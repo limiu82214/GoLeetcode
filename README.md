@@ -1,0 +1,2 @@
+# GoLeetcode
+Leetcode GO解
