@@ -12,6 +12,60 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q2217FindPalindromeWithFixedLength(queries []int, intLength int) []int64 {
+	ans := make([]int64, 0, len(queries))
+	solveOne := func(n int, intLength int) int64 {
+		switch intLength {
+		case 1:
+			if n > 9 {
+				return -1
+			}
+			return int64(n)
+		case 2:
+			if n > 9 {
+				return -1
+			}
+			return int64(n*10 + n)
+		}
+		n1 := n - 1
+		b := make([]byte, intLength)
+		midIdx := intLength / 2
+		var l, r int
+		if intLength%2 == 0 {
+			l, r = midIdx-1, midIdx
+
+		} else {
+			l, r = midIdx, midIdx
+		}
+		// n1--, 最中間 and intLength >2  直接拿
+		// 最外面 +1
+		for l >= 0 {
+			if l == 0 {
+				b[l] = byte(n1%10+1) + 48
+				b[r] = byte(n1%10+1) + 48
+				break
+			}
+			b[l] = byte(n1%10) + 48
+			b[r] = byte(n1%10) + 48
+			l--
+			r++
+			n1 /= 10
+		}
+		if n1 > 8 {
+			return -1
+		}
+
+		v, _ := strconv.ParseInt(string(b), 10, 64)
+		return v
+	}
+	for _, v := range queries {
+		ans = append(ans, solveOne(v, intLength))
+	}
+
+	return ans
+}
+
 func Q9PalindromeNumber(x int) bool {
 	s := strconv.Itoa(x)
 	b := []byte(s)

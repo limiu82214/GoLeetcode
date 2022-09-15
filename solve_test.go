@@ -30,6 +30,57 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ2217FindPalindromeWithFixedLength Medium
+func TestQ2217FindPalindromeWithFixedLength(t *testing.T) {
+	type param struct {
+		Arg1     []interface{}
+		Arg2     int
+		Excepted []interface{}
+	}
+	data := []param{
+		// {
+		// 	Arg1:     JsonStringToSlice(`[1,2,3,4,5,90]`),
+		// 	Arg2:     3,
+		// 	Excepted: JsonStringToSlice(`[101,111,121,131,141,999]`),
+		// },
+		// {
+		// 	Arg1:     JsonStringToSlice(`[2,4,6]`),
+		// 	Arg2:     4,
+		// 	Excepted: JsonStringToSlice(`[1111,1331,1551]`),
+		// },
+		// {
+		// 	Arg1:     JsonStringToSlice(`[2,201429812,8,520498110,492711727,339882032,462074369,9,7,6]`),
+		// 	Arg2:     1,
+		// 	Excepted: JsonStringToSlice(`[2,-1,8,-1,-1,-1,-1,9,7,6]`),
+		// },
+		// {
+		// 	Arg1:     JsonStringToSlice(`[928053739,72,86059860,90,622074924,831263840,8,10,43,13,54,870906009,64]`),
+		// 	Arg2:     3,
+		// 	Excepted: JsonStringToSlice(`[-1,818,-1,999,-1,-1,171,191,525,222,636,-1,737]`),
+		// },
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+
+			c := ConvertSlice[float64](d.Excepted) // 還原unmarshal
+			var expected []int64
+			expected = make([]int64, 0, len(c))
+			for _, v := range c {
+				expected = append(expected, int64(v))
+			}
+
+			Arg1 := ConvertSlice[float64](d.Arg1) // 還原unmarshal
+			var param1 []int
+			param1 = make([]int, 0, len(Arg1))
+			for _, v := range Arg1 {
+				param1 = append(param1, int(v))
+			}
+
+			assert.Equal(t, expected, Q2217FindPalindromeWithFixedLength(param1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
 func TestQ9PalindromeNumber(t *testing.T) {
 
 	type param struct {
