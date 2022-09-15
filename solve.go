@@ -12,8 +12,20 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
-func Q2353DesignAFoodRatingSystem() {
-
+func Q9PalindromeNumber(x int) bool {
+	s := strconv.Itoa(x)
+	b := []byte(s)
+	l := 0
+	r := len(b) - 1
+	for l < r {
+		if b[l] == b[r] {
+			l++
+			r--
+		} else {
+			return false
+		}
+	}
+	return true
 }
 
 func Q1636SortArrayByIncreasingFrequency(nums []int) []int {

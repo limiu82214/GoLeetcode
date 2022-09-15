@@ -30,6 +30,26 @@ func TestForCopy(t *testing.T) {
 
 }
 
+func TestQ9PalindromeNumber(t *testing.T) {
+
+	type param struct {
+		Arg1     int
+		Excepted bool
+	}
+	data := []param{
+		{121, true},
+		{-121, false},
+		{10, false},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q9PalindromeNumber(d.Arg1), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ2353DesignAFoodRatingSystem Medium #heap #maxHeap
 func TestQ2353DesignAFoodRatingSystem(t *testing.T) {
 	type param struct {
