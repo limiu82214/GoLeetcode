@@ -2,13 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"runtime"
-	"runtime/pprof"
 	"testing"
 
 	q2349designanumbercontainersystem "github.com/limiu82214/GoLeetcode/exam/Q2349DesignANumberContainerSystem"
+	q2353designafoodratingsystem "github.com/limiu82214/GoLeetcode/exam/Q2353DesignAFoodRatingSystem"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -25,7 +22,7 @@ func TestForCopy(t *testing.T) {
 		{[]int{-1, 1, -6, 4, 5, -6, 1, 4, 1}, []int{5, -1, 4, 4, -6, -6, 1, 1, 1}},
 	}
 
-	decorate(func() {
+	Decorate(func() {
 		for _, d := range data {
 			assert.Equal(t, d.Excepted, Q1636SortArrayByIncreasingFrequency(d.Arg1), d)
 		}
@@ -33,9 +30,61 @@ func TestForCopy(t *testing.T) {
 
 }
 
-// TestQ2353DesignAFoodRatingSystem Medium
+// TestQ2353DesignAFoodRatingSystem Medium #heap #maxHeap
 func TestQ2353DesignAFoodRatingSystem(t *testing.T) {
-
+	type param struct {
+		Arg1     []interface{}
+		Arg2     []interface{}
+		Excepted []interface{}
+	}
+	// var slice []interface{}
+	// fmt.Println("ori:", []byte("[null, 1, 2, null, 2, 3, 4, 5, null]"))
+	// json.Unmarshal([]byte("[null, 1, 2, null, 2, 3, 4, 5, null]"), &slice)
+	// fmt.Println("rst:", slice[0] == nil)
+	data := []param{
+		// {
+		// 	Arg1:     JsonStringToSlice(`["FoodRatings", "highestRated", "highestRated", "changeRating", "highestRated", "changeRating", "highestRated"]`),
+		// 	Arg2:     JsonStringToSlice(`[[["kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"], ["korean", "japanese", "japanese", "greek", "japanese", "korean"], [9, 12, 8, 15, 14, 7]], ["korean"], ["japanese"], ["sushi", 16], ["japanese"], ["ramen", 16], ["japanese"]]`),
+		// 	Excepted: JsonStringToSlice(`[null, "kimchi", "ramen", null, "sushi", null, "ramen"]`),
+		// },
+		{
+			Arg1:     JsonStringToSlice(`["FoodRatings","highestRated","changeRating","changeRating","changeRating","highestRated","highestRated","highestRated","highestRated","changeRating","changeRating","changeRating","changeRating"]`),
+			Arg2:     JsonStringToSlice(`[[["ixoldpvcl","bmdzu","zmazdit","wdz","yxsoc","jyxxdmeqpy","hxvyjar","jktdotax","kgdct","kxuhddwif"],["uudduznsjc","uudduznsjc","uudduznsjc","uudduznsjc","uudduznsjc","uudduznsjc","uudduznsjc","uudduznsjc","uudduznsjc","uudduznsjc"],[5,9,4,6,8,6,17,9,11,4]],["uudduznsjc"],["jyxxdmeqpy",3],["hxvyjar",19],["bmdzu",12],["uudduznsjc"],["uudduznsjc"],["uudduznsjc"],["uudduznsjc"],["hxvyjar",10],["yxsoc",6],["hxvyjar",14],["yxsoc",2]]`),
+			Excepted: JsonStringToSlice(`[null,"hxvyjar",null,null,null,"hxvyjar","hxvyjar","hxvyjar","hxvyjar",null,null,null,null]`),
+		},
+	}
+	Decorate(func() {
+		for _, d := range data {
+			var obj q2353designafoodratingsystem.FoodRatings
+			var actual interface{}
+			for idx, action := range d.Arg1 {
+				switch action {
+				case "FoodRatings":
+					arg, _ := d.Arg2[idx].([]interface{})
+					// fmt.Println()
+					c := ConvertSlice[float64](arg[2].([]interface{})) // 還原unmarshal
+					var param3 []int
+					param3 = make([]int, 0, len(c))
+					for _, v := range c {
+						// fmt.Println(v)
+						param3 = append(param3, int(v))
+					}
+					obj = q2353designafoodratingsystem.Constructor(ConvertSlice[string](arg[0].([]interface{})), ConvertSlice[string](arg[1].([]interface{})), param3)
+					actual = nil
+				case "highestRated":
+					arg, _ := d.Arg2[idx].([]interface{})
+					// fmt.Println(arg[0].(string))
+					actual = obj.HighestRated(arg[0].(string))
+				case "changeRating":
+					arg, _ := d.Arg2[idx].([]interface{})
+					// fmt.Println(arg[1])
+					obj.ChangeRating(arg[0].(string), int(arg[1].(float64)))
+					actual = nil
+				}
+				assert.Equal(t, d.Excepted[idx], actual, "tttttttttttt")
+			}
+		}
+	}, 1, 0)
 }
 func TestQ1636SortArrayByIncreasingFrequency(t *testing.T) {
 	type param struct {
@@ -48,7 +97,7 @@ func TestQ1636SortArrayByIncreasingFrequency(t *testing.T) {
 		{[]int{-1, 1, -6, 4, 5, -6, 1, 4, 1}, []int{5, -1, 4, 4, -6, -6, 1, 1, 1}},
 	}
 
-	decorate(func() {
+	Decorate(func() {
 		for _, d := range data {
 			assert.Equal(t, d.Excepted, Q1636SortArrayByIncreasingFrequency(d.Arg1), d)
 		}
@@ -88,7 +137,7 @@ func TestQ2349DesignANumberContainerSystem(t *testing.T) {
 		{"find", []int{30}, -1},
 	}
 
-	decorate(func() {
+	Decorate(func() {
 		obj := q2349designanumbercontainersystem.Constructor()
 		for _, d := range data {
 			fmt.Println(d, obj)
@@ -115,7 +164,7 @@ func TestQ1TwoSum(t *testing.T) {
 		{[]int{3, 3}, 6, []int{0, 1}},
 	}
 
-	decorate(func() {
+	Decorate(func() {
 		for _, d := range data {
 			nums := d.Arg1
 			target := d.Arg2
@@ -136,30 +185,11 @@ func TestQ2180CountIntegersWithEvenDigitSum(t *testing.T) {
 		{30, 14},
 	}
 
-	decorate(func() {
+	Decorate(func() {
 		for _, d := range data {
 			actual := Q2180CountIntegersWithEvenDigitSum(d.Arg1)
 			excepted := d.Excepted
 			assert.Equal(t, excepted, actual, d)
 		}
 	}, 1, 0)
-}
-
-func decorate(inter func(), times int, cpurate int) {
-	if cpurate == 0 {
-		cpurate = 100
-	}
-	runtime.SetCPUProfileRate(cpurate)
-	f, err := os.Create("cpu.prof")
-	if err != nil {
-		log.Fatal("create file error", err)
-	}
-	defer f.Close()
-	if err := pprof.StartCPUProfile(f); err != nil {
-		log.Fatal("errrrrrrrrrrrrrrrr", err)
-	}
-	defer pprof.StopCPUProfile()
-	for i := 0; i < times; i++ {
-		inter()
-	}
 }
