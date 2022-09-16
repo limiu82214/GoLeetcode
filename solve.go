@@ -14,6 +14,43 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q331VerifyPreorderSerializationOfABinaryTree(preorder string) bool {
+	/* readable but slow
+	heap := 1
+	q := strings.Split(preorder, ",")
+	for _, v := range q {
+		heap--
+		if heap < 0 {
+			return false
+		}
+		if v != "#" {
+			heap += 2
+		}
+	}
+	return heap == 0
+	*/
+	heap := 1
+	q := []byte(preorder)
+	l := len(q)
+	i := 0
+	for i < l {
+		heap--
+		if heap < 0 {
+			return false
+		}
+		if q[i] != '#' {
+			for i < l && q[i] != ',' {
+				i++
+			}
+			heap += 2
+		} else {
+			i++
+		}
+		i++
+	}
+	return heap == 0
+}
+
 func Q27RemoveElement(nums []int, val int) int {
 	k := 0
 	i := 0

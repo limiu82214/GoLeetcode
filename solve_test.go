@@ -50,6 +50,39 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ331VerifyPreorderSerializationOfABinaryTree Medium
+func TestQ331VerifyPreorderSerializationOfABinaryTree(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Excepted bool
+	}
+	data := []param{
+		{
+			Arg1:     "9,3,4,#,#,1,#,#,2,#,6,#,#",
+			Excepted: true,
+		},
+		{
+			Arg1:     "1,#",
+			Excepted: false,
+		},
+		{
+			Arg1:     "9,#,#,1",
+			Excepted: false,
+		},
+		{
+			Arg1:     "9,#,92,#,#",
+			Excepted: true,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q331VerifyPreorderSerializationOfABinaryTree(d.Arg1), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ27RemoveElement Easy
 func TestQ27RemoveElement(t *testing.T) {
 	type param struct {
