@@ -30,7 +30,28 @@ func TestForCopy(t *testing.T) {
 
 }
 
-// Q564FindtheClosestPalindrome Hard
+// TestQ13RomanToInteger Easy
+func TestQ13RomanToInteger(t *testing.T) {
+
+	type param struct {
+		Arg1     string
+		Excepted int
+	}
+	data := []param{
+		{"III", 3},
+		{"LVIII", 58},
+		{"MCMXCIV", 1994},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q13RomanToInteger(d.Arg1), d)
+		}
+	}, 1, 0)
+
+}
+
+// TestQ564FindtheClosestPalindrome Hard
 func TestQ564FindTheClosestPalindrome(t *testing.T) {
 
 	type param struct {

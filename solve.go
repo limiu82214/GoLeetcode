@@ -13,6 +13,43 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q13RomanToInteger(s string) int {
+	l := len(s)
+	sum := 0
+	for i, v := range s {
+		switch v {
+		case 'I':
+			if i+1 < l && (s[i+1] == 'V' || s[i+1] == 'X') {
+				sum -= 1
+			} else {
+				sum += 1
+			}
+		case 'V':
+			sum += 5
+		case 'X':
+			if i+1 < l && (s[i+1] == 'L' || s[i+1] == 'C') {
+				sum -= 10
+			} else {
+				sum += 10
+			}
+		case 'L':
+			sum += 50
+		case 'C':
+			// if next is D or M Minus 100
+			if i+1 < l && (s[i+1] == 'D' || s[i+1] == 'M') {
+				sum -= 100
+			} else {
+				sum += 100
+			}
+		case 'D':
+			sum += 500
+		case 'M':
+			sum += 1000
+		}
+	}
+	return sum
+}
+
 func Q564FindTheClosestPalindrome(n string) string {
 	Abs := func(x int) int {
 		if x < 0 {
