@@ -14,6 +14,13 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q175CombineTwoTables() {
+	// # Write your MySQL query statement below
+	// SELECT P.firstName, P.lastName, A.city, A.state
+	// FROM Person AS P LEFT JOIN Address AS A
+	// ON P.personId = A.personId
+}
+
 func Q8StringToInteger(s string) int {
 	re := regexp.MustCompile(`^[ ]*((?:[+-])?(?:(?:\d+[.]\d+)|(?:\d))*)`)
 	t := re.FindStringSubmatch(s)[1]
