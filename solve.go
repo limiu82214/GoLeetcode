@@ -13,6 +13,48 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q4MedianOfTwoSortedArrays(nums1 []int, nums2 []int) float64 {
+	q := []int{}
+	n1Idx := 0
+	n1Len := len(nums1)
+	n2Idx := 0
+	n2Len := len(nums2)
+
+	for n1Idx < n1Len || n2Idx < n2Len { // 若還沒取完
+		if n1Idx == n1Len {
+			q = append(q, nums2[n2Idx])
+			n2Idx++
+			continue
+		}
+		if n2Idx == n2Len {
+			q = append(q, nums1[n1Idx])
+			n1Idx++
+			continue
+		}
+
+		if nums1[n1Idx] <= nums2[n2Idx] {
+			q = append(q, nums1[n1Idx])
+			n1Idx++
+		} else {
+			q = append(q, nums2[n2Idx])
+			n2Idx++
+		}
+	}
+
+	// -----------------
+	l := len(q)
+	isEven := l%2 == 0
+	var mid float64
+	if isEven { // even get len(q)/ 2  /2-1  ) /2
+		mid = (float64(q[l/2]) + float64(q[l/2-1])) / 2
+	} else { // odd get len(q)/ 2
+		mid = float64(q[l/2])
+	}
+
+	return mid
+}
+
 func Q2231LargestNumberAfterDigitSwapsByParity(num int) int {
 	b := []byte(strconv.Itoa(num))
 	odds := []byte{}

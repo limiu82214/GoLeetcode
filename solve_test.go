@@ -50,6 +50,48 @@ func TestQ2231LargestNumberAfterDigitSwapsByParity(t *testing.T) {
 
 }
 
+// TestQ4MedianOfTwoSortedArrays Hard
+func TestQ4MedianOfTwoSortedArrays(t *testing.T) {
+
+	type param struct {
+		Arg1     []interface{}
+		Arg2     []interface{}
+		Excepted float64
+	}
+	data := []param{
+		{
+			Arg1:     JsonStringToSlice(`[1,3]`),
+			Arg2:     JsonStringToSlice(`[2]`),
+			Excepted: 2.00000,
+		},
+		{
+			Arg1:     JsonStringToSlice(`[1,2]`),
+			Arg2:     JsonStringToSlice(`[3,4]`),
+			Excepted: 2.50000,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			var param1 []int
+			Arg1 := ConvertSlice[float64](d.Arg1)
+			param1 = make([]int, 0, len(Arg1))
+			for _, v := range Arg1 {
+				param1 = append(param1, int(v))
+			}
+
+			var param2 []int
+			Arg2 := ConvertSlice[float64](d.Arg2)
+			param2 = make([]int, 0, len(Arg2))
+			for _, v := range Arg2 {
+				param2 = append(param2, int(v))
+			}
+			assert.Equal(t, d.Excepted, Q4MedianOfTwoSortedArrays(param1, param2), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ8StringToInteger Medium
 func TestQ8StringToInteger(t *testing.T) {
 
