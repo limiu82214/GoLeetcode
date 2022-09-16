@@ -13,6 +13,47 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q2231LargestNumberAfterDigitSwapsByParity(num int) int {
+	b := []byte(strconv.Itoa(num))
+	odds := []byte{}
+	evens := []byte{}
+	sequence := []byte{} // e, o will be appended
+	for _, c := range b {
+		if (c-48)%2 == 0 { // even
+			sequence = append(sequence, 'e')
+			evens = append(evens, c)
+		} else {
+			sequence = append(sequence, 'o')
+			odds = append(odds, c)
+		}
+	}
+
+	sort.Slice(odds, func(i, j int) bool {
+		return odds[i] > odds[j]
+	})
+	sort.Slice(evens, func(i, j int) bool {
+		return evens[i] > evens[j]
+	})
+
+	ans := []byte{}
+	for _, v := range sequence {
+		switch v {
+		case 'e':
+			// pop evens
+			c := evens[0:1][0]
+			evens = evens[1:]
+			ans = append(ans, c)
+		case 'o':
+			// pop odds
+			c := odds[0:1][0]
+			odds = odds[1:]
+			ans = append(ans, c)
+		}
+	}
+
+	t, _ := strconv.Atoi(string(ans))
+	return t
+}
 
 func Q175CombineTwoTables() {
 	// # Write your MySQL query statement below

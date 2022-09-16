@@ -30,6 +30,26 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ2231LargestNumberAfterDigitSwapsByParity Easy
+func TestQ2231LargestNumberAfterDigitSwapsByParity(t *testing.T) {
+	type param struct {
+		Arg1     int
+		Excepted int
+	}
+	data := []param{
+		{1234, 3412},
+		{65875, 87655},
+		{247, 427},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q2231LargestNumberAfterDigitSwapsByParity(d.Arg1), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ8StringToInteger Medium
 func TestQ8StringToInteger(t *testing.T) {
 
