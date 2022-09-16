@@ -13,6 +13,91 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q564FindTheClosestPalindrome(n string) string {
+	Abs := func(x int) int {
+		if x < 0 {
+			return -x
+		}
+		return x
+	}
+	ReverseString := func(s string) string {
+		ans := ""
+		for _, v := range s {
+			ans = string(v) + ans
+		}
+		return ans
+	}
+	halfIdx := len(n)/2 + len(n)%2
+	isOdd := len(n)%2 != 0
+	halfs := n[0:halfIdx]
+	halfn, _ := strconv.Atoi(halfs)
+	halfnAdd := halfn + 1
+	halfnMinus := halfn - 1
+	halfsLength := len(halfs)
+	ca := strconv.Itoa(halfnAdd)
+	cn := halfs
+	cm := strconv.Itoa(halfnMinus)
+	if isOdd {
+		if len(ca) > halfsLength && halfsLength > 1 {
+			ca += strings.Repeat("0", halfsLength-2) + "1"
+		} else {
+			ca += ReverseString(ca[:halfsLength-1])
+		}
+		cn += ReverseString(cn[:halfsLength-1])
+		if len(cm) >= halfsLength {
+			cm += ReverseString(cm[:halfsLength-1])
+		} else {
+			cm += strings.Repeat("9", halfsLength-1)
+		}
+	} else {
+		if len(ca) > halfsLength {
+			ca += strings.Repeat("0", halfsLength-1) + "1"
+		} else {
+			ca += ReverseString(ca)
+		}
+		cn += ReverseString(cn)
+		if len(cm) >= halfsLength {
+			if cm == "0" {
+				cm += "9"
+			} else {
+				cm += ReverseString(cm[:halfsLength])
+			}
+		} else {
+			cm += strings.Repeat("9", halfsLength)
+		}
+	}
+
+	candidateList := []int{}
+	var t int
+	t, _ = strconv.Atoi(ca)
+	candidateList = append(candidateList, t)
+	t, _ = strconv.Atoi(cm)
+	candidateList = append(candidateList, t)
+	if cn != n {
+		t, _ = strconv.Atoi(cn)
+		candidateList = append(candidateList, t)
+	}
+
+	nn, _ := strconv.Atoi(n)
+	closetLength := -1
+	var ans int
+	for _, v := range candidateList {
+		if closetLength == -1 || Abs(nn-v) <= closetLength {
+			if Abs(nn-v) == closetLength {
+				if ans > v {
+					ans = v
+				}
+			} else {
+				closetLength = Abs(nn - v)
+				ans = v
+			}
+		}
+	}
+	// fmt.Println(ca, cn, cm, closetLength, ans)
+
+	return strconv.Itoa(ans)
+}
+
 func Q2217FindPalindromeWithFixedLength(queries []int, intLength int) []int64 {
 	ans := make([]int64, 0, len(queries))
 	solveOne := func(n int, intLength int) int64 {

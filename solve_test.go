@@ -30,6 +30,32 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// Q564FindtheClosestPalindrome Hard
+func TestQ564FindTheClosestPalindrome(t *testing.T) {
+
+	type param struct {
+		Arg1     string
+		Excepted string
+	}
+	data := []param{
+		{"1234", "1221"},
+		{"123", "121"},
+		{"1", "0"},
+		{"100", "99"},
+		{"1000", "999"},
+		{"11", "9"},
+		{"99", "101"},
+		{"9", "8"},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q564FindTheClosestPalindrome(d.Arg1), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ2217FindPalindromeWithFixedLength Medium
 func TestQ2217FindPalindromeWithFixedLength(t *testing.T) {
 	type param struct {
