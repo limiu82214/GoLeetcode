@@ -14,6 +14,22 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q27RemoveElement(nums []int, val int) int {
+	k := 0
+	i := 0
+	l := len(nums)
+	for i < l {
+		if nums[i] == val {
+			nums[i] = -1
+		} else {
+			nums[k] = nums[i]
+			k++
+		}
+		i++
+	}
+	return k
+}
+
 func Q4MedianOfTwoSortedArrays(nums1 []int, nums2 []int) float64 {
 	q := []int{}
 	n1Idx := 0

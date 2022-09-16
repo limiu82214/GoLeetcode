@@ -11,20 +11,75 @@ import (
 
 // TestForCopy Easy ============= 複製一個copy並開始你的表演
 func TestForCopy(t *testing.T) {
-
 	type param struct {
-		Arg1     []int
-		Excepted []int
+		Arg1     []interface{}
+		Arg2     []interface{}
+		Excepted float64
 	}
 	data := []param{
-		{[]int{1, 1, 2, 2, 2, 3}, []int{3, 1, 1, 2, 2, 2}},
-		{[]int{2, 3, 1, 3, 2}, []int{1, 3, 3, 2, 2}},
-		{[]int{-1, 1, -6, 4, 5, -6, 1, 4, 1}, []int{5, -1, 4, 4, -6, -6, 1, 1, 1}},
+		{
+			Arg1:     JsonStringToSlice(`[1,3]`),
+			Arg2:     JsonStringToSlice(`[2]`),
+			Excepted: 2.00000,
+		},
+		{
+			Arg1:     JsonStringToSlice(`[1,2]`),
+			Arg2:     JsonStringToSlice(`[3,4]`),
+			Excepted: 2.50000,
+		},
 	}
 
 	Decorate(func() {
 		for _, d := range data {
-			assert.Equal(t, d.Excepted, Q1636SortArrayByIncreasingFrequency(d.Arg1), d)
+			var param1 []int
+			Arg1 := ConvertSlice[float64](d.Arg1)
+			param1 = make([]int, 0, len(Arg1))
+			for _, v := range Arg1 {
+				param1 = append(param1, int(v))
+			}
+
+			var param2 []int
+			Arg2 := ConvertSlice[float64](d.Arg2)
+			param2 = make([]int, 0, len(Arg2))
+			for _, v := range Arg2 {
+				param2 = append(param2, int(v))
+			}
+			assert.Equal(t, d.Excepted, Q4MedianOfTwoSortedArrays(param1, param2), d)
+		}
+	}, 1, 0)
+
+}
+
+// TestQ27RemoveElement Easy
+func TestQ27RemoveElement(t *testing.T) {
+	type param struct {
+		Arg1     []interface{}
+		Arg2     int
+		Excepted int
+	}
+	data := []param{
+		{
+			Arg1:     JsonStringToSlice(`[3,2,2,3]`),
+			Arg2:     3,
+			Excepted: 2,
+		},
+		{
+			Arg1:     JsonStringToSlice(`[0,1,2,2,3,0,4,2]`),
+			Arg2:     2,
+			Excepted: 5,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			var param1 []int
+			Arg1 := ConvertSlice[float64](d.Arg1)
+			param1 = make([]int, 0, len(Arg1))
+			for _, v := range Arg1 {
+				param1 = append(param1, int(v))
+			}
+
+			assert.Equal(t, d.Excepted, Q27RemoveElement(param1, d.Arg2), d)
 		}
 	}, 1, 0)
 
