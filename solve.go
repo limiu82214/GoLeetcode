@@ -13,6 +13,41 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q14LongestCommonPrefix(strs []string) string {
+	prefix := []byte(strs[0])
+	// get shortest
+	var prefixIdx int
+	for i, s := range strs {
+		if len(s) < len(prefix) {
+			prefix = []byte(s)
+			prefixIdx = i
+		}
+	}
+	l := len(prefix)
+
+	// nil
+	if string(prefix) == "" {
+		return ""
+	}
+
+	for i, s := range strs {
+		if i == prefixIdx {
+			continue
+		}
+		for j, c := range s {
+			if j >= l {
+				break
+			}
+			if prefix[j] != byte(c) {
+				prefix = []byte(string(prefix)[:j])
+				l = len(prefix)
+				break
+			}
+		}
+	}
+	return string(prefix)
+}
+
 func Q13RomanToInteger(s string) int {
 	l := len(s)
 	sum := 0

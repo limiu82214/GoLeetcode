@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TestForCopy ============= 複製一個copy並開始你的表演
+// TestForCopy Easy ============= 複製一個copy並開始你的表演
 func TestForCopy(t *testing.T) {
 
 	type param struct {
@@ -25,6 +25,49 @@ func TestForCopy(t *testing.T) {
 	Decorate(func() {
 		for _, d := range data {
 			assert.Equal(t, d.Excepted, Q1636SortArrayByIncreasingFrequency(d.Arg1), d)
+		}
+	}, 1, 0)
+
+}
+
+// TestQ14LongestCommonPrefix Easy
+func TestQ14LongestCommonPrefix(t *testing.T) {
+
+	type param struct {
+		Arg1     []any
+		Excepted string
+	}
+	data := []param{
+		{
+			Arg1:     JsonStringToSlice(`["flower","flow","flight"]`),
+			Excepted: "fl",
+		},
+		{
+			Arg1:     JsonStringToSlice(`["dog","racecar","car"]`),
+			Excepted: "",
+		},
+		{
+			Arg1:     JsonStringToSlice(`["a","aaa","aa"]`),
+			Excepted: "a",
+		},
+		{
+			Arg1:     JsonStringToSlice(`["ab","a"]`),
+			Excepted: "a",
+		},
+		{
+			Arg1:     JsonStringToSlice(`["baab","bacb","b","cbc"]`),
+			Excepted: "",
+		},
+		{
+			Arg1:     JsonStringToSlice(`["abca","aba","aaab"]`),
+			Excepted: "a",
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			param1 := ConvertSlice[string](d.Arg1)
+			assert.Equal(t, d.Excepted, Q14LongestCommonPrefix(param1), d)
 		}
 	}, 1, 0)
 
