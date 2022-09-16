@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -11,6 +12,23 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+func Q8StringToInteger(s string) int {
+	re := regexp.MustCompile(`^[ ]*((?:[+-])?(?:(?:\d+[.]\d+)|(?:\d))*)`)
+	t := re.FindStringSubmatch(s)[1]
+	if t == "" {
+		return 0
+	}
+	// ans, _ := strconv.Atoi(t)
+	ans, _ := strconv.ParseFloat(t, 64)
+	if ans > (2<<30 - 1) {
+		return 2<<30 - 1
+	}
+	if ans < -2<<30 {
+		return -2 << 30
+	}
+	return int(ans)
 }
 
 func Q14LongestCommonPrefix(strs []string) string {

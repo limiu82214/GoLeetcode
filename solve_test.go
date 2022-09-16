@@ -30,6 +30,31 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ8StringToInteger Medium
+func TestQ8StringToInteger(t *testing.T) {
+
+	type param struct {
+		Arg1     string
+		Excepted int
+	}
+	data := []param{
+		{"", 0},
+		{"42", 42},
+		{"   -42", -42},
+		{"4193 with words", 4193},
+		{"words and 987", 0},
+		{"-91283472332", -2147483648},
+		{"3.14159", 3},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q8StringToInteger(d.Arg1), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ14LongestCommonPrefix Easy
 func TestQ14LongestCommonPrefix(t *testing.T) {
 
