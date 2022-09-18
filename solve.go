@@ -14,6 +14,56 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q1531StringCompressionII(s string, k int) int {
+	ci := make(map[byte]int)
+	b := []byte(s)
+	for _, c := range b {
+		ci[c]++
+	}
+
+	lenK := k
+leave:
+	for i := 1; i <= lenK; i++ {
+		if k < i {
+			break leave
+		}
+		for c, j := range ci {
+			if i == j {
+				if k < i {
+					break leave
+				}
+				delete(ci, c)
+				k -= i
+			}
+		}
+	}
+
+	if k > 0 {
+		lenK = k
+		for i := 1; i <= lenK; i++ {
+			for c, j := range ci {
+				if (j%10 + 1) == i {
+					ci[c] -= i
+					k -= i
+				}
+			}
+		}
+	}
+
+	// cal ans
+	ans := 0
+	for _, i := range ci {
+		if i == 1 {
+			ans++
+			continue
+		}
+		ans++
+		for j := i; j != 0; j /= 10 {
+			ans++
+		}
+	}
+	return ans
+}
 func Q331VerifyPreorderSerializationOfABinaryTree(preorder string) bool {
 	/* readable but slow
 	heap := 1

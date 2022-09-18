@@ -50,6 +50,59 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ1531StringCompressionII Hard
+func TestQ1531StringCompressionII(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Arg2     int
+		Excepted int
+	}
+	data := []param{
+		// {
+		// 	Arg1:     "aaabcccd",
+		// 	Arg2:     2,
+		// 	Excepted: 4,
+		// },
+		// {
+		// 	Arg1:     "aabbaa",
+		// 	Arg2:     2,
+		// 	Excepted: 2,
+		// },
+		// {
+		// 	Arg1:     "aaaaaaaaaaa",
+		// 	Arg2:     0,
+		// 	Excepted: 3,
+		// },
+		// {
+		// 	Arg1:     "abc",
+		// 	Arg2:     0,
+		// 	Excepted: 3,
+		// },
+		// {
+		// 	Arg1:     "abbbbbbbbbba",
+		// 	Arg2:     2,
+		// 	Excepted: 3,
+		// },
+		// {
+		// 	Arg1:     "llllllllllttttttttt",
+		// 	Arg2:     1,
+		// 	Excepted: 4,
+		// },
+		{
+			Arg1:     "bababbaba",
+			Arg2:     1,
+			Excepted: 7,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q1531StringCompressionII(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ331VerifyPreorderSerializationOfABinaryTree Medium
 func TestQ331VerifyPreorderSerializationOfABinaryTree(t *testing.T) {
 	type param struct {
