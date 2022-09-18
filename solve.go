@@ -15,52 +15,178 @@ func main() {
 }
 
 func Q1531StringCompressionII(s string, k int) int {
-	ci := make(map[byte]int)
+	// 目前的方法是先找出刪除最優解，再依序刪除
+	// 遇到的問題: aaaabbab, 3
+	// 問題描述: 依照目前邏輯順序
+	// 	aaaabbab => a4b2ab, 3
+	// 	del a => a4b3, 2
+	// 	k 剩2不足以讓長度變短，於是跳出
+	// 	// ---------------
+	// 	但其實可以刪除b2，使結果變成a5b，再刪除b變成a2
 	b := []byte(s)
-	for _, c := range b {
-		ci[c]++
+
+	type BESTKILL int
+	const (
+		NONE BESTKILL = iota
+		ONEKILL
+		FULLKILL
+	)
+	type node struct {
+		letter       byte
+		n            int
+		length       int
+		bestKillWay  BESTKILL // fullKill or oneKill
+		bestKillCost int
+	}
+	CalLength := func(n int) int {
+		if n == 1 {
+			return 1
+		}
+		l := 1
+		for n > 0 {
+			n /= 10
+			l++
+		}
+		return l
 	}
 
-	lenK := k
-leave:
-	for i := 1; i <= lenK; i++ {
-		if k < i {
-			break leave
+	nlist := []*node{}
+
+	// forr b put to node
+	var tmpNode *node
+	for i, v := range b {
+		if i == 0 || (i-1 >= 0 && b[i] != b[i-1]) {
+			tmpNode = &node{
+				letter:       v,
+				n:            1,
+				length:       0,
+				bestKillWay:  NONE,
+				bestKillCost: -1,
+			}
+			tmpNode.length = CalLength(tmpNode.n)
+			nlist = append(nlist, tmpNode)
+		} else {
+			tmpNode.n++
+			tmpNode.length = CalLength(tmpNode.n)
 		}
-		for c, j := range ci {
-			if i == j {
-				if k < i {
-					break leave
+	}
+
+	// do it if k > 0
+	for k > 0 {
+		// // calKillCost keep best one
+		biggestCP := -1
+		biggestCPIdx := -1
+		for i, n := range nlist {
+			nlist[i].bestKillWay = NONE
+			nlist[i].bestKillCost = -1
+			oneKillCP := 0
+			if n.n >= 10 { // oneKill
+				oneLengthKillCost := n.n%10 + 1
+				// cp = 1/oneLengthKillCost // 1 because cost 1 length
+				oneKillCP = 1 / oneLengthKillCost
+				if k >= oneLengthKillCost {
+					nlist[i].bestKillWay = ONEKILL
+					nlist[i].bestKillCost = oneLengthKillCost
 				}
-				delete(ci, c)
-				k -= i
+			}
+
+			bestCP := oneKillCP
+			fullKillCP := 0
+			{ // fullKill
+				fullKillCost := n.n
+
+				// ori left + n + right 's length
+				leftLen := 0
+				if i-1 < 0 {
+					leftLen = 0
+				} else {
+					leftLen = nlist[i-1].length
+				}
+				rightLen := 0
+				if i >= (len(nlist) - 1) {
+					rightLen = 0
+				} else {
+					rightLen = nlist[i+1].length
+				}
+				originLen := leftLen + n.length + rightLen
+				// after left + right 's Length (notice if letter same must be join)
+				afterLen := -1
+				if leftLen != 0 && rightLen != 0 { // both side has num
+					if nlist[i-1].letter != nlist[i+1].letter {
+						afterLen = nlist[i-1].length + nlist[i+1].length
+					} else {
+						afterLen = CalLength(nlist[i-1].length + nlist[i+1].length)
+					}
+				} else if leftLen == 0 && rightLen != 0 {
+					afterLen = nlist[i+1].length
+				} else if leftLen != 0 && rightLen == 0 {
+					afterLen = nlist[i-1].length
+				}
+
+				// cp = after - ori / fullKillCost
+				if afterLen < 0 { // no afterLen exist
+					fullKillCP = originLen / fullKillCost
+				} else {
+					fullKillCP = (originLen - afterLen) / fullKillCost
+				}
+
+				if k >= fullKillCost {
+					if fullKillCP >= oneKillCP {
+						bestCP = fullKillCP
+						nlist[i].bestKillWay = FULLKILL
+						nlist[i].bestKillCost = fullKillCost
+					}
+				}
+			}
+
+			// ----------
+
+			// save biggest cp
+			if k >= nlist[i].bestKillCost && nlist[i].bestKillWay != NONE {
+				if biggestCP == -1 {
+					biggestCP = bestCP
+					biggestCPIdx = i
+				} else if bestCP >= biggestCP && nlist[i].bestKillWay >= nlist[biggestCPIdx].bestKillWay {
+					biggestCP = bestCP
+					biggestCPIdx = i
+				}
 			}
 		}
-	}
 
-	if k > 0 {
-		lenK = k
-		for i := 1; i <= lenK; i++ {
-			for c, j := range ci {
-				if (j%10 + 1) == i {
-					ci[c] -= i
-					k -= i
+		//kill best cp, and cost k
+		tmpNode = nil
+		if biggestCPIdx != -1 {
+			k -= nlist[biggestCPIdx].bestKillCost
+			switch nlist[biggestCPIdx].bestKillWay {
+			case FULLKILL:
+				if biggestCPIdx-1 >= 0 && biggestCPIdx+1 < len(nlist) { // both
+					if nlist[biggestCPIdx-1].letter == nlist[biggestCPIdx+1].letter {
+						nlist[biggestCPIdx-1].n = nlist[biggestCPIdx-1].n + nlist[biggestCPIdx+1].n
+						nlist[biggestCPIdx-1].length = CalLength(nlist[biggestCPIdx-1].n)
+						nlist = append(nlist[:biggestCPIdx], nlist[biggestCPIdx+2:]...)
+					} else {
+						nlist = append(nlist[:biggestCPIdx], nlist[biggestCPIdx+1:]...)
+					}
+				} else if biggestCPIdx-1 >= 0 && biggestCPIdx+1 >= len(nlist) { // only left
+					nlist = append(nlist[:biggestCPIdx], nlist[biggestCPIdx+1:]...)
+				} else if biggestCPIdx-1 < 0 && biggestCPIdx+1 < len(nlist) { // only right
+					nlist = append(nlist[:biggestCPIdx], nlist[biggestCPIdx+1:]...)
+				} else { //kill will be empty
+					return 0
 				}
-			}
-		}
-	}
 
-	// cal ans
+			case ONEKILL:
+				nlist[biggestCPIdx].n -= nlist[biggestCPIdx].bestKillCost
+				nlist[biggestCPIdx].length = CalLength(nlist[biggestCPIdx].n)
+			}
+		} else {
+			break // cannot find
+		}
+
+	}
 	ans := 0
-	for _, i := range ci {
-		if i == 1 {
-			ans++
-			continue
-		}
-		ans++
-		for j := i; j != 0; j /= 10 {
-			ans++
-		}
+	for _, n := range nlist {
+		ans += n.length
 	}
 	return ans
 }

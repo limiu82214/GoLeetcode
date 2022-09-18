@@ -58,6 +58,11 @@ func TestQ1531StringCompressionII(t *testing.T) {
 		Excepted int
 	}
 	data := []param{
+		{
+			Arg1:     "aaaabbab",
+			Arg2:     3,
+			Excepted: 2,
+		},
 		// {
 		// 	Arg1:     "aaabcccd",
 		// 	Arg2:     2,
@@ -88,11 +93,21 @@ func TestQ1531StringCompressionII(t *testing.T) {
 		// 	Arg2:     1,
 		// 	Excepted: 4,
 		// },
-		{
-			Arg1:     "bababbaba",
-			Arg2:     1,
-			Excepted: 7,
-		},
+		// {
+		// 	Arg1:     "bababbaba",
+		// 	Arg2:     1,
+		// 	Excepted: 7,
+		// },
+		// {
+		// 	Arg1:     "bbabbbabbbbcbb",
+		// 	Arg2:     4,
+		// 	Excepted: 3,
+		// },
+		// {
+		// 	Arg1:     "baaaaa",
+		// 	Arg2:     2,
+		// 	Excepted: 2,
+		// },
 	}
 
 	Decorate(func() {
