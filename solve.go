@@ -14,6 +14,31 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q653TwoSumIV(root *TreeNode, k int) bool {
+	var recursive func(now *TreeNode, k int, root *TreeNode) bool
+	recursive = func(now *TreeNode, k int, root *TreeNode) bool {
+		if now == nil {
+			return false
+		}
+		goal := k - now.Val
+		tNode := root
+		for tNode != nil {
+			if goal == tNode.Val && tNode != now {
+				return true
+			}
+			if goal > tNode.Val {
+				tNode = tNode.Right
+				continue
+			}
+			if goal <= tNode.Val {
+				tNode = tNode.Left
+				continue
+			}
+		}
+		return recursive(now.Left, k, root) || recursive(now.Right, k, root)
+	}
+	return recursive(root, k, root)
+}
 
 func Q1099TwoSumLessThanK(nums []int, k int) int {
 	sort.Ints(nums)

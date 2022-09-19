@@ -51,6 +51,39 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ653TwoSumIV-InputIsABST Easy
+func TestQ653TwoSumIV(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Arg2     int
+		Excepted bool
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[5,3,6,2,4,null,7]`),
+			Arg2:     9,
+			Excepted: true,
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[5,3,6,2,4,null,7]`),
+			Arg2:     28,
+			Excepted: false,
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[2,1,3]`),
+			Arg2:     4,
+			Excepted: true,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q653TwoSumIV(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ1099TwoSumLessThanK Easy
 func TestQ1099TwoSumLessThanK(t *testing.T) {
 	type param struct {
@@ -59,16 +92,16 @@ func TestQ1099TwoSumLessThanK(t *testing.T) {
 		Excepted int
 	}
 	data := []param{
-		// {
-		// 	Arg1:     JsonStringToSlice(`[34,23,1,24,75,33,54,8]`),
-		// 	Arg2:     60,
-		// 	Excepted: 58,
-		// },
-		// {
-		// 	Arg1:     JsonStringToSlice(`[10,20,30]`),
-		// 	Arg2:     15,
-		// 	Excepted: -1,
-		// },
+		{
+			Arg1:     JsonStringToSlice(`[34,23,1,24,75,33,54,8]`),
+			Arg2:     60,
+			Excepted: 58,
+		},
+		{
+			Arg1:     JsonStringToSlice(`[10,20,30]`),
+			Arg2:     15,
+			Excepted: -1,
+		},
 		{
 			Arg1:     JsonStringToSlice(`[254,914,110,900,147,441,209,122,571,942,136,350,160,127,178,839,201,386,462,45,735,467,153,415,875,282,204,534,639,994,284,320,865,468,1,838,275,370,295,574,309,268,415,385,786,62,359,78,854,944]`),
 			Arg2:     200,

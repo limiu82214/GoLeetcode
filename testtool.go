@@ -54,3 +54,44 @@ func ConvertFloatToInt[A interface{}, B interface{}](in []any) (out []B) {
 	return out
 }
 */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+// JSONArrayToTreeNode [5,3,6,2,4,null,7] use it
+func JSONArrayToTreeNode(j string) *TreeNode {
+	arg := JsonStringToSlice(j)
+	if len(arg) < 1 {
+		return nil
+	}
+	list := make([]*TreeNode, 0)
+
+	for _, v := range arg {
+		if v == nil {
+			list = append(list, nil)
+			continue
+		}
+		tNode := &TreeNode{
+			Val:   int(v.(float64)),
+			Left:  nil,
+			Right: nil,
+		}
+		list = append(list, tNode)
+	}
+
+	for idx := range list {
+		l := len(list)
+		if idx*2+1 < l {
+			list[idx].Left = list[idx*2+1]
+		}
+		if idx*2+2 < l {
+			list[idx].Right = list[idx*2+2]
+		}
+	}
+
+	return list[0]
+
+}
