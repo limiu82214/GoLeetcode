@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"regexp"
 	"sort"
@@ -12,6 +13,61 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+func Q7ReverseInteger(x int) int {
+	// Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+	if x == 0 {
+		return 0
+	}
+	ans := []byte{}
+	if x < 0 {
+		ans = append(ans, '-')
+		x = -x
+	}
+	isLeaderZero := true
+	for ; x != 0; x /= 10 {
+		mod := x%10 + 48
+		if isLeaderZero && mod != 0 {
+			isLeaderZero = false
+		}
+		if !isLeaderZero {
+			ans = append(ans, byte(mod))
+		}
+
+	}
+	bToInt := func(b []byte) int {
+		rst, _ := strconv.Atoi(string(b))
+		return rst
+	}
+	maxInt32b := []byte("2147483648")
+	if ans[0] == '-' {
+		if len(ans[1:]) > len(maxInt32b) {
+			return 0
+		}
+		if len(ans[1:]) < len(maxInt32b) {
+			return bToInt(ans)
+		}
+		if len(ans[1:]) == len(maxInt32b) {
+			crst := bytes.Compare(ans[1:], maxInt32b)
+			if crst <= 0 {
+				return bToInt(ans)
+			}
+		}
+	} else {
+		if len(ans) > len(maxInt32b) {
+			return 0
+		}
+		if len(ans) < len(maxInt32b) {
+			return bToInt(ans)
+		}
+		if len(ans) == len(maxInt32b) {
+			crst := bytes.Compare(ans, maxInt32b)
+			if crst < 0 {
+				return bToInt(ans)
+			}
+		}
+	}
+	return 0
 }
 
 func Q1531StringCompressionII(s string, k int) int {

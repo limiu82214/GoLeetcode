@@ -50,6 +50,35 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ7ReverseInteger Medium
+func TestQ7ReverseInteger(t *testing.T) {
+	type param struct {
+		Arg1     int
+		Excepted int
+	}
+	data := []param{
+		{
+			Arg1:     123,
+			Excepted: 321,
+		},
+		{
+			Arg1:     -123,
+			Excepted: -321,
+		},
+		{
+			Arg1:     120,
+			Excepted: 21,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q7ReverseInteger(d.Arg1), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ1531StringCompressionII Hard
 func TestQ1531StringCompressionII(t *testing.T) {
 	type param struct {
