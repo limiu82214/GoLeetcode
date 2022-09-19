@@ -626,6 +626,47 @@ func TestQ2349DesignANumberContainerSystem(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ167TwoSumIIInputArrayIsSorted Easy
+func TestQ167TwoSumIIInputArrayIsSorted(t *testing.T) {
+	type param struct {
+		Arg1     []interface{}
+		Arg2     int
+		Excepted []int
+	}
+	data := []param{
+		{
+			Arg1:     JsonStringToSlice(`[2,7,11,15]`),
+			Arg2:     9,
+			Excepted: []int{1, 2},
+		},
+		{
+			Arg1:     JsonStringToSlice(`[2,3,4]`),
+			Arg2:     6,
+			Excepted: []int{1, 3},
+		},
+		{
+			Arg1:     JsonStringToSlice(`[-1,0]`),
+			Arg2:     -1,
+			Excepted: []int{1, 2},
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			var param1 []int
+			Arg1 := ConvertSlice[float64](d.Arg1)
+			param1 = make([]int, 0, len(Arg1))
+			for _, v := range Arg1 {
+				param1 = append(param1, int(v))
+			}
+
+			assert.Equal(t, d.Excepted, Q167TwoSumIIInputArrayIsSorted(param1, d.Arg2), d)
+		}
+	}, 1, 0)
+
+}
+
+// TestQ1TwoSum Easy
 func TestQ1TwoSum(t *testing.T) {
 	type param struct {
 		Arg1     []int

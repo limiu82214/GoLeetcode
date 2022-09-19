@@ -707,6 +707,24 @@ func Q237DeleteNodeInALinkedList(node *q237deletenodeinalinkedlist.ListNode) {
 	node.Val = node.Next.Val
 	node.Next = node.Next.Next
 }
+func Q167TwoSumIIInputArrayIsSorted(numbers []int, target int) []int {
+	solve1 := func(numbers []int, target int) []int {
+		m := make(map[int]int)
+		for i, v := range numbers {
+			// target = v + x
+			// x = target - v
+			x := target - v
+			if j, ok := m[x]; ok {
+				ans := []int{i + 1, j + 1}
+				sort.Ints(ans)
+				return ans
+			}
+			m[v] = i
+		}
+		return nil
+	}
+	return solve1(numbers, target)
+}
 func Q1TwoSum(nums []int, target int) []int {
 	solve1 := func(nums []int, target int) []int {
 		// fmt.Println(nums)
