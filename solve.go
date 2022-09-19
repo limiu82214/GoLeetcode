@@ -14,6 +14,28 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+// func Q184Sum(nums []int, target int) [][]int {
+// ans := [][]int{}
+// maxDigit := 4
+// solveOne := func(ori []int, now []int, now_t int) bool {
+// 	if len(now) > maxDigit {
+// 		return false
+// 	}
+// 	if now_t == 0 {
+// 		ans = append(ans, now)
+// 		return true
+// 	}
+// 	for _, v := range ori {
+// 	}
+// 	return false
+// }
+// solveOne(nums, []int{}, target)
+// return ans
+// 	return [][]int{}
+
+// }
+
 func Q7ReverseInteger(x int) int {
 	// Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
 	if x == 0 {
@@ -686,22 +708,44 @@ func Q237DeleteNodeInALinkedList(node *q237deletenodeinalinkedlist.ListNode) {
 	node.Next = node.Next.Next
 }
 func Q1TwoSum(nums []int, target int) []int {
-	// fmt.Println(nums)
-	alreadyTryInt := map[int]bool{}
-	for i := 0; i < len(nums); i++ {
+	solve1 := func(nums []int, target int) []int {
+		// fmt.Println(nums)
+		alreadyTryInt := map[int]bool{}
+		for i := 0; i < len(nums); i++ {
 
-		if alreadyTryInt[i] == true {
-			continue
-		}
-		for j := (i + 1); j < len(nums); j++ {
-			// fmt.Println(nums[i]+nums[j], i, j)
-			if nums[i]+nums[j] == target {
-				return []int{i, j}
+			if alreadyTryInt[i] == true {
+				continue
 			}
+			for j := (i + 1); j < len(nums); j++ {
+				// fmt.Println(nums[i]+nums[j], i, j)
+				if nums[i]+nums[j] == target {
+					return []int{i, j}
+				}
+			}
+			alreadyTryInt[i] = true
 		}
-		alreadyTryInt[i] = true
+		return nil
 	}
-	return nil
+
+	solve2 := func(nums []int, target int) []int {
+		m := make(map[int]int)
+		for i, v := range nums {
+			// target = v + x
+			// x = target - v
+			x := target - v
+			if j, ok := m[x]; ok {
+				ans := []int{i, j}
+				sort.Ints(ans)
+				return ans
+			}
+			m[v] = i
+		}
+		return nil
+
+	}
+	// solve1(nums, target)
+	_ = solve1
+	return solve2(nums, target)
 }
 
 func Q2180CountIntegersWithEvenDigitSum(num int) int {

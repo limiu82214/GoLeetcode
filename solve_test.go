@@ -50,6 +50,47 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ184Sum Medium
+// func TestQ184Sum(t *testing.T) {
+// 	type param struct {
+// 		Arg1     []interface{}
+// 		Arg2     int
+// 		Excepted [][]int
+// 	}
+// 	data := []param{
+// 		{
+// 			Arg1: JsonStringToSlice(`[1,0,-1,0,-2,2]`),
+// 			Arg2: 0,
+// 			Excepted: [][]int{
+// 				[]int{-2, -1, 1, 2},
+// 				[]int{-2, 0, 0, 2},
+// 				[]int{-1, 0, 0, 1},
+// 			},
+// 		},
+// 		{
+// 			Arg1: JsonStringToSlice(`[2,2,2,2,2]`),
+// 			Arg2: 8,
+// 			Excepted: [][]int{
+// 				[]int{2, 2, 2, 2},
+// 			},
+// 		},
+// 	}
+
+// 	Decorate(func() {
+// 		for _, d := range data {
+// 			var param1 []int
+// 			Arg1 := ConvertSlice[float64](d.Arg1)
+// 			param1 = make([]int, 0, len(Arg1))
+// 			for _, v := range Arg1 {
+// 				param1 = append(param1, int(v))
+// 			}
+
+// 			assert.Equal(t, d.Excepted, Q184Sum(param1, d.Arg2), d)
+// 		}
+// 	}, 1, 0)
+
+// }
+
 // TestQ7ReverseInteger Medium
 func TestQ7ReverseInteger(t *testing.T) {
 	type param struct {
