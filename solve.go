@@ -15,6 +15,30 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q1099TwoSumLessThanK(nums []int, k int) int {
+	sort.Ints(nums)
+	if len(nums) < 1 {
+		return -1
+	}
+	low := 0
+	high := len(nums) - 1
+	closestK := -1
+	for low != high {
+		tSum := nums[low] + nums[high]
+		if tSum == k {
+			high--
+		} else if tSum > k {
+			high--
+		} else if tSum < k {
+			if tSum > closestK {
+				closestK = tSum
+			}
+			low++
+		}
+	}
+	return closestK
+}
+
 // func Q184Sum(nums []int, target int) [][]int {
 // ans := [][]int{}
 // maxDigit := 4

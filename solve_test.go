@@ -51,6 +51,46 @@ func TestForCopy(t *testing.T) {
 
 }
 
+// TestQ1099TwoSumLessThanK Easy
+func TestQ1099TwoSumLessThanK(t *testing.T) {
+	type param struct {
+		Arg1     []interface{}
+		Arg2     int
+		Excepted int
+	}
+	data := []param{
+		// {
+		// 	Arg1:     JsonStringToSlice(`[34,23,1,24,75,33,54,8]`),
+		// 	Arg2:     60,
+		// 	Excepted: 58,
+		// },
+		// {
+		// 	Arg1:     JsonStringToSlice(`[10,20,30]`),
+		// 	Arg2:     15,
+		// 	Excepted: -1,
+		// },
+		{
+			Arg1:     JsonStringToSlice(`[254,914,110,900,147,441,209,122,571,942,136,350,160,127,178,839,201,386,462,45,735,467,153,415,875,282,204,534,639,994,284,320,865,468,1,838,275,370,295,574,309,268,415,385,786,62,359,78,854,944]`),
+			Arg2:     200,
+			Excepted: 198,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			var param1 []int
+			Arg1 := ConvertSlice[float64](d.Arg1)
+			param1 = make([]int, 0, len(Arg1))
+			for _, v := range Arg1 {
+				param1 = append(param1, int(v))
+			}
+
+			assert.Equal(t, d.Excepted, Q1099TwoSumLessThanK(param1, d.Arg2), d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ184Sum Medium
 // func TestQ184Sum(t *testing.T) {
 // 	type param struct {
