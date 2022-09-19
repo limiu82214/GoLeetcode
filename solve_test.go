@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	q170twosumiiidatastructuredesign "github.com/limiu82214/GoLeetcode/exam/Q170TwoSumIIIDataStructureDesign"
 	q2349designanumbercontainersystem "github.com/limiu82214/GoLeetcode/exam/Q2349DesignANumberContainerSystem"
 	q2353designafoodratingsystem "github.com/limiu82214/GoLeetcode/exam/Q2353DesignAFoodRatingSystem"
 	"github.com/stretchr/testify/assert"
@@ -90,6 +91,46 @@ func TestForCopy(t *testing.T) {
 // 	}, 1, 0)
 
 // }
+func TestQ170TwoSumIIIDataStructureDesign(t *testing.T) {
+	type param struct {
+		Arg1     []interface{}
+		Arg2     []interface{}
+		Excepted []interface{}
+	}
+	data := []param{
+		{
+			Arg1:     JsonStringToSlice(`["TwoSum", "add", "add", "add", "find", "find"]`),
+			Arg2:     JsonStringToSlice(`[[], [1], [3], [5], [4], [7]]`),
+			Excepted: JsonStringToSlice(`[null, null, null, null, true, false]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			var obj q170twosumiiidatastructuredesign.TwoSum
+			var actual interface{}
+			for idx, action := range d.Arg1 {
+				switch action {
+				case "TwoSum":
+					obj = q170twosumiiidatastructuredesign.Constructor()
+					actual = nil
+				case "add":
+					arg, _ := d.Arg2[idx].([]interface{})
+					Arg2 := ConvertSlice[float64](arg)
+					obj.Add(int(Arg2[0]))
+					actual = nil
+				case "find":
+					arg, _ := d.Arg2[idx].([]interface{})
+					Arg2 := ConvertSlice[float64](arg)
+					actual = obj.Find(int(Arg2[0]))
+				}
+				assert.Equal(t, d.Excepted[idx], actual, "d")
+			}
+		}
+
+	}, 1, 0)
+
+}
 
 // TestQ7ReverseInteger Medium
 func TestQ7ReverseInteger(t *testing.T) {
