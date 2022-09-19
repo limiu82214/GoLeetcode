@@ -48,6 +48,36 @@ func TestForCopy(t *testing.T) {
 			assert.Equal(t, d.Excepted, Q4MedianOfTwoSortedArrays(param1, param2), d)
 		}
 	}, 1, 0)
+}
+
+// TestQ1214TwoSumBSTs Medium
+func TestQ1214TwoSumBSTs(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Arg2     *TreeNode
+		Arg3     int
+		Excepted bool
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[2,1,4]`),
+			Arg2:     JSONArrayToTreeNode(`[1,0,3]`),
+			Arg3:     5,
+			Excepted: true,
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[0,-10,10]`),
+			Arg2:     JSONArrayToTreeNode(`[5,1,7,0,2]`),
+			Arg3:     18,
+			Excepted: false,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Excepted, Q1214TwoSumBSTs(d.Arg1, d.Arg2, d.Arg3), d)
+		}
+	}, 1, 0)
 
 }
 

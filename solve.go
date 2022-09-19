@@ -14,6 +14,45 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q1214TwoSumBSTs(root1 *TreeNode, root2 *TreeNode, target int) bool {
+	r1Map := make(map[int]struct{})
+	if root1 == nil || root2 == nil {
+		return false
+	}
+
+	query1 := make([]*TreeNode, 0)
+	query1 = append(query1, root1)
+	var tNode *TreeNode
+	for len(query1) != 0 { // go over root1 and map to r1Map O(n)
+		tNode, query1 = query1[0], query1[1:]
+		if tNode.Left != nil {
+			query1 = append(query1, tNode.Left)
+		}
+		if tNode.Right != nil {
+			query1 = append(query1, tNode.Right)
+		}
+		r1Map[tNode.Val] = struct{}{}
+	}
+
+	query2 := make([]*TreeNode, 0)
+	query2 = append(query2, root2)
+	for len(query2) != 0 { // go over root2 and O(n)
+		tNode, query2 = query2[0], query2[1:]
+		goal := target - tNode.Val
+		if _, ok := r1Map[goal]; ok {
+			return true
+		}
+		if tNode.Left != nil {
+			query2 = append(query2, tNode.Left)
+		}
+		if tNode.Right != nil {
+			query2 = append(query2, tNode.Right)
+		}
+	}
+	return false
+}
+
 func Q653TwoSumIV(root *TreeNode, k int) bool {
 	var recursive func(now *TreeNode, k int, root *TreeNode) bool
 	recursive = func(now *TreeNode, k int, root *TreeNode) bool {
