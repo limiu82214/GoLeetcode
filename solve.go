@@ -191,66 +191,123 @@ func Q1099TwoSumLessThanK(nums []int, k int) int {
 }
 
 func Q184Sum(nums []int, target int) [][]int {
-	sort.Ints(nums)
-	twoSum := func(nums []int, target int) [][]int {
-		ans := [][]int{}
-		l := len(nums)
-		for i, j := 0, l-1; i < j; {
-			if j+1 < l && nums[j] == nums[j+1] {
-				j--
-				continue
+	solve1 := func(nums []int, target int) [][]int {
+		sort.Ints(nums)
+		twoSum := func(nums []int, target int) [][]int {
+			ans := [][]int{}
+			l := len(nums)
+			for i, j := 0, l-1; i < j; {
+				if j+1 < l && nums[j] == nums[j+1] {
+					j--
+					continue
+				}
+				if i-1 > 0 && nums[i] == nums[i-1] {
+					i++
+					continue
+				}
+				// goal := target - nums[i]
+				tSum := nums[i] + nums[j]
+				if tSum == target {
+					ans = append(ans, []int{nums[i], nums[j]})
+					i++
+					j--
+				} else if tSum > target {
+					j--
+				} else {
+					i++
+				}
 			}
-			if i-1 > 0 && nums[i] == nums[i-1] {
-				i++
-				continue
-			}
-			// goal := target - nums[i]
-			tSum := nums[i] + nums[j]
-			if tSum == target {
-				ans = append(ans, []int{nums[i], nums[j]})
-				i++
-				j--
-			} else if tSum > target {
-				j--
-			} else {
-				i++
-			}
+			return ans
 		}
-		return ans
-	}
-	threeSum := func(nums []int, target int) [][]int {
-		ans := [][]int{}
-		l := len(nums)
-		for i := 0; i < l-2; i++ {
-			if i > 0 && nums[i] == nums[i-1] {
-				continue
+		threeSum := func(nums []int, target int) [][]int {
+			ans := [][]int{}
+			l := len(nums)
+			for i := 0; i < l-2; i++ {
+				if i > 0 && nums[i] == nums[i-1] {
+					continue
+				}
+				goal := target - nums[i]
+				sumSlice := twoSum(nums[i+1:], goal)
+				for _, intSlice := range sumSlice {
+					intSlice = append(intSlice, nums[i])
+					ans = append(ans, intSlice)
+				}
 			}
-			goal := target - nums[i]
-			sumSlice := twoSum(nums[i+1:], goal)
-			for _, intSlice := range sumSlice {
-				intSlice = append(intSlice, nums[i])
-				ans = append(ans, intSlice)
-			}
+			return ans
 		}
-		return ans
-	}
-	fourSum := func(nums []int, target int) [][]int {
-		ans := [][]int{}
-		l := len(nums)
-		for i := 0; i < l-3; i++ {
-			if i > 0 && nums[i] == nums[i-1] {
-				continue
+		fourSum := func(nums []int, target int) [][]int {
+			ans := [][]int{}
+			l := len(nums)
+			for i := 0; i < l-3; i++ {
+				if i > 0 && nums[i] == nums[i-1] {
+					continue
+				}
+				goal := target - nums[i]
+				sumSlice := threeSum(nums[i+1:], goal)
+				for _, intSlice := range sumSlice {
+					intSlice = append(intSlice, nums[i])
+					ans = append(ans, intSlice)
+				}
 			}
-			goal := target - nums[i]
-			sumSlice := threeSum(nums[i+1:], goal)
-			for _, intSlice := range sumSlice {
-				intSlice = append(intSlice, nums[i])
-				ans = append(ans, intSlice)
-			}
+			return ans
 		}
-		return ans
+		return fourSum(nums, target)
 	}
-	return fourSum(nums, target)
+	_ = solve1(nums, target)
+	// solve2 是 solve1的簡化重複版本，可以處理nSum
+	solve2 := func(nums []int, target int) [][]int {
+		sort.Ints(nums)
+		twoSum := func(nums []int, target int) [][]int {
+			ans := [][]int{}
+			l := len(nums)
+			for i, j := 0, l-1; i < j; {
+				if j+1 < l && nums[j] == nums[j+1] {
+					j--
+					continue
+				}
+				if i-1 > 0 && nums[i] == nums[i-1] {
+					i++
+					continue
+				}
+				// goal := target - nums[i]
+				tSum := nums[i] + nums[j]
+				if tSum == target {
+					ans = append(ans, []int{nums[i], nums[j]})
+					i++
+					j--
+				} else if tSum > target {
+					j--
+				} else {
+					i++
+				}
+			}
+			return ans
+		}
+		var nSum func(nsum int, nums []int, target int) [][]int
+		nSum = func(nsum int, nums []int, target int) [][]int {
+			ans := [][]int{}
+			l := len(nums)
+			for i := 0; i < l-(nsum-1); i++ {
+				if i > 0 && nums[i] == nums[i-1] {
+					continue
+				}
+				goal := target - nums[i]
+				var sumSlice [][]int
+				if nsum-1 == 2 {
+					sumSlice = twoSum(nums[i+1:], goal)
+				} else {
+					sumSlice = nSum(nsum-1, nums[i+1:], goal)
+				}
+				for _, intSlice := range sumSlice {
+					intSlice = append(intSlice, nums[i])
+					ans = append(ans, intSlice)
+				}
+			}
+			return ans
+		}
+		return nSum(4, nums, target) // 4 for quiz
+	}
+	return solve2(nums, target)
 }
 
 func Q7ReverseInteger(x int) int {
