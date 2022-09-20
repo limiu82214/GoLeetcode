@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"runtime"
 	"runtime/pprof"
 )
 
@@ -21,13 +22,28 @@ func Decorate(inter func(), times int, cpurate int) {
 		log.Fatal("errrrrrrrrrrrrrrrr", err)
 	}
 	defer pprof.StopCPUProfile()
+	runtime.GC() // 決定是否先回收其餘的記憶體使用
 	for i := 0; i < times; i++ {
 		inter()
 	}
+	f1, _ := os.Create("mem.prof")
+	pprof.WriteHeapProfile(f1)
+	defer f1.Close()
 }
 
-func JsonStringToSlice(s string) []interface{} {
+func JsonStringToSliceAny(s string) []interface{} {
 	var slice []interface{}
+	json.Unmarshal([]byte(s), &slice)
+	return slice
+}
+
+func JsonToSlice[E interface{}](s string) []E {
+	var slice []E
+	json.Unmarshal([]byte(s), &slice)
+	return slice
+}
+func JsonToSliceSlice[E interface{}](s string) [][]E {
+	var slice [][]E
 	json.Unmarshal([]byte(s), &slice)
 	return slice
 }
@@ -63,7 +79,7 @@ type TreeNode struct {
 
 // JSONArrayToTreeNode [5,3,6,2,4,null,7] use it
 func JSONArrayToTreeNode(j string) *TreeNode {
-	arg := JsonStringToSlice(j)
+	arg := JsonStringToSliceAny(j)
 	if len(arg) < 1 {
 		return nil
 	}

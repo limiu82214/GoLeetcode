@@ -15,6 +15,93 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q153Sum(nums []int) [][]int {
+	solve1 := func(nums []int) [][]int {
+		if len(nums) < 1 {
+			return [][]int{}
+		}
+		sort.Ints(nums)
+		ansMap := make(map[string][]int)
+		findTwoSum := func(basicV int, numsSorted []int, k int) {
+			gMap := make(map[int]struct{})
+			for _, v := range numsSorted {
+				goal := k - v
+				if _, ok := gMap[goal]; ok {
+					tmp := []int{basicV, v, goal}
+					sort.Ints(tmp)
+					key := strconv.Itoa(tmp[0]) + "," + strconv.Itoa(tmp[1]) + "," + strconv.Itoa(tmp[2])
+					ansMap[key] = tmp
+
+				} else {
+					gMap[v] = struct{}{}
+				}
+			}
+		}
+		for i, v := range nums {
+			if i+1 > len(nums)-1 {
+				break
+			}
+			goal := 0 - v // 0 is quiz target
+			findTwoSum(v, nums[i+1:], goal)
+		}
+
+		ans := [][]int{}
+		for _, v := range ansMap {
+			ans = append(ans, v)
+		}
+		return ans
+	}
+
+	// solve2 有一個進步是使用ij逼近的時候，若要把剩下的找完i和j可以繼續下去
+	// * 有可能相同的數組，但是index不一樣，但由於題目要的答案不要求索引，只要
+	//      求值並且不重複，所以有排序的數組可以很好的避免重複查找的問題
+	// 		由於是部分index重複不會涵蓋到所有，所以要把重複的可能避免掉
+	solve2 := func(nums []int) [][]int {
+		// [-2,0,0,2,2]
+		// [[-2,0,2]]
+		ans := [][]int{}
+		l := len(nums)
+		if l < 3 {
+			return [][]int{}
+		}
+		sort.Ints(nums)
+
+		for i, j, k := 0, 0, 0; i < l-2; i++ {
+			j = i + 1
+			k = l - 1
+			if i > 0 && nums[i] == nums[i-1] {
+				continue // 跳過重複的數字
+			}
+			for j < k {
+				if k+1 < l && nums[k] == nums[k+1] {
+					k--
+					continue // 跳過重複的數字
+				}
+				if j-1 > i && nums[j] == nums[j-1] {
+					j++
+					continue // 跳過重複的數字
+				}
+				goal := 0 - nums[i] // 0 is quiz target
+				tSum := nums[j] + nums[k]
+				if tSum == goal {
+					ans = append(ans, []int{nums[i], nums[j], nums[k]})
+					// 繼續循找
+					k--
+					j++
+				} else if tSum > goal {
+					k--
+				} else {
+					j++
+				}
+			}
+		}
+		return ans
+	}
+
+	_ = solve1(nums)
+	return solve2(nums)
+}
+
 func Q1214TwoSumBSTs(root1 *TreeNode, root2 *TreeNode, target int) bool {
 	r1Map := make(map[int]struct{})
 	if root1 == nil || root2 == nil {
