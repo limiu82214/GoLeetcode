@@ -14,6 +14,87 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q1995CountSpecialQuadruplets(nums []int) int {
+	// solve1 := func(nums []int) int {
+	// 	tmp := []int{}
+	// 	for i := len(nums) - 1; i >= 0; i-- {
+	// 		tmp = append(tmp, nums[i])
+	// 	}
+	// 	nums = tmp
+	// 	// fmt.Println(nums)
+	// 	n := 4
+	// 	var find func(nums []int, n int, target int) int
+	// 	find = func(nums []int, n int, target int) int {
+	// 		l := len(nums)
+	// 		if n == 1 {
+	// 			// fmt.Println("n==1")
+	// 			ans := 0
+	// 			for _, v := range nums {
+	// 				if v == target {
+	// 					ans++
+	// 				}
+	// 			}
+	// 			// fmt.Printf("find: %v times: %v in nums:%v \n", target, ans, nums)
+	// 			return ans
+	// 		}
+	// 		ans := 0
+	// 		for i, v := range nums {
+	// 			// fmt.Printf("nums:%v, ", nums)
+	// 			if i > l-n {
+	// 				// fmt.Printf("overflow nums, break i:%v, l:%v, n:%v\n", i, l, n)
+	// 				break
+
+	// 			}
+	// 			goal := target - v
+	// 			if goal < 0 { // every num should be positive
+	// 				// fmt.Printf("choose %v ,every num should be positive, continue i:%v, l:%v, n:%v\n", v, i, l, n)
+	// 				continue
+	// 			}
+	// 			// fmt.Printf("base:%v, goal %v, find %v num in %v, -- i:%v, l:%v, n:%v\n", v, goal, n-1, nums[i+1:], i, l, n)
+	// 			ans += find(nums[i+1:], n-1, goal)
+	// 		}
+	// 		return ans
+	// 	}
+	// 	ans := 0
+	// 	l := len(nums)
+	// 	for i, v := range nums {
+	// 		if i > l-n {
+	// 			break
+	// 		}
+	// 		goal := v
+	// 		// fmt.Printf("base:%v, find %v num in %v\n", v, n-1, nums[i+1:])
+	// 		ans += find(nums[i+1:], n-1, goal)
+	// 	}
+	// 	return ans
+	// }
+	// _ = solve1(nums)
+
+	solve2 := func(nums []int) int {
+		// a + b + c = d  // value
+		// a < b < c < d  // idx
+		// ---
+		// a + b + c - d = 0
+		len := len(nums)
+		ans := 0
+		for i := 0; i < len-1; i++ {
+			for j := i + 1; j < len; j++ {
+				for k := j + 1; k < len; k++ {
+					for l := k + 1; l < len; l++ {
+						tSum := nums[i] + nums[j] + nums[k] - nums[l]
+						if tSum == 0 {
+							ans++
+						}
+					}
+				}
+			}
+		}
+
+		return ans
+	}
+	return solve2(nums)
+}
+
 func Q4544SumII(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
 	// solve1 超時
 	solve1 := func(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
@@ -69,7 +150,8 @@ func Q4544SumII(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
 		*/
 	}
 
-	// 原本考慮 前面的組合會影響到後面的，但後來思考發現?
+	// 原本考慮 前面的組合會影響到後面的，但後來思考發現兩組兩組並不會影響，因為已經列出
+	// 兩組所有的可能了
 	solve2 := func(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
 		target := 0
 		sort.Ints(nums1)

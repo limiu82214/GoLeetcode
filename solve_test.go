@@ -21,12 +21,12 @@ func TestForCopy(t *testing.T) {
 		{
 			Arg1:     JsonToSlice[int](`[1,3]`),
 			Arg2:     JsonStringToSliceAny(`[2]`),
-			Expected: 2.00000,
+			Expected: 2,
 		},
 		{
 			Arg1:     JsonToSlice[int](`[1,2]`),
 			Arg2:     JsonStringToSliceAny(`[3,4]`),
-			Expected: 2.50000,
+			Expected: 2,
 		},
 	}
 
@@ -40,6 +40,46 @@ func TestForCopy(t *testing.T) {
 				param2 = append(param2, int(v))
 			}
 			assert.Equal(t, d.Expected, Q4MedianOfTwoSortedArrays(d.Arg1, param2), d)
+		}
+	}, 1, 0)
+}
+
+// TestQ1995CountSpecialQuadruplets Easy
+func TestQ1995CountSpecialQuadruplets(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,2,3,6]`),
+			Expected: 1,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[3,3,6,4,5]`),
+			Expected: 0,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1,1,1,3,5]`),
+			Expected: 4,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[28,8,49,85,37,90,20,8]`),
+			Expected: 1,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[2,16,9,27,3,39]`),
+			Expected: 2,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[8,73,11,9,28,92,52]`),
+			Expected: 2,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q1995CountSpecialQuadruplets(d.Arg1), d)
 		}
 	}, 1, 0)
 }
