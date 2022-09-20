@@ -14,6 +14,93 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q4544SumII(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
+	// solve1 超時
+	solve1 := func(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
+		return 0
+		/*
+			twoSum := func(nums1 []int, nums2 []int, target int) int {
+				rMap := make(map[int]int, 200)
+				ans := 0
+				for _, v := range nums2 {
+					rMap[v]++
+				}
+				for i := range nums1 {
+					goal := target - nums1[i]
+					ans += rMap[goal]
+				}
+				return ans
+			}
+			rNMap := make(map[int]map[int]int, 5) // number mt target mt combine
+			rNMap[2] = make(map[int]int, 4000)
+			rNMap[3] = make(map[int]int, 4000)
+			rNMap[4] = make(map[int]int, 200)
+			var nSum func(n int, nums [][]int, target int) int
+			nSum = func(n int, nums [][]int, target int) int {
+				ans := 0
+				if n > 2 {
+					for _, v := range nums[0] {
+						goal := target - v
+						if _, ok := rNMap[n][goal]; ok {
+							ans += rNMap[n][goal]
+						} else {
+							rNMap[n] = make(map[int]int)
+							rNMap[n][goal] = nSum(n-1, nums[1:], goal)
+							ans += rNMap[n][goal]
+						}
+					}
+				} else if n == 2 {
+					if _, ok := rNMap[2][target]; ok {
+						ans += rNMap[2][target]
+					} else {
+						rNMap[2] = make(map[int]int)
+						rNMap[2][target] = twoSum(nums[0], nums[1], target)
+						ans += rNMap[2][target]
+					}
+				}
+				return ans
+			}
+			sort.Ints(nums1)
+			sort.Ints(nums2)
+			sort.Ints(nums3)
+			sort.Ints(nums4)
+			nsums := append([][]int{}, nums1, nums2, nums3, nums4)
+			return nSum(4, nsums, 0) // because 4sum
+		*/
+	}
+
+	// 原本考慮 前面的組合會影響到後面的，但後來思考發現?
+	solve2 := func(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
+		target := 0
+		sort.Ints(nums1)
+		sort.Ints(nums2)
+		sort.Ints(nums3)
+		sort.Ints(nums4)
+		nSum := func(nums [][]int) (goalCntMap map[int]int) {
+			goalCntMap = make(map[int]int)
+			for _, v := range nums[0] {
+				for _, v2 := range nums[1] {
+					goalCntMap[v+v2]++
+				}
+			}
+			return goalCntMap
+		}
+		A := nSum([][]int{nums1, nums2}) //A是nums1和nums2組合次數表
+		ans := 0
+		// for _, v := range nums3 {
+		// 	for _, v2 := range nums4 {
+		// 		ans += A[target-(v+v2)]
+		// 	}
+		// }
+		B := nSum([][]int{nums3, nums4})
+		for aGoal, aCnt := range A {
+			ans += aCnt * B[target-aGoal]
+		}
+		return ans
+	}
+	_ = solve1(nums1, nums2, nums3, nums4)
+	return solve2(nums1, nums2, nums3, nums4)
+}
 
 func Q153Sum(nums []int) [][]int {
 	solve1 := func(nums []int) [][]int {
