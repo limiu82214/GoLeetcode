@@ -190,26 +190,68 @@ func Q1099TwoSumLessThanK(nums []int, k int) int {
 	return closestK
 }
 
-// func Q184Sum(nums []int, target int) [][]int {
-// ans := [][]int{}
-// maxDigit := 4
-// solveOne := func(ori []int, now []int, now_t int) bool {
-// 	if len(now) > maxDigit {
-// 		return false
-// 	}
-// 	if now_t == 0 {
-// 		ans = append(ans, now)
-// 		return true
-// 	}
-// 	for _, v := range ori {
-// 	}
-// 	return false
-// }
-// solveOne(nums, []int{}, target)
-// return ans
-// 	return [][]int{}
-
-// }
+func Q184Sum(nums []int, target int) [][]int {
+	sort.Ints(nums)
+	twoSum := func(nums []int, target int) [][]int {
+		ans := [][]int{}
+		l := len(nums)
+		for i, j := 0, l-1; i < j; {
+			if j+1 < l && nums[j] == nums[j+1] {
+				j--
+				continue
+			}
+			if i-1 > 0 && nums[i] == nums[i-1] {
+				i++
+				continue
+			}
+			// goal := target - nums[i]
+			tSum := nums[i] + nums[j]
+			if tSum == target {
+				ans = append(ans, []int{nums[i], nums[j]})
+				i++
+				j--
+			} else if tSum > target {
+				j--
+			} else {
+				i++
+			}
+		}
+		return ans
+	}
+	threeSum := func(nums []int, target int) [][]int {
+		ans := [][]int{}
+		l := len(nums)
+		for i := 0; i < l-2; i++ {
+			if i > 0 && nums[i] == nums[i-1] {
+				continue
+			}
+			goal := target - nums[i]
+			sumSlice := twoSum(nums[i+1:], goal)
+			for _, intSlice := range sumSlice {
+				intSlice = append(intSlice, nums[i])
+				ans = append(ans, intSlice)
+			}
+		}
+		return ans
+	}
+	fourSum := func(nums []int, target int) [][]int {
+		ans := [][]int{}
+		l := len(nums)
+		for i := 0; i < l-3; i++ {
+			if i > 0 && nums[i] == nums[i-1] {
+				continue
+			}
+			goal := target - nums[i]
+			sumSlice := threeSum(nums[i+1:], goal)
+			for _, intSlice := range sumSlice {
+				intSlice = append(intSlice, nums[i])
+				ans = append(ans, intSlice)
+			}
+		}
+		return ans
+	}
+	return fourSum(nums, target)
+}
 
 func Q7ReverseInteger(x int) int {
 	// Assume the environment does not allow you to store 64-bit integers (signed or unsigned).

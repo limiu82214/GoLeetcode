@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"testing"
 
 	q170twosumiiidatastructuredesign "github.com/limiu82214/GoLeetcode/exam/Q170TwoSumIIIDataStructureDesign"
@@ -85,8 +86,14 @@ func TestQ153Sum(t *testing.T) {
 
 	Decorate(func() {
 		for _, d := range data {
-			// note 題目對答案的排序不重要，但在這個測試中沒有特別整理排序
-			assert.Equal(t, d.Excepted, Q153Sum(d.Arg1), d)
+			for i := range d.Excepted {
+				sort.Ints(d.Excepted[i])
+			}
+			actual := Q153Sum(d.Arg1)
+			for i := range actual {
+				sort.Ints(actual[i])
+			}
+			assert.Equal(t, d.Excepted, actual, d)
 		}
 	}, 1, 0)
 }
@@ -196,45 +203,49 @@ func TestQ1099TwoSumLessThanK(t *testing.T) {
 }
 
 // TestQ184Sum Medium
-// func TestQ184Sum(t *testing.T) {
-// 	type param struct {
-// 		Arg1     []interface{}
-// 		Arg2     int
-// 		Excepted [][]int
-// 	}
-// 	data := []param{
-// 		{
-// 			Arg1: JsonStringToSliceAny(`[1,0,-1,0,-2,2]`),
-// 			Arg2: 0,
-// 			Excepted: [][]int{
-// 				[]int{-2, -1, 1, 2},
-// 				[]int{-2, 0, 0, 2},
-// 				[]int{-1, 0, 0, 1},
-// 			},
-// 		},
-// 		{
-// 			Arg1: JsonStringToSliceAny(`[2,2,2,2,2]`),
-// 			Arg2: 8,
-// 			Excepted: [][]int{
-// 				[]int{2, 2, 2, 2},
-// 			},
-// 		},
-// 	}
+func TestQ184Sum(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Arg2     int
+		Excepted [][]int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,0,-1,0,-2,2]`),
+			Arg2:     0,
+			Excepted: JsonToSliceSlice[int](`[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[2,2,2,2,2]`),
+			Arg2:     8,
+			Excepted: JsonToSliceSlice[int](`[[2,2,2,2]]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[0,0,0,0]`),
+			Arg2:     0,
+			Excepted: JsonToSliceSlice[int](`[[0,0,0,0]]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[-1,0,-5,-2,-2,-4,0,1,-2]`),
+			Arg2:     -9,
+			Excepted: JsonToSliceSlice[int](`[[-5,-4,-1,1],[-5,-4,0,0],[-5,-2,-2,0],[-4,-2,-2,-1]]`),
+		},
+	}
 
-// 	Decorate(func() {
-// 		for _, d := range data {
-// 			var param1 []int
-// 			Arg1 := ConvertSlice[float64](d.Arg1)
-// 			param1 = make([]int, 0, len(Arg1))
-// 			for _, v := range Arg1 {
-// 				param1 = append(param1, int(v))
-// 			}
+	Decorate(func() {
+		for _, d := range data {
+			for i := range d.Excepted {
+				sort.Ints(d.Excepted[i])
+			}
+			actual := Q184Sum(d.Arg1, d.Arg2)
+			for i := range actual {
+				sort.Ints(actual[i])
+			}
+			assert.Equal(t, d.Excepted, actual, d)
+		}
+	}, 1, 0)
 
-// 			assert.Equal(t, d.Excepted, Q184Sum(param1, d.Arg2), d)
-// 		}
-// 	}, 1, 0)
-
-// }
+}
 func TestQ170TwoSumIIIDataStructureDesign(t *testing.T) {
 	type param struct {
 		Arg1     []interface{}
