@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ415AddStrings Easy
+func TestQ415AddStrings(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Arg2     string
+		Expected string
+	}
+	data := []param{
+		{
+			Arg1:     "11",
+			Arg2:     "123",
+			Expected: "134",
+		},
+		{
+			Arg1:     "456",
+			Arg2:     "77",
+			Expected: "533",
+		},
+		{
+			Arg1:     "0",
+			Arg2:     "0",
+			Expected: "0",
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q415AddStrings(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ989AddToArray_FormOfInteger Easy
 func TestQ989AddToArray_FormOfInteger(t *testing.T) {
 	type param struct {

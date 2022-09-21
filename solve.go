@@ -14,6 +14,36 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q415AddStrings(num1 string, num2 string) string {
+	// You must solve the problem without using any built-in library for handling large integers (such as BigInteger). You must also not convert the inputs to integers directly.
+	reverseAns := []byte{}
+	carry := 0
+	for i, j := len(num1)-1, len(num2)-1; i >= 0 || j >= 0; {
+		t := 0
+		if i >= 0 {
+			t += int(num1[i]) - 48
+			i--
+		}
+		if j >= 0 {
+			t += int(num2[j]) - 48
+			j--
+		}
+		t += carry
+		carry = t / 10
+		reverseAns = append(reverseAns, byte(t%10+48))
+	}
+	if carry != 0 {
+		reverseAns = append(reverseAns, byte(carry+48))
+	}
+
+	l := len(reverseAns)
+	for i := 0; i < l-i-1; i++ {
+		reverseAns[i], reverseAns[l-i-1] = reverseAns[l-i-1], reverseAns[i]
+	}
+
+	return string(reverseAns)
+}
 func Q989AddToArray_FormOfInteger(num []int, k int) []int {
 	carry := 0
 	for i := len(num) - 1; i >= 0 && (k > 0 || carry > 0); i-- {
