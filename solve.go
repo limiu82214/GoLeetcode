@@ -15,6 +15,58 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q67AddBinary(a string, b string) string {
+	aa := []byte(a)
+	bb := []byte(b)
+	i := len(aa) - 1
+	j := len(bb) - 1
+	carry := '0'
+	ans := []byte{}
+	for i >= 0 || j >= 0 {
+		cnt := 0
+		if i >= 0 {
+			if aa[i] == '1' {
+				cnt++
+			}
+			i--
+		}
+		if j >= 0 {
+			if bb[j] == '1' {
+				cnt++
+			}
+			j--
+		}
+		if carry == '1' {
+			cnt++
+		}
+		if cnt/2 > 0 {
+			carry = '1'
+		} else {
+			carry = '0'
+		}
+		if cnt%2 == 0 {
+			ans = append(ans, '0')
+		} else {
+			ans = append(ans, '1')
+		}
+	}
+	if carry == '1' {
+		ans = append(ans, '1')
+	}
+
+	// leetcode use will not change
+	// sort.Slice(ans, func(i, j int) bool {
+	// 	return i > j
+	// })
+
+	l := len(ans)
+	for i := 0; i < l-i-1; i++ {
+		ans[i], ans[l-i-1] = ans[l-i-1], ans[i]
+	}
+
+	return string(ans)
+}
+
 func Q718MaximumLengthOfRepeatedSubarray(nums1 []int, nums2 []int) int {
 	// time limit
 	solve1 := func(nums1 []int, nums2 []int) int {

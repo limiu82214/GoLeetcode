@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ67AddBinary Easy
+func TestQ67AddBinary(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Arg2     string
+		Expected string
+	}
+	data := []param{
+		{
+			Arg1:     "11",
+			Arg2:     "1",
+			Expected: "100",
+		},
+		{
+			Arg1:     "1010",
+			Arg2:     "1011",
+			Expected: "10101",
+		},
+		{
+			Arg1:     "11",
+			Arg2:     "111101",
+			Expected: "1000000",
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q67AddBinary(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ718MaximumLengthOfRepeatedSubarray Medium *fail*
 func TestQ718MaximumLengthOfRepeatedSubarray(t *testing.T) {
 	type param struct {
