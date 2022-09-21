@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ66PlusOne Easy
+func TestQ66PlusOne(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected []int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,2,3]`),
+			Expected: JsonToSlice[int](`[1,2,4]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[4,3,2,1]`),
+			Expected: JsonToSlice[int](`[4,3,2,2]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[9]`),
+			Expected: JsonToSlice[int](`[1,0]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q66PlusOne(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ67AddBinary Easy
 func TestQ67AddBinary(t *testing.T) {
 	type param struct {

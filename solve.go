@@ -15,6 +15,32 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q66PlusOne(digits []int) []int {
+
+	carry := 1 // basic 1
+	ans := []int{}
+	for i := len(digits) - 1; i >= 0; i-- {
+		t := digits[i] + carry
+		ans = append(ans, t%10)
+		carry = t / 10
+	}
+	if carry == 1 {
+		ans = append(ans, 1)
+	}
+
+	// leetcode use will not change
+	// sort.Slice(ans, func(i, j int) bool {
+	// 	return i > j
+	// })
+
+	l := len(ans)
+	for i := 0; i < l-i-1; i++ {
+		ans[i], ans[l-i-1] = ans[l-i-1], ans[i]
+	}
+
+	return ans
+}
+
 func Q67AddBinary(a string, b string) string {
 	aa := []byte(a)
 	bb := []byte(b)
