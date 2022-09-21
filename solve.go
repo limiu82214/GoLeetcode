@@ -14,6 +14,75 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q445AddTwoNumbersII(l1 *ListNode, l2 *ListNode) *ListNode {
+	// reverse
+	var pre, ll1, ll2 *ListNode
+	pre = nil
+	for l1 != nil {
+		ll1 = &ListNode{
+			Val:  l1.Val,
+			Next: nil,
+		}
+		if pre != nil {
+			ll1.Next = pre
+		}
+		pre = ll1
+		l1 = l1.Next
+	}
+	pre = nil
+	for l2 != nil {
+		ll2 = &ListNode{
+			Val:  l2.Val,
+			Next: nil,
+		}
+		if pre != nil {
+			ll2.Next = pre
+		}
+		pre = ll2
+		l2 = l2.Next
+	}
+
+	// add
+	var ans *ListNode
+	carry := 0
+	pre = nil
+	for ll1 != nil || ll2 != nil {
+		t := 0
+		if ll1 != nil {
+			t += ll1.Val
+			ll1 = ll1.Next
+		}
+		if ll2 != nil {
+			t += ll2.Val
+			ll2 = ll2.Next
+		}
+		t += carry
+		carry = t / 10
+		ans = &ListNode{
+			Val:  t % 10,
+			Next: nil,
+		}
+		if pre != nil {
+			ans.Next = pre
+		}
+		pre = ans
+	}
+	if carry != 0 {
+		ans = &ListNode{
+			Val:  carry % 10,
+			Next: nil,
+		}
+		if pre != nil {
+			ans.Next = pre
+		}
+		pre = ans
+	}
+
+	for ans != nil && ans.Next != nil && ans.Val == 0 {
+		ans = ans.Next
+	}
+	return ans
+}
 func Q371SumOfTwoIntegers(a int, b int) int {
 	// without using the operators + and -.
 	b1 := a

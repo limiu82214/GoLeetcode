@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ445AddTwoNumbersII Medium
+func TestQ445AddTwoNumbersII(t *testing.T) {
+	type param struct {
+		Arg1     *ListNode
+		Arg2     *ListNode
+		Expected *ListNode
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToListNode(`[7,2,4,3]`),
+			Arg2:     JSONArrayToListNode(`[5,6,4]`),
+			Expected: JSONArrayToListNode(`[7,8,0,7]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[2,4,3]`),
+			Arg2:     JSONArrayToListNode(`[5,6,4]`),
+			Expected: JSONArrayToListNode(`[8,0,7]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[0]`),
+			Arg2:     JSONArrayToListNode(`[0]`),
+			Expected: JSONArrayToListNode(`[0]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q445AddTwoNumbersII(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ371SumOfTwoIntegers Medium
 func TestQ371SumOfTwoIntegers(t *testing.T) {
 	type param struct {
