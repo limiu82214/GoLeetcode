@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ43MultiplyStrings Easy
+func TestQ43MultiplyStrings(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Arg2     string
+		Expected string
+	}
+	data := []param{
+		{
+			Arg1:     "2",
+			Arg2:     "3",
+			Expected: "6",
+		},
+		{
+			Arg1:     "123",
+			Arg2:     "456",
+			Expected: "56088",
+		},
+		{
+			Arg1:     "9133",
+			Arg2:     "0",
+			Expected: "0",
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q43MultiplyStrings(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ66PlusOne Easy
 func TestQ66PlusOne(t *testing.T) {
 	type param struct {

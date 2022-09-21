@@ -15,6 +15,73 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q43MultiplyStrings(num1 string, num2 string) string {
+	// Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
+	Itb := func(i int) byte {
+		return byte(i) + 48
+	}
+	Bti := func(b byte) int {
+		return int(b) - 48
+	}
+	ans := []byte{}
+	aa := []byte(num1)
+	bb := []byte(num2)
+
+	sumList := [][]byte{}
+	for i := len(aa) - 1; i >= 0; i-- {
+		carry := 0
+		row := []byte{}
+		for j := len(bb) - 1; j >= 0; j-- {
+			t := Bti(aa[i])*Bti(bb[j]) + carry
+			carry = t / 10
+			row = append(row, Itb(t%10))
+		}
+		if carry != 0 {
+			row = append(row, Itb(carry))
+		}
+		sumList = append(sumList, row)
+	}
+
+	popIdx := 0
+	carry := 0
+	for hasVal := true; hasVal; {
+		hasVal = false
+		t := 0
+		for i := range sumList {
+			if popIdx-i < 0 {
+				continue
+			}
+			if popIdx-i > len(sumList[i])-1 {
+				continue
+			}
+			t += Bti(sumList[i][popIdx-i])
+			hasVal = true
+		}
+		if hasVal {
+			t += carry
+			carry = t / 10
+			ans = append(ans, Itb(t%10))
+			popIdx++
+		}
+	}
+	if carry != 0 {
+		ans = append(ans, Itb(carry))
+	}
+
+	l := len(ans) - 1
+	for l >= 0 && ans[l] == '0' {
+		l--
+	}
+	if l < 0 {
+		return "0"
+	}
+	for i := 0; i < l-i; i++ {
+		ans[i], ans[l-i] = ans[l-i], ans[i]
+	}
+
+	return string(ans)
+}
+
 func Q66PlusOne(digits []int) []int {
 
 	carry := 1 // basic 1
