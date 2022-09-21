@@ -45,6 +45,42 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ92ReverseLinkedListII Medium
+func TestQ92ReverseLinkedListII(t *testing.T) {
+	type param struct {
+		Arg1     *ListNode
+		Arg2     int
+		Arg3     int
+		Expected *ListNode
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToListNode(`[1,2,3,4,5]`),
+			Arg2:     2,
+			Arg3:     4,
+			Expected: JSONArrayToListNode(`[1,4,3,2,5]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[5]`),
+			Arg2:     1,
+			Arg3:     1,
+			Expected: JSONArrayToListNode(`[5]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[3,5]`),
+			Arg2:     1,
+			Arg3:     2,
+			Expected: JSONArrayToListNode(`[5,3]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q92ReverseLinkedListII(d.Arg1, d.Arg2, d.Arg3), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ206ReverseLinkedList Easy
 func TestQ206ReverseLinkedList(t *testing.T) {
 	type param struct {

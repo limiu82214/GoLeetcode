@@ -14,6 +14,44 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q92ReverseLinkedListII(head *ListNode, left int, right int) *ListNode {
+	var preLp, preRp, tp *ListNode
+	tp = head
+	i := 0
+	for tp != nil {
+		i++
+		if i+1 == left {
+			preLp = tp
+		}
+		if i == right {
+			preRp = tp.Next
+			break
+		}
+		tp = tp.Next
+	}
+	// reverse left to right
+	var h *ListNode
+	if preLp != nil {
+		h = preLp.Next
+	} else {
+		h = head
+	}
+	last := preRp
+	for h != preRp {
+		t := h.Next
+		h.Next = last
+		last = h
+		h = t
+	}
+	if preLp != nil {
+		preLp.Next = last
+	} else {
+		head = last
+	}
+	return head
+}
+
 func Q206ReverseLinkedList(head *ListNode) *ListNode {
 	var pre *ListNode
 	for head != nil {
