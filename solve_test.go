@@ -45,6 +45,33 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ371SumOfTwoIntegers Medium
+func TestQ371SumOfTwoIntegers(t *testing.T) {
+	type param struct {
+		Arg1     int
+		Arg2     int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     1,
+			Arg2:     2,
+			Expected: 3,
+		},
+		{
+			Arg1:     2,
+			Arg2:     3,
+			Expected: 5,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q371SumOfTwoIntegers(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2AddTwoNumbers Medium
 func TestQ2AddTwoNumbers(t *testing.T) {
 	type param struct {

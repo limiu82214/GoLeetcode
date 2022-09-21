@@ -14,6 +14,20 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q371SumOfTwoIntegers(a int, b int) int {
+	// without using the operators + and -.
+	b1 := a
+	b2 := b
+
+	sum := b1 ^ b2
+	carry := b1 & b2
+	for carry != 0 {
+		b1, b2 = sum, carry<<1
+		sum = b1 ^ b2
+		carry = b1 & b2
+	}
+	return sum
+}
 func Q2AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	carry := 0
 	var ans, preN, nowN *ListNode
