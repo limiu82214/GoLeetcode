@@ -45,6 +45,30 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ369PlusOneLinkedList Medium
+func TestQ369PlusOneLinkedList(t *testing.T) {
+	type param struct {
+		Arg1     *ListNode
+		Expected *ListNode
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToListNode(`[1,2,3]`),
+			Expected: JSONArrayToListNode(`[1,2,4]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[0]`),
+			Expected: JSONArrayToListNode(`[1]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q369PlusOneLinkedList(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ43MultiplyStrings Easy
 func TestQ43MultiplyStrings(t *testing.T) {
 	type param struct {

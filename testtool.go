@@ -111,3 +111,39 @@ func JSONArrayToTreeNode(j string) *TreeNode {
 	return list[0]
 
 }
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+// JSONArrayToListNode [5,3,6,2,4,null,7] use it
+func JSONArrayToListNode(j string) *ListNode {
+	arg := JsonStringToSliceAny(j)
+	if len(arg) < 1 {
+		return nil
+	}
+	list := make([]*ListNode, 0)
+
+	for _, v := range arg {
+		if v == nil {
+			list = append(list, nil)
+			continue
+		}
+		tNode := &ListNode{
+			Val:  int(v.(float64)),
+			Next: nil,
+		}
+		list = append(list, tNode)
+	}
+
+	for idx := range list {
+		l := len(list)
+		if idx < l-1 {
+			list[idx].Next = list[idx+1]
+		}
+	}
+
+	return list[0]
+
+}

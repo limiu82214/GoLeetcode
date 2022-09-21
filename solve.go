@@ -14,6 +14,26 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q369PlusOneLinkedList(head *ListNode) *ListNode {
+	query := []*ListNode{}
+
+	for now := head; now != nil; now = now.Next {
+		query = append(query, now)
+	}
+
+	carry := 1
+	for i := len(query) - 1; i >= 0; i-- {
+		t := query[i].Val + carry
+		query[i].Val, carry = t%10, t/10
+	}
+	if carry > 0 {
+		head = &ListNode{
+			Val:  carry,
+			Next: head,
+		}
+	}
+	return head
+}
 
 func Q43MultiplyStrings(num1 string, num2 string) string {
 	// Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
