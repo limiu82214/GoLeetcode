@@ -15,6 +15,64 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q718MaximumLengthOfRepeatedSubarray(nums1 []int, nums2 []int) int {
+	// time limit
+	solve1 := func(nums1 []int, nums2 []int) int {
+		if len(nums1) > len(nums2) {
+			nums1, nums2 = nums2, nums1
+		}
+		l1 := len(nums1)
+		l2 := len(nums2)
+		maxLength := 0
+		for baseIdx := range nums1 {
+			if l1-(baseIdx+1) < maxLength {
+				break
+			}
+			for i := baseIdx; i < l1; i++ {
+				if l1-(i+1) < maxLength {
+					break
+				}
+				for j := 0; j < l2; j++ {
+					if l2-(j+1) < maxLength {
+						break
+					}
+					nowLength := 0
+					for k, l := i, j; k < l1 && l < l2 && nums1[k] == nums2[l]; {
+						k++
+						l++
+						nowLength++
+
+					}
+					if nowLength > maxLength {
+						maxLength = nowLength
+					}
+				}
+			}
+		}
+		return maxLength
+	}
+
+	// solve2 := func(nums1 []int, nums2 []int) int {
+	// 	dp := make(map[int]int)
+	// 	list := []int{}
+	// 	for
+
+	// 	for i := range nums1 {
+	// 		for j := range nums1[:i+1] {
+	// 			nums1[j:] // all nums1 sub
+	// 		}
+	// 	}
+	// 	for i := range nums2 {
+	// 		for j := range nums2[:i+1] {
+	// 			nums2[j:] // all nums2 sub
+	// 		}
+	// 	}
+	// }
+	// _ = solve2(nums1, nums2)
+	return solve1(nums1, nums2)
+	// note---
+}
+
 func Q1995CountSpecialQuadruplets(nums []int) int {
 	// solve1 := func(nums []int) int {
 	// 	tmp := []int{}
