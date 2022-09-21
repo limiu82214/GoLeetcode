@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ156BinaryTreeUpsideDown Medium
+func TestQ156BinaryTreeUpsideDown(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Expected *TreeNode
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[1,2,3,4,5]`),
+			Expected: JSONArrayToTreeNode(`[4,5,2,null,null,3,1]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[]`),
+			Expected: JSONArrayToTreeNode(`[]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1]`),
+			Expected: JSONArrayToTreeNode(`[1]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1,2]`),
+			Expected: JSONArrayToTreeNode(`[2, null, 1]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q156BinaryTreeUpsideDown(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ92ReverseLinkedListII Medium
 func TestQ92ReverseLinkedListII(t *testing.T) {
 	type param struct {

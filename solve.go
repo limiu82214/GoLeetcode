@@ -14,6 +14,37 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q156BinaryTreeUpsideDown(root *TreeNode) *TreeNode {
+	if root == nil {
+		return root
+	}
+	if root.Left == nil {
+		return root
+	}
+	var newRoot *TreeNode
+
+	var re func(left *TreeNode, father *TreeNode, fatherRight *TreeNode)
+	re = func(left *TreeNode, father *TreeNode, fatherRight *TreeNode) {
+		if left.Left != nil {
+			re(left.Left, left, left.Right)
+		}
+		if newRoot == nil {
+			newRoot = left
+		}
+		if left.Right != nil {
+			re(left.Right, left, nil)
+		}
+		if father != nil && left != father.Right {
+			left.Left = father.Right
+			left.Right = father
+		}
+
+	}
+	re(root, nil, nil)
+	root.Left = nil
+	root.Right = nil
+	return newRoot
+}
 
 func Q92ReverseLinkedListII(head *ListNode, left int, right int) *ListNode {
 	var preLp, preRp, tp *ListNode
