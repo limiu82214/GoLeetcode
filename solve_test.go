@@ -45,6 +45,48 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ989AddToArray_FormOfInteger Easy
+func TestQ989AddToArray_FormOfInteger(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Arg2     int
+		Expected []int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,2,0,0]`),
+			Arg2:     34,
+			Expected: JsonToSlice[int](`[1,2,3,4]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[2,7,4]`),
+			Arg2:     181,
+			Expected: JsonToSlice[int](`[4,5,5]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[2,1,5]`),
+			Arg2:     806,
+			Expected: JsonToSlice[int](`[1,0,2,1]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[9,9,9,9,9,9,9,9,9,9]`),
+			Arg2:     1,
+			Expected: JsonToSlice[int](`[1,0,0,0,0,0,0,0,0,0,0]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[0]`),
+			Arg2:     123,
+			Expected: JsonToSlice[int](`[1,2,3]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q989AddToArray_FormOfInteger(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ369PlusOneLinkedList Medium
 func TestQ369PlusOneLinkedList(t *testing.T) {
 	type param struct {

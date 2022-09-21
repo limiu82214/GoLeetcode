@@ -14,6 +14,19 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q989AddToArray_FormOfInteger(num []int, k int) []int {
+	carry := 0
+	for i := len(num) - 1; i >= 0 && (k > 0 || carry > 0); i-- {
+		t := num[i] + carry + k%10
+		num[i], carry, k = t%10, t/10, k/10
+	}
+	carry += k
+	for carry != 0 {
+		num = append([]int{carry % 10}, num...)
+		carry /= 10
+	}
+	return num
+}
 func Q369PlusOneLinkedList(head *ListNode) *ListNode {
 	query := []*ListNode{}
 
