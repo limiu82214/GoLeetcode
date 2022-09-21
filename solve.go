@@ -14,6 +14,43 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q2AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	carry := 0
+	var ans, preN, nowN *ListNode
+	for l1 != nil || l2 != nil {
+		t := 0
+		if l1 != nil {
+			t += l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			t += l2.Val
+			l2 = l2.Next
+		}
+		t += carry
+		carry = t / 10
+
+		nowN = &ListNode{
+			Val:  t % 10,
+			Next: nil,
+		}
+		if preN == nil {
+			preN, ans = nowN, nowN
+
+		} else {
+			preN.Next = nowN
+			preN = nowN
+		}
+	}
+	if carry != 0 {
+		nowN = &ListNode{
+			Val:  carry % 10,
+			Next: nil,
+		}
+		preN.Next = nowN
+	}
+	return ans
+}
 
 func Q415AddStrings(num1 string, num2 string) string {
 	// You must solve the problem without using any built-in library for handling large integers (such as BigInteger). You must also not convert the inputs to integers directly.
