@@ -14,6 +14,17 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q206ReverseLinkedList(head *ListNode) *ListNode {
+	var pre *ListNode
+	for head != nil {
+		tmp := head.Next
+		head.Next = pre
+		pre = head
+		head = tmp
+	}
+	return pre
+}
+
 func Q445AddTwoNumbersII(l1 *ListNode, l2 *ListNode) *ListNode {
 	// reverse
 	var pre, ll1, ll2 *ListNode
