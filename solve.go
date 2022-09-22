@@ -15,6 +15,26 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q2130MaximumTwinSumOfALinkedList(head *ListNode) int {
+	now := head
+	is := []int{}
+	for now != nil {
+		is = append(is, now.Val)
+		now = now.Next
+	}
+
+	max := 0
+	for i, j := 0, len(is)-1; i < j; {
+		t := is[i] + is[j]
+		if t > max {
+			max = t
+		}
+		i++
+		j--
+	}
+	return max
+}
+
 func Q2074ReverseNodesInEvenLengthGroups(head *ListNode) *ListNode {
 	// 注意 最後一個Group的節點可能是偶數，也要反轉Q2074ReverseNodesInEvenLengthGroups
 	reverseListNode := func(preNode *ListNode, postNode *ListNode) {

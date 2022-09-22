@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2130MaximumTwinSumOfALinkedList Medium
+func TestQ2130MaximumTwinSumOfALinkedList(t *testing.T) {
+	type param struct {
+		Arg1     *ListNode
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToListNode(`[5,4,2,1]`),
+			Expected: 6,
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[4,2,2,3]`),
+			Expected: 7,
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[1,100000]`),
+			Expected: 100001,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2130MaximumTwinSumOfALinkedList(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2074ReverseNodesInEvenLengthGroups Medium
 func TestQ2074ReverseNodesInEvenLengthGroups(t *testing.T) {
 	type param struct {
