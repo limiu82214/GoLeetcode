@@ -45,6 +45,30 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ234PalindromeLinkedList Easy
+func TestQ234PalindromeLinkedList(t *testing.T) {
+	type param struct {
+		Arg1     *ListNode
+		Expected bool
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToListNode(`[1,2,2,1]`),
+			Expected: true,
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[1,2]`),
+			Expected: false,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q234PalindromeLinkedList(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ156BinaryTreeUpsideDown Medium
 func TestQ156BinaryTreeUpsideDown(t *testing.T) {
 	type param struct {

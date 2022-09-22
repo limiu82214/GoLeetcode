@@ -14,6 +14,57 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q234PalindromeLinkedList(head *ListNode) bool {
+	// solve1 := func(head *ListNode) bool {
+	// 	arrange := []byte{}
+	// 	var last *ListNode
+	// 	for head != nil {
+	// 		t := head.Next
+	// 		head.Next = last
+	// 		last = head
+	// 		head = t
+	// 		arrange = append(arrange, byte(last.Val))
+	// 	}
+
+	// 	for _, v := range arrange {
+	// 		if v != byte(last.Val) {
+	// 			return false
+	// 		}
+	// 		last = last.Next
+	// 	}
+	// 	return true
+	// }
+	solve2 := func(head *ListNode) bool {
+		mid, tail := head, head
+		// get mid and tail
+		for tail != nil && tail.Next != nil {
+			mid = mid.Next
+			tail = tail.Next.Next
+		}
+		// reverse mid to tail
+		now := mid.Next
+		mid.Next = nil
+		last := mid
+		for now != nil {
+			t := now.Next
+			now.Next = last
+			last = now
+			now = t
+		}
+		// compare head to mid and head to tail
+		for head != nil && last != nil {
+			if head.Val != last.Val {
+				return false
+			}
+			head = head.Next
+			last = last.Next
+		}
+		return true
+	}
+	// _ = solve1(head)
+	return solve2(head)
+}
+
 func Q156BinaryTreeUpsideDown(root *TreeNode) *TreeNode {
 	if root == nil {
 		return root
