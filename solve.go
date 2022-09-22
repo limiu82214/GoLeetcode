@@ -14,6 +14,48 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q2074ReverseNodesInEvenLengthGroups(head *ListNode) *ListNode {
+	// 注意 最後一個Group的節點可能是偶數，也要反轉Q2074ReverseNodesInEvenLengthGroups
+	reverseListNode := func(preNode *ListNode, postNode *ListNode) {
+		head := preNode.Next
+		last := postNode
+		for head != postNode {
+			t := head.Next
+			head.Next = last
+			last = head
+			head = t
+		}
+		preNode.Next = last
+	}
+	nowGroupLen := 1
+	calLen := 1
+	now := head
+	var pre, preG *ListNode
+	for now != nil { // 還沒處理最後一組
+		if calLen > nowGroupLen { // 計算現在在哪個Group
+			nowGroupLen++
+			calLen = 1
+			preG = pre
+		}
+
+		pre = now
+		now = now.Next
+		if calLen == nowGroupLen { // 走到一個Group的末端拉
+			if nowGroupLen%2 == 0 {
+				pre = preG.Next
+				reverseListNode(preG, now)
+
+			}
+		} else if now == nil && calLen%2 == 0 { // 末端的狀況
+			pre = preG.Next
+			reverseListNode(preG, now)
+		}
+		calLen++
+	}
+	return head
+}
+
 func Q680ValidPalindromeII(s string) bool {
 	var recursive func(s string, chance int) bool
 	recursive = func(s string, chance int) bool {

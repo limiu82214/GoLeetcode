@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2074ReverseNodesInEvenLengthGroups Medium
+func TestQ2074ReverseNodesInEvenLengthGroups(t *testing.T) {
+	type param struct {
+		Arg1     *ListNode
+		Expected *ListNode
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToListNode(`[5,2,6,3,9,1,7,3,8,4]`),
+			Expected: JSONArrayToListNode(`[5,6,2,3,9,1,4,8,3,7]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[1,1,0,6]`),
+			Expected: JSONArrayToListNode(`[1,0,1,6]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[1,1,0,6,5]`),
+			Expected: JSONArrayToListNode(`[1,0,1,5,6]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2074ReverseNodesInEvenLengthGroups(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ680ValidPalindromeII Easy
 func TestQ680ValidPalindromeII(t *testing.T) {
 	type param struct {
