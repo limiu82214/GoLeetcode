@@ -14,6 +14,55 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q125ValidPalindrome(s string) bool {
+	solve1 := func(s string) bool {
+		str := strings.ToLower(s)
+		str = regexp.MustCompile(`[^a-z0-9]`).ReplaceAllString(str, "")
+		for i, j := 0, len(str)-1; i < j; {
+			if str[i] != str[j] {
+				return false
+			}
+			i++
+			j--
+		}
+		return true
+	}
+	solve2 := func(s string) bool {
+		str := []byte(s)
+		fitQuiz := func(b byte) byte {
+			if b >= 'A' && b <= 'Z' {
+				return byte(int(b) + 32)
+			}
+			if b >= 'a' && b <= 'z' ||
+				b >= '0' && b <= '9' {
+				return b
+			}
+			return ' '
+		}
+		for i, j := 0, len(str)-1; i < j; {
+			a := fitQuiz(str[i])
+			b := fitQuiz(str[j])
+			if a == ' ' {
+				i++
+				continue
+			}
+			if b == ' ' {
+				j--
+				continue
+			}
+			if a != b {
+				return false
+			} else {
+				i++
+				j--
+			}
+		}
+		return true
+	}
+	_ = solve1(s)
+	return solve2(s)
+}
+
 func Q234PalindromeLinkedList(head *ListNode) bool {
 	// solve1 := func(head *ListNode) bool {
 	// 	arrange := []byte{}
