@@ -45,6 +45,43 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ1216ValidPalindromeIII Hard
+func TestQ1216ValidPalindromeIII(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Arg2     int
+		Expected bool
+	}
+	data := []param{
+		{
+			Arg1:     "abcdeca",
+			Arg2:     2,
+			Expected: true,
+		},
+		{
+			Arg1:     "abbababa",
+			Arg2:     1,
+			Expected: true,
+		},
+		{
+			Arg1:     "fcgihcgeadfehgiabegbiahbeadbiafgcfchbcacedbificicihibaeehbffeidiaiighceegbfdggggcfaiibefbgeegbcgeadcfdfegfghebcfceiabiagehhibiheddbcgdebdcfegaiahibcfhheggbheebfdahgcfcahafecfehgcgdabbghddeadecidicchfgicbdbecibddfcgbiadiffcifiggigdeedbiiihfgehhdegcaffaggiidiifgfigfiaiicadceefbhicfhbcachacaeiefdcchegfbifhaeafdehicfgbecahidgdagigbhiffhcccdhfdbd",
+			Arg2:     216,
+			Expected: true, // 超時
+		},
+		{
+			Arg1:     "bacabaaa",
+			Arg2:     2,
+			Expected: false,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q1216ValidPalindromeIII(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2130MaximumTwinSumOfALinkedList Medium
 func TestQ2130MaximumTwinSumOfALinkedList(t *testing.T) {
 	type param struct {

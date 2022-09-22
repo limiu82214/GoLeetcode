@@ -14,6 +14,171 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q1216ValidPalindromeIII(s string, k int) bool {
+	// time limit
+	// solve1 := func(s string, chance int) bool {
+	// 	var recursive func(s string, chance int) bool
+	// 	recursive = func(s string, chance int) bool {
+	// 		for i, j := 0, len(s)-1; i < j; {
+	// 			if s[i] != s[j] {
+	// 				if chance > 0 {
+	// 					chance--
+	// 					return recursive(s[i+1:j+1], chance) || recursive(s[i:j], chance)
+	// 				} else {
+	// 					return false
+	// 				}
+	// 			}
+	// 			i++
+	// 			j--
+	// 		}
+	// 		return true
+	// 	}
+	// 	return recursive(s, chance)
+	// }
+
+	// solve2 := func(s string, k int) bool {
+	// 	l := len(s)
+	// 	cost := make([][]int, l)
+	// 	for i := range cost {
+	// 		cost[i] = make([]int, l)
+	// 		for j := range cost[i] {
+	// 			cost[i][j] = -1
+	// 		}
+	// 	}
+	// 	var recursive func(string, int, int) int
+	// 	recursive = func(s string, i int, j int) int {
+	// 		if i == j {
+	// 			return 0
+	// 		}
+	// 		if i+1 == j {
+	// 			if s[i] == s[j] {
+	// 				return 0
+	// 			} else {
+	// 				return 1
+	// 			}
+	// 		}
+	// 		if cost[i][j] != -1 { // 利用快取來防止過多的呼叫
+	// 			return cost[i][j]
+	// 		}
+	// 		if s[i] == s[j] {
+	// 			cost[i][j] = recursive(s, i+1, j-1)
+	// 			return cost[i][j]
+	// 		}
+	// 		m1 := recursive(s, i+1, j)
+	// 		m2 := recursive(s, i, j-1)
+	// 		if m1 < m2 {
+	// 			cost[i][j] = m1 + 1
+	// 		} else {
+	// 			cost[i][j] = m2 + 1
+	// 		}
+	// 		return cost[i][j]
+	// 	}
+	// 	return recursive(s, 0, len(s)-1) <= k
+	// }
+
+	// solve4 := func(s string, k int) bool {
+	// 	l := len(s)
+	// 	cost := make([][]int, l)
+	// 	for i := range cost {
+	// 		cost[i] = make([]int, l)
+	// 		for j := range cost[i] {
+	// 			cost[i][j] = 0
+	// 		}
+	// 	}
+
+	// 	// for i := l - 2; i >= 0; i-- {
+	// 	// 	for j := i + 1; j < l; j++ {
+	// 	// 		if s[i] == s[j] {
+	// 	// 			cost[i][j] = cost[i+1][j-1]
+	// 	// 		} else {
+	// 	// 			m1 := 1 + cost[i+1][j]
+	// 	// 			m2 := 1 + cost[i][j-1]
+	// 	// 			if m1 < m2 {
+	// 	// 				cost[i][j] = m1
+	// 	// 			} else {
+	// 	// 				cost[i][j] = m2
+	// 	// 			}
+	// 	// 		}
+	// 	// 	}
+	// 	// }
+	// 	// return cost[0][l-1] <= k
+
+	// 	for j := 1; j < l; j++ {
+	// 		for i := j - 1; i >= 0; i-- {
+	// 			if s[i] == s[j] {
+	// 				cost[i][j] = cost[i+1][j-1]
+	// 			} else {
+	// 				m1 := 1 + cost[i+1][j]
+	// 				m2 := 1 + cost[i][j-1]
+	// 				if m1 < m2 {
+	// 					cost[i][j] = m1
+	// 				} else {
+	// 					cost[i][j] = m2
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// 	return cost[0][l-1] <= k
+
+	// }
+
+	solve4 := func(s string, k int) bool {
+		l := len(s)
+		// cost := make([][]int, l)
+		// for i := range cost {
+		// 	cost[i] = make([]int, l)
+		// 	for j := range cost[i] {
+		// 		cost[i][j] = 0
+		// 	}
+		// }
+		cost := make([]int, l)
+		for i := range cost {
+			cost[i] = 0
+		}
+
+		prev := 0
+		tmp := 0
+		for i := l - 2; i >= 0; i-- {
+			prev = 0
+			for j := i + 1; j < l; j++ {
+				tmp = cost[j]
+				if s[i] == s[j] {
+					cost[j] = prev
+				} else {
+					m1 := cost[j]
+					m2 := cost[j-1]
+					if m1 < m2 {
+						cost[i] = m1 + 1
+					} else {
+						cost[j] = m2 + 1
+					}
+				}
+				prev = tmp
+			}
+		}
+		return cost[l-1] <= k
+		// for j := 1; j < l; j++ {
+		// 	prev := 0
+		// 	for i := j - 1; i >= 0; i-- {
+		// 		tmp := cost[i]
+		// 		if s[i] == s[j] {
+		// 			cost[i] = prev
+		// 		} else {
+		// 			m1 := 1 + cost[i]
+		// 			m2 := 1 + cost[i+1]
+		// 			if m1 < m2 {
+		// 				cost[i] = m1
+		// 			} else {
+		// 				cost[i] = m2
+		// 			}
+		// 		}
+		// 		prev = tmp
+		// 	}
+		// }
+		// return cost[l-1] <= k
+	}
+	return solve4(s, k)
+}
 
 func Q2130MaximumTwinSumOfALinkedList(head *ListNode) int {
 	now := head
