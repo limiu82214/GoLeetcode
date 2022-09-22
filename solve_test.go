@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ680ValidPalindromeII Easy
+func TestQ680ValidPalindromeII(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Expected bool
+	}
+	data := []param{
+		{
+			Arg1:     "aba",
+			Expected: true,
+		},
+		{
+			Arg1:     "abca",
+			Expected: true,
+		},
+		{
+			Arg1:     "abc",
+			Expected: false,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q680ValidPalindromeII(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ125ValidPalindrome Easy
 func TestQ125ValidPalindrome(t *testing.T) {
 	type param struct {

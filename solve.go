@@ -14,6 +14,26 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q680ValidPalindromeII(s string) bool {
+	var recursive func(s string, chance int) bool
+	recursive = func(s string, chance int) bool {
+		for i, j := 0, len(s)-1; i < j; {
+			if s[i] != s[j] {
+				if chance > 0 {
+					chance--
+					return recursive(s[i+1:j+1], chance) || recursive(s[i:j], chance)
+				} else {
+					return false
+				}
+			}
+			i++
+			j--
+		}
+		return true
+	}
+	return recursive(s, 1)
+}
+
 func Q125ValidPalindrome(s string) bool {
 	solve1 := func(s string) bool {
 		str := strings.ToLower(s)
