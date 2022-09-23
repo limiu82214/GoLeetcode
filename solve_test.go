@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2330ValidPalindromeIV Medium
+func TestQ2330ValidPalindromeIV(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Expected bool
+	}
+	data := []param{
+		{
+			Arg1:     "abcdba",
+			Expected: true,
+		},
+		{
+			Arg1:     "aa",
+			Expected: true,
+		},
+		{
+			Arg1:     "abcdef",
+			Expected: false,
+		},
+		{
+			Arg1:     "zbcfedcba",
+			Expected: true,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2330ValidPalindromeIV(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ1216ValidPalindromeIII Hard
 func TestQ1216ValidPalindromeIII(t *testing.T) {
 	type param struct {

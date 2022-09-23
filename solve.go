@@ -14,6 +14,20 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q2330ValidPalindromeIV(s string) bool {
+	ans := 0
+	for i, j := 0, len(s)-1; i < j; {
+		if s[i] != s[j] {
+			ans++
+			// change 1 to another one for fit
+		}
+		i++
+		j--
+	}
+	return ans <= 2
+}
+
 func Q1216ValidPalindromeIII(s string, k int) bool {
 	// time limit
 	// solve1 := func(s string, chance int) bool {
