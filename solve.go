@@ -124,17 +124,21 @@ func Q1216ValidPalindromeIII(s string, k int) bool {
 
 	solve4 := func(s string, k int) bool {
 		l := len(s)
-		// cost := make([][]int, l)
-		// for i := range cost {
-		// 	cost[i] = make([]int, l)
-		// 	for j := range cost[i] {
-		// 		cost[i][j] = 0
-		// 	}
-		// }
 		cost := make([]int, l)
 		for i := range cost {
 			cost[i] = 0
 		}
+		// 完成後 cost[]內每一個表示從距離從0 ~ j 之間k的最小值
+		// cost 會在i從len - 2 到0之間逐漸完善
+		// 過程中:
+		//     cost[j] 表示 i+1 ~ j 的最小k    == i+1到總長度之間的最小k
+		//     cost[j-1] 表示 i ~ j-1 的最小k  == i到總長度之間的最小k
+		// 由於cost 會記錄從0~k之間的最小值，所以只需要將反方向算回去再加上cost的值。
+		// 如果 abcdeca, i== 4->3 尚未開始計算 cost 中儲存的是
+		// cost[3]=>0,  cost[4]=>1, cost[5]=>2, cost[6]=>3
+		// 3~3,0     , 3~4,1      , 3~5,2    ,    3~6,3
+		// pre 是 上一把計算的cost[j](上一次j到len-1的最小k)，因為 cost[j]會在這次計
+		//     算被蓋過去，但如果遇到兩個相同的字母表示不用增加k，那就是前一次的最小k
 
 		prev := 0
 		tmp := 0
@@ -148,7 +152,7 @@ func Q1216ValidPalindromeIII(s string, k int) bool {
 					m1 := cost[j]
 					m2 := cost[j-1]
 					if m1 < m2 {
-						cost[i] = m1 + 1
+						cost[j] = m1 + 1
 					} else {
 						cost[j] = m2 + 1
 					}
@@ -157,25 +161,6 @@ func Q1216ValidPalindromeIII(s string, k int) bool {
 			}
 		}
 		return cost[l-1] <= k
-		// for j := 1; j < l; j++ {
-		// 	prev := 0
-		// 	for i := j - 1; i >= 0; i-- {
-		// 		tmp := cost[i]
-		// 		if s[i] == s[j] {
-		// 			cost[i] = prev
-		// 		} else {
-		// 			m1 := 1 + cost[i]
-		// 			m2 := 1 + cost[i+1]
-		// 			if m1 < m2 {
-		// 				cost[i] = m1
-		// 			} else {
-		// 				cost[i] = m2
-		// 			}
-		// 		}
-		// 		prev = tmp
-		// 	}
-		// }
-		// return cost[l-1] <= k
 	}
 	return solve4(s, k)
 }
