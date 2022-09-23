@@ -15,6 +15,26 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q2108FindFirstPalindromicStringInTheArray(words []string) string {
+	isPalindromic := func(s string) bool {
+		for i, j := 0, len(s)-1; i < j; {
+			if s[i] != s[j] {
+				return false
+			}
+			i++
+			j--
+		}
+		return true
+	}
+
+	for _, s := range words {
+		if isPalindromic(s) {
+			return s
+		}
+	}
+	return ""
+}
+
 func Q2330ValidPalindromeIV(s string) bool {
 	ans := 0
 	for i, j := 0, len(s)-1; i < j; {

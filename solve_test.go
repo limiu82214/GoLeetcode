@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2108FindFirstPalindromicStringInTheArray Easy
+func TestQ2108FindFirstPalindromicStringInTheArray(t *testing.T) {
+	type param struct {
+		Arg1     []string
+		Expected string
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[string](`["abc","car","ada","racecar","cool"]`),
+			Expected: "ada",
+		},
+		{
+			Arg1:     JsonToSlice[string](`["notapalindrome","racecar"]`),
+			Expected: "racecar",
+		},
+		{
+			Arg1:     JsonToSlice[string](`["def","ghi"]`),
+			Expected: "",
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2108FindFirstPalindromicStringInTheArray(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2330ValidPalindromeIV Medium
 func TestQ2330ValidPalindromeIV(t *testing.T) {
 	type param struct {
