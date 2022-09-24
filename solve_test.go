@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ3LongestSubstringWithoutRepeatingCharacters Medium
+func TestQ3LongestSubstringWithoutRepeatingCharacters(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Expected int
+	}
+	data := []param{
+		// {
+		// 	Arg1:     "brnk",
+		// 	Expected: 4,
+		// },
+		{
+			Arg1:     "abcabcbb",
+			Expected: 3,
+		},
+		{
+			Arg1:     "bbbbb",
+			Expected: 1,
+		},
+		{
+			Arg1:     "pwwkew",
+			Expected: 3,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q3LongestSubstringWithoutRepeatingCharacters(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2002MaximumProductOfTheLengthOfTwoPalindromicSubsequences Medium
 func TestQ2002MaximumProductOfTheLengthOfTwoPalindromicSubsequences(t *testing.T) {
 	type param struct {

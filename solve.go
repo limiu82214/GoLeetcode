@@ -14,6 +14,57 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q3LongestSubstringWithoutRepeatingCharacters(s string) int {
+	solve1 := func(s string) int {
+		max := 0
+		l := len(s)
+		for i := 0; i < l; i++ {
+			if i+1 <= max {
+				break
+			}
+			repeatM := make(map[byte]struct{}, l)
+			cnt := 0
+			for j := i; j >= 0; j-- {
+				if j+1+cnt <= max {
+					break
+				}
+
+				if _, ok := repeatM[s[j]]; ok {
+					break
+				} else {
+					repeatM[s[j]] = struct{}{}
+					cnt++
+				}
+			}
+			if cnt > max {
+				max = cnt
+			}
+		}
+		return max
+	}
+	_ = solve1(s)
+
+	solve2 := func(s string) int {
+
+		l := len(s)
+		pathM := map[byte]int{} // 用於紀錄是否有重複過的字母 >1表示有重複
+		max := 0
+		for i, j := 0, 0; j < l; {
+			pathM[s[j]]++
+
+			for pathM[s[j]] > 1 { // i會一直往後，直到重複的字母被削掉
+				pathM[s[i]]--
+				i++
+			}
+			if j-i+1 > max {
+				max = j - i + 1
+			}
+			j++
+		}
+		return max
+	}
+	return solve2(s)
+}
 
 func Q2002MaximumProductOfTheLengthOfTwoPalindromicSubsequences(s string) int {
 	isPalindromic := func(s string) bool {
