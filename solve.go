@@ -15,6 +15,71 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q2002MaximumProductOfTheLengthOfTwoPalindromicSubsequences(s string) int {
+	isPalindromic := func(s string) bool {
+		for i, j := 0, len(s)-1; i < j; {
+			if s[i] != s[j] {
+				return false
+			}
+			i++
+			j--
+		}
+		return true
+	}
+
+	q := 1
+	for i := 1; i < len(s); i++ {
+		q = q<<1 + 1
+	}
+
+	// fmt.Printf("%v, %b", q, q)
+	c := [][]int{}
+	for i := 1; i <= q; i++ {
+		tmpIdx := fmt.Sprintf("%0b", i)
+		tmpIdx = strings.Repeat("0", len(s)-len(tmpIdx)) + string(tmpIdx)
+		testI := []int{}
+		testB := []byte{}
+		for j, r := range tmpIdx {
+			if r == '1' {
+				testI = append(testI, j)
+				testB = append(testB, s[j])
+			}
+		}
+		if isPalindromic(string(testB)) {
+			c = append(c, testI)
+		}
+	}
+	isContainSameIdx := func(a, b []int) bool {
+		for _, v := range a {
+			for _, v2 := range b {
+				if v == v2 {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
+	sort.Slice(c, func(i, j int) bool {
+		return len(c[i]) > len(c[j])
+	})
+
+	max := 0
+	// 取兩個 檢查重複
+	ll := len(c)
+	for i := 0; i < ll; i++ {
+		for j := i + 1; j < ll; j++ {
+			if !isContainSameIdx(c[i], c[j]) {
+				if max < len(c[i])*len(c[j]) {
+					max = len(c[i]) * len(c[j])
+				}
+			}
+		}
+	}
+
+	return max
+}
+
 func Q2108FindFirstPalindromicStringInTheArray(words []string) string {
 	isPalindromic := func(s string) bool {
 		for i, j := 0, len(s)-1; i < j; {

@@ -45,6 +45,50 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2002MaximumProductOfTheLengthOfTwoPalindromicSubsequences Medium
+func TestQ2002MaximumProductOfTheLengthOfTwoPalindromicSubsequences(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     "leetcodecom",
+			Expected: 9,
+		},
+		{
+			Arg1:     "bb",
+			Expected: 1,
+		},
+		{
+			Arg1:     "accbcaxxcxx",
+			Expected: 25,
+		},
+		{
+			Arg1:     "eabedb",
+			Expected: 9,
+		},
+		{
+			Arg1:     "qzq",
+			Expected: 2,
+		},
+		{
+			Arg1:     "jee",
+			Expected: 2,
+		},
+		{
+			Arg1:     "bbabb",
+			Expected: 6,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2002MaximumProductOfTheLengthOfTwoPalindromicSubsequences(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2108FindFirstPalindromicStringInTheArray Easy
 func TestQ2108FindFirstPalindromicStringInTheArray(t *testing.T) {
 	type param struct {
