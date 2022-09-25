@@ -14,6 +14,120 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q992SubarraysWithKDifferentIntegers(nums []int, k int) int {
+	// solve1 := func(nums []int, k int) int {
+	// 	isTarget := func(left, right int) bool { //last must be one
+	// 		cntKind := make(map[int]int)
+	// 		for i := left; i <= right; i++ {
+	// 			cntKind[nums[i]]++
+	// 		}
+	// 		return len(cntKind) == k
+	// 	}
+
+	// 	kDiff := 0
+	// 	cntKind := make(map[int]int)
+	// 	for i, j := 0, 0; i < len(nums); i++ {
+	// 		cntKind[nums[i]]++
+	// 		for len(cntKind) > k {
+	// 			if cntKind[nums[j]] == 1 {
+	// 				delete(cntKind, nums[j])
+	// 			} else {
+	// 				cntKind[nums[j]]--
+	// 			}
+	// 			j++
+	// 		}
+	// 		if len(cntKind) == k {
+	// 			for l := i - k + 1; l >= 0; l-- {
+	// 				if isTarget(l, i) {
+	// 					kDiff++
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// 	return kDiff
+	// }
+	// // time limit
+
+	// solve2 := func(nums []int, k int) int {
+	// 	type d struct {
+	// 		k int
+	// 		m map[int]int
+	// 	}
+
+	// 	l := len(nums)
+	// 	kind := make([][]d, l)
+	// 	for i := range kind {
+	// 		kind[i] = make([]d, l)
+	// 		for j := range kind[i] {
+	// 			kind[i][j].m = make(map[int]int)
+	// 		}
+	// 	}
+
+	// 	kDiff := 0
+	// 	for j := 0; j < l; j++ {
+	// 		for i := j; i >= 0; i-- {
+	// 			if j == i {
+	// 				kind[i][j].k = 1
+	// 				kind[i][j].m[nums[i]]++
+	// 			} else {
+	// 				kind[i][j] = kind[i+1][j]
+	// 				kind[i][j].m[nums[i]]++
+	// 				kind[i][j].k = len(kind[i][j].m)
+	// 			}
+
+	// 			if kind[i][j].k == k {
+	// 				kDiff++
+	// 			}
+	// 		}
+	// 	}
+	// 	return kDiff
+	// }
+	// // out of memory
+
+	// solve3 := func(nums []int, k int) int {
+	// 	l := len(nums)
+	// 	kind := make([]map[int]int, l)
+	// 	for i := range kind {
+	// 		kind[i] = make(map[int]int, l)
+	// 	}
+
+	// 	kDiff := 0
+	// 	for j := 0; j < l; j++ {
+	// 		for i := j; i >= 0; i-- {
+	// 			if j == i {
+	// 				kind[i][nums[i]]++
+	// 			} else {
+	// 				kind[i] = kind[i+1]
+	// 				kind[i][nums[i]]++
+	// 			}
+
+	// 			if len(kind[i]) == k {
+	// 				kDiff++
+	// 			}
+	// 		}
+	// 	}
+	// 	return kDiff
+	// }
+	// // out of memory
+
+	solve4 := func(nums []int, k int) int {
+		l := len(nums)
+		kDiff := 0
+		for j := 0; j < l; j++ {
+			kind := make(map[int]int)
+			for i := j; i >= 0; i-- {
+				kind[nums[i]]++
+				if len(kind) == k {
+					kDiff++
+				}
+			}
+		}
+		return kDiff
+	}
+	// Time Limit Exceeded
+
+	return solve4(nums, k)
+}
 
 func Q340LongestSubstringWithAtMostKDistinctCharacters(s string, k int) int {
 	containLetter := make(map[byte]int)
