@@ -14,6 +14,37 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q1695MaximumErasureValue(nums []int) int {
+	im := make(map[int]int)
+	tmpSum := 0
+	max := 0
+	for i, j := 0, 0; i < len(nums); i++ {
+		if im[nums[i]] == 1 {
+			if max < tmpSum {
+				max = tmpSum
+			}
+		}
+		tmpSum += nums[i]
+		im[nums[i]]++
+		for im[nums[i]] > 1 {
+			tmpSum -= nums[j]
+			if im[nums[j]] == 1 {
+				delete(im, nums[j])
+			} else {
+				im[nums[j]]--
+			}
+			j++
+		}
+	}
+
+	if max < tmpSum {
+		max = tmpSum
+	}
+
+	return max
+}
+
 func Q992SubarraysWithKDifferentIntegers(nums []int, k int) int {
 	// solve1 := func(nums []int, k int) int {
 	// 	isTarget := func(left, right int) bool { //last must be one
