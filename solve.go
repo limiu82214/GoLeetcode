@@ -14,6 +14,26 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q340LongestSubstringWithAtMostKDistinctCharacters(s string, k int) int {
+	containLetter := make(map[byte]int)
+	longest := 0
+	for i, j := 0, 0; i < len(s); i++ {
+		containLetter[s[i]]++
+		for len(containLetter) > k {
+			if containLetter[s[j]] == 1 {
+				delete(containLetter, s[j])
+			} else {
+				containLetter[s[j]]--
+			}
+			j++
+		}
+		if longest < i-j+1 {
+			longest = i - j + 1
+		}
+	}
+	return longest
+}
 func Q3LongestSubstringWithoutRepeatingCharacters(s string) int {
 	solve1 := func(s string) int {
 		max := 0

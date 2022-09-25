@@ -45,6 +45,33 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ340LongestSubstringWithAtMostKDistinctCharacters Medium
+func TestQ340LongestSubstringWithAtMostKDistinctCharacters(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Arg2     int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     "eceba",
+			Arg2:     2,
+			Expected: 3,
+		},
+		{
+			Arg1:     "aa",
+			Arg2:     1,
+			Expected: 2,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q340LongestSubstringWithAtMostKDistinctCharacters(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ3LongestSubstringWithoutRepeatingCharacters Medium
 func TestQ3LongestSubstringWithoutRepeatingCharacters(t *testing.T) {
 	type param struct {
