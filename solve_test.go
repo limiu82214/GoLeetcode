@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ516LongestPalindromicSubsequence Medium
+func TestQ516LongestPalindromicSubsequence(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     "a",
+			Expected: 1,
+		},
+		{
+			Arg1:     "bbbab",
+			Expected: 4,
+		},
+		{
+			Arg1:     "cbbd",
+			Expected: 2,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q516LongestPalindromicSubsequence(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ159LongestSubstringWithAtMostTwoDistinctCharacters Medium
 func TestQ159LongestSubstringWithAtMostTwoDistinctCharacters(t *testing.T) {
 	type param struct {

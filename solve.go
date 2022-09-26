@@ -14,6 +14,56 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q516LongestPalindromicSubsequence(s string) int {
+	l := len(s)
+	costK := make([][]int, l)
+	for i := range costK {
+		costK[i] = make([]int, l)
+	}
+	for j := 1; j < l; j++ {
+		for i := j - 1; i >= 0; i-- {
+			if s[i] == s[j] {
+				costK[i][j] = costK[i+1][j-1]
+			} else {
+				m1 := costK[i+1][j]
+				m2 := costK[i][j-1]
+				if m1 < m2 {
+					costK[i][j] = 1 + m1
+				} else {
+					costK[i][j] = 1 + m2
+				}
+			}
+		}
+	}
+
+	i := 0
+	j := l - 1
+	k := costK[i][j]
+	ls := []byte{}
+	rs := []byte{}
+	for k > 0 {
+		// choose shortest path
+		if costK[i][j] == costK[i+1][j-1] { // same
+			ls = append(ls, s[i])
+			rs = append([]byte{s[j]}, rs...)
+			i++
+			j--
+		} else {
+			m1 := costK[i+1][j] // del left
+			m2 := costK[i][j-1] // del right
+			if m1 < m2 {
+				i++
+			} else {
+				j--
+			}
+			k--
+		}
+	}
+	ns := string(ls) + string(s[i:j+1]) + string(rs)
+	return len(ns)
+}
+
 func Q159LongestSubstringWithAtMostTwoDistinctCharacters(s string) int {
 	im := make(map[byte]int)
 	longest := 0
