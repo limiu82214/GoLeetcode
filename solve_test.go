@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2260MinimumConsecutiveCardsToPickUp Medium
+func TestQ2260MinimumConsecutiveCardsToPickUp(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[3,4,2,3,4,7]`),
+			Expected: 4,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1,0,5,3]`),
+			Expected: -1,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[95,11,8,65,5,86,30,27,30,73,15,91,30,7,37,26,55,76,60,43,36,85,47,96,6]`),
+			Expected: 3,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2260MinimumConsecutiveCardsToPickUp(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2067NumberOfEqualCountSubstrings Medium *fail*
 func TestQ2067NumberOfEqualCountSubstrings(t *testing.T) {
 	type param struct {

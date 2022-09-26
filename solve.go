@@ -14,6 +14,32 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q2260MinimumConsecutiveCardsToPickUp(cards []int) int {
+	// 找頭尾相同的字串 (最短的) 回傳長度 -1找不到
+	im := make(map[int]int)
+	min := -1
+	for i, j := 0, 0; i < len(cards); i++ {
+		im[cards[i]]++
+
+		isMoved := false
+		for im[cards[i]] == 2 {
+			isMoved = true
+			if im[cards[j]] == 1 {
+				delete(im, cards[j])
+			} else {
+				im[cards[j]]--
+			}
+			j++
+		}
+		if isMoved {
+			l := i - j + 2
+			if min == -1 || l < min {
+				min = l
+			}
+		}
+	}
+	return min
+}
 
 func Q2067NumberOfEqualCountSubstrings(s string, count int) int {
 	ans := 0
