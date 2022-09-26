@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2401LongestNiceSubarray Medium
+func TestQ2401LongestNiceSubarray(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,3,8,48,10]`),
+			Expected: 3,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[3,1,5,11,13]`),
+			Expected: 1,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[135745088,609245787,16,2048,2097152]`),
+			Expected: 3,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2401LongestNiceSubarray(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2260MinimumConsecutiveCardsToPickUp Medium
 func TestQ2260MinimumConsecutiveCardsToPickUp(t *testing.T) {
 	type param struct {

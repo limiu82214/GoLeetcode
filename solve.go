@@ -14,6 +14,30 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q2401LongestNiceSubarray(nums []int) int {
+	longest := 0
+	lastOR := 0
+	for i, j := 0, 0; i < len(nums); i++ {
+		if nums[i]&lastOR != 0 {
+			if i-j > longest {
+				longest = i - j
+			}
+		}
+		for nums[i]&lastOR != 0 {
+			lastOR = lastOR ^ nums[j]
+			j++
+		}
+		lastOR = lastOR | nums[i]
+		if i == len(nums)-1 {
+			if i-j+1 > longest {
+				longest = i - j + 1
+			}
+		}
+	}
+	return longest
+}
+
 func Q2260MinimumConsecutiveCardsToPickUp(cards []int) int {
 	// 找頭尾相同的字串 (最短的) 回傳長度 -1找不到
 	im := make(map[int]int)
