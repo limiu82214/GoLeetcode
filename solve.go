@@ -15,6 +15,32 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q2067NumberOfEqualCountSubstrings(s string, count int) int {
+	ans := 0
+	// im := make(map[byte]int)
+	// i := 0
+	// j := 0
+	// for i < len(s) {
+	// 	im[s[i]]++
+	// 	if len(im)*3 == i-j+1 {
+	// 		ans++
+	// 	}
+	// 	for im[s[i]] > 3 {
+	// 		if im[s[j]] == 1 {
+	// 			delete(im, s[j])
+	// 		} else {
+	// 			im[s[j]]--
+	// 		}
+	// 		j++
+	// 	}
+
+	// 	i++
+	// }
+
+	//Skip ---------------------
+	return ans
+}
+
 func Q1695MaximumErasureValue(nums []int) int {
 	im := make(map[int]int)
 	tmpSum := 0

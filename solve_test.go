@@ -45,7 +45,39 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
-// TestQ1695MaximumErasureValue Medium
+// TestQ2067NumberOfEqualCountSubstrings Medium *fail*
+func TestQ2067NumberOfEqualCountSubstrings(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Arg2     int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     "aaabcbbcc",
+			Arg2:     3,
+			Expected: 3,
+		},
+		{
+			Arg1:     "abcd",
+			Arg2:     2,
+			Expected: 0,
+		},
+		{
+			Arg1:     "a",
+			Arg2:     5,
+			Expected: 0,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2067NumberOfEqualCountSubstrings(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
+// TestQ1695MaximumErasureValue Medium *fail*
 func TestQ1695MaximumErasureValue(t *testing.T) {
 	type param struct {
 		Arg1     []int
