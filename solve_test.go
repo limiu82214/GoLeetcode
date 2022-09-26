@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ159LongestSubstringWithAtMostTwoDistinctCharacters Medium
+func TestQ159LongestSubstringWithAtMostTwoDistinctCharacters(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     "a",
+			Expected: 1,
+		},
+		{
+			Arg1:     "eceba",
+			Expected: 3,
+		},
+		{
+			Arg1:     "ccaabbb",
+			Expected: 5,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q159LongestSubstringWithAtMostTwoDistinctCharacters(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2405OptimalPartitionOfString Medium
 func TestQ2405OptimalPartitionOfString(t *testing.T) {
 	type param struct {

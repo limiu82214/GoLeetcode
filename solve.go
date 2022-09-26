@@ -14,6 +14,27 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q159LongestSubstringWithAtMostTwoDistinctCharacters(s string) int {
+	im := make(map[byte]int)
+	longest := 0
+	for i, j := 0, 0; i < len(s); i++ {
+		im[s[i]]++
+		if len(im) <= 2 { // move
+			if i-j+1 > longest {
+				longest = i - j + 1
+			}
+		}
+		for len(im) > 2 {
+			if im[s[j]] == 1 {
+				delete(im, s[j])
+			} else {
+				im[s[j]]--
+			}
+			j++
+		}
+	}
+	return longest
+}
 
 func Q2405OptimalPartitionOfString(s string) int {
 	im := make(map[byte]int)
