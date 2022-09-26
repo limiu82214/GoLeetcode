@@ -45,6 +45,30 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2405OptimalPartitionOfString Medium
+func TestQ2405OptimalPartitionOfString(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     "abacaba",
+			Expected: 4,
+		},
+		{
+			Arg1:     "ssssss",
+			Expected: 6,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2405OptimalPartitionOfString(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2401LongestNiceSubarray Medium
 func TestQ2401LongestNiceSubarray(t *testing.T) {
 	type param struct {

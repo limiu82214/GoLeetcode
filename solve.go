@@ -15,6 +15,29 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q2405OptimalPartitionOfString(s string) int {
+	im := make(map[byte]int)
+	cnt := 0
+	for i, j := 0, 0; i < len(s); i++ {
+		im[s[i]]++
+		if im[s[i]] == 2 {
+			for i != j {
+				if im[s[j]] == 1 {
+					delete(im, s[j])
+				} else {
+					im[s[j]]--
+				}
+				j++
+			}
+			cnt++
+		}
+	}
+	if len(im) > 0 {
+		cnt++
+	}
+	return cnt
+}
+
 func Q2401LongestNiceSubarray(nums []int) int {
 	longest := 0
 	lastOR := 0
