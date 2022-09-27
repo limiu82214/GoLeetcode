@@ -15,6 +15,34 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q19RemoveNthNodeFromEndOfList(head *ListNode, n int) *ListNode {
+	if head == nil || (head.Next == nil && n == 1) {
+		return nil
+	}
+	// must be nil after n
+	var preBeforeN *ListNode
+	h := head
+	i := 1
+	for h != nil {
+		if i >= n+1 {
+			if preBeforeN == nil {
+				preBeforeN = head
+			} else {
+				preBeforeN = preBeforeN.Next
+			}
+		}
+		i++
+		h = h.Next
+	}
+	if preBeforeN == nil {
+		head = head.Next
+	} else if preBeforeN.Next == nil {
+		preBeforeN.Next = nil
+	} else {
+		preBeforeN.Next = preBeforeN.Next.Next
+	}
+	return head
+}
 func Q11ContainerWithMostWater(height []int) int {
 	calContain := func(left, right int) int {
 		min := 0

@@ -45,6 +45,43 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ19RemoveNthNodeFromEndOfList Medium
+func TestQ19RemoveNthNodeFromEndOfList(t *testing.T) {
+	type param struct {
+		Arg1     *ListNode
+		Arg2     int
+		Expected *ListNode
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToListNode(`[1,2,3,4,5]`),
+			Arg2:     2,
+			Expected: JSONArrayToListNode(`[1,2,3,5]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[1]`),
+			Arg2:     1,
+			Expected: JSONArrayToListNode(`[]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[1,2]`),
+			Arg2:     1,
+			Expected: JSONArrayToListNode(`[1]`),
+		},
+		{
+			Arg1:     JSONArrayToListNode(`[1,2]`),
+			Arg2:     2,
+			Expected: JSONArrayToListNode(`[2]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q19RemoveNthNodeFromEndOfList(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ11ContainerWithMostWater Medium
 func TestQ11ContainerWithMostWater(t *testing.T) {
 	type param struct {
