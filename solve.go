@@ -15,6 +15,10 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q2212MaximumPointsInAnArcheryCompetition(numArrows int, aliceArrows []int) []int {
+	return []int{}
+}
+
 func Q516LongestPalindromicSubsequence(s string) int {
 	l := len(s)
 	costK := make([][]int, l)

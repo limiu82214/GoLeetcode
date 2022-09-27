@@ -45,6 +45,33 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ2212MaximumPointsInAnArcheryCompetition Medium *fail*
+func TestQ2212MaximumPointsInAnArcheryCompetition(t *testing.T) {
+	type param struct {
+		Arg1     int
+		Arg2     []int
+		Expected []int
+	}
+	data := []param{
+		{
+			Arg1:     9,
+			Arg2:     JsonToSlice[int](`[1,1,0,1,0,0,2,1,0,1,2,0]`),
+			Expected: JsonToSlice[int](`[0,0,0,0,1,1,0,0,1,2,3,1]`),
+		},
+		{
+			Arg1:     3,
+			Arg2:     JsonToSlice[int](`[0,0,1,0,0,0,0,0,0,0,0,2]`),
+			Expected: JsonToSlice[int](`[0,0,0,0,0,0,0,0,1,1,1,0]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2212MaximumPointsInAnArcheryCompetition(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ516LongestPalindromicSubsequence Medium
 func TestQ516LongestPalindromicSubsequence(t *testing.T) {
 	type param struct {
