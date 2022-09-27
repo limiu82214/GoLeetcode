@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ6ZigzagConversion Medium
+func TestQ6ZigzagConversion(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Arg2     int
+		Expected string
+	}
+	data := []param{
+		{
+			Arg1:     "PAYPALISHIRING",
+			Arg2:     3,
+			Expected: "PAHNAPLSIIGYIR",
+		},
+		{
+			Arg1:     "PAYPALISHIRING",
+			Arg2:     4,
+			Expected: "PINALSIGYAHRPI",
+		},
+		{
+			Arg1:     "A",
+			Arg2:     1,
+			Expected: "A",
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q6ZigzagConversion(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ2212MaximumPointsInAnArcheryCompetition Medium *fail*
 func TestQ2212MaximumPointsInAnArcheryCompetition(t *testing.T) {
 	type param struct {

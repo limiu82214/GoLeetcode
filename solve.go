@@ -14,6 +14,33 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q6ZigzagConversion(s string, numRows int) string {
+	if numRows == 1 {
+		return s
+	}
+	ans := []byte{}
+	switchFlag := true
+	for i := 0; i < numRows; i++ {
+		if i == 0 || i == numRows-1 {
+			for j := i; j < len(s); j += numRows*2 - 2 { // 頭尾都是這個
+				ans = append(ans, s[j])
+			}
+		} else {
+			for j := i; j < len(s); { // 中間 交替
+				ans = append(ans, s[j])
+				if switchFlag {
+					j += (numRows*2 - 2*(i+1))
+				} else {
+
+					j += 2 * i
+				}
+				switchFlag = !switchFlag
+			}
+			switchFlag = true
+		}
+	}
+	return string(ans)
+}
 
 func Q2212MaximumPointsInAnArcheryCompetition(numArrows int, aliceArrows []int) []int {
 	return []int{}
