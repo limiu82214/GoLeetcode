@@ -45,6 +45,30 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ11ContainerWithMostWater Medium
+func TestQ11ContainerWithMostWater(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,8,6,2,5,4,8,3,7]`),
+			Expected: 49,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1,1]`),
+			Expected: 1,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q11ContainerWithMostWater(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ5LongestPalindromicSubstring Medium
 func TestQ5LongestPalindromicSubstring(t *testing.T) {
 	type param struct {

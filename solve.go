@@ -14,6 +14,36 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q11ContainerWithMostWater(height []int) int {
+	calContain := func(left, right int) int {
+		min := 0
+		if height[left] > height[right] {
+			min = height[right]
+		} else {
+			min = height[left]
+		}
+		return (right - left) * min
+	}
+
+	l := len(height)
+	i := 0
+	j := l - 1
+	max := 0
+	for i < j {
+		t := calContain(i, j)
+		if t > max {
+			max = t
+		}
+		if height[i] < height[j] {
+			i++
+		} else {
+			j--
+		}
+	}
+	return max
+}
+
 func Q5LongestPalindromicSubstring(s string) string {
 	isPalindromic := func(s string) bool {
 		for i, j := 0, len(s)-1; i < j; {
