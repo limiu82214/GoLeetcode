@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ5LongestPalindromicSubstring Medium
+func TestQ5LongestPalindromicSubstring(t *testing.T) {
+	type param struct {
+		Arg1     string
+		Expected string
+	}
+	data := []param{
+		{
+			Arg1:     "babad",
+			Expected: "bab",
+		},
+		{
+			Arg1:     "cbbd",
+			Expected: "bb",
+		},
+		{
+			Arg1:     "aacabdkacaa",
+			Expected: "aca",
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q5LongestPalindromicSubstring(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ6ZigzagConversion Medium
 func TestQ6ZigzagConversion(t *testing.T) {
 	type param struct {

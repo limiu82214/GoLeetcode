@@ -14,6 +14,34 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q5LongestPalindromicSubstring(s string) string {
+	isPalindromic := func(s string) bool {
+		for i, j := 0, len(s)-1; i < j; {
+			if s[i] != s[j] {
+				return false
+			}
+			i++
+			j--
+		}
+		return true
+	}
+	max := 0
+	maxL, maxR := 0, 0
+	for p := range s {
+		// find right
+		for j := len(s) - 1; j >= p; j-- {
+			if s[p] == s[j] {
+				if isPalindromic(s[p:j+1]) && max < j-p+1 {
+					maxL = p
+					maxR = j
+					max = j - p + 1
+				}
+			}
+		}
+	}
+	return s[maxL : maxR+1]
+}
+
 func Q6ZigzagConversion(s string, numRows int) string {
 	if numRows == 1 {
 		return s
