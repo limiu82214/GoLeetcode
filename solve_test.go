@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ163SumClosest Medium
+func TestQ163SumClosest(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Arg2     int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[-1,2,1,-4]`),
+			Arg2:     1,
+			Expected: 2,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[0,0,0]`),
+			Arg2:     1,
+			Expected: 0,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[0,1,2]`),
+			Arg2:     0,
+			Expected: 3,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q163SumClosest(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ19RemoveNthNodeFromEndOfList Medium
 func TestQ19RemoveNthNodeFromEndOfList(t *testing.T) {
 	type param struct {

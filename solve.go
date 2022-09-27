@@ -15,6 +15,50 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q163SumClosest(nums []int, target int) int {
+	sort.Ints(nums)
+	minDist := -1
+	ans := 0
+	// tmp := []int{}
+	abs := func(x int) int {
+		if x < 0 {
+			return -x
+		}
+		return x
+	}
+	foo := func(third int) {
+		T := nums[third]
+		for i, j := 0, len(nums)-1; i < j; {
+			for j == third {
+				j--
+			}
+			for i == third {
+				i++
+			}
+			if i == j {
+				break
+			}
+			t := T + nums[i] + nums[j]
+			// fmt.Println("---", i, j, third, ":", nums[i], nums[j], nums[third], ":", t)
+			if minDist == -1 || abs(target-t) < minDist {
+				minDist = abs(target - t)
+				ans = t
+				// tmp = []int{T, nums[i], nums[j]}
+			}
+			if t > target {
+				j--
+			} else {
+				i++
+			}
+		}
+	}
+	for third := range nums {
+		foo(third)
+	}
+	// fmt.Println(tmp)
+	return ans
+}
+
 func Q19RemoveNthNodeFromEndOfList(head *ListNode, n int) *ListNode {
 	if head == nil || (head.Next == nil && n == 1) {
 		return nil
