@@ -45,6 +45,42 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ56MergeIntervals Medium
+func TestQ56MergeIntervals(t *testing.T) {
+	type param struct {
+		Arg1     [][]int
+		Expected [][]int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSliceSlice[int](`[[1,3],[2,6],[8,10],[15,18]]`),
+			Expected: JsonToSliceSlice[int](`[[1,6],[8,10],[15,18]]`),
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[1,4],[4,5]]`),
+			Expected: JsonToSliceSlice[int](`[[1,5]]`),
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[1,4],[0,2],[3,5]]`),
+			Expected: JsonToSliceSlice[int](`[[0,5]]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			for i := range d.Expected {
+				sort.Ints(d.Expected[i])
+			}
+			actual := Q56MergeIntervals(d.Arg1)
+			for i := range actual {
+				sort.Ints(actual[i])
+			}
+			assert.Equal(t, d.Expected, actual, d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ163SumClosest Medium
 func TestQ2593SumSmaller(t *testing.T) {
 	type param struct {

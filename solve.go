@@ -15,6 +15,44 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q56MergeIntervals(intervals [][]int) [][]int {
+	merge := func(one, two []int) []int {
+		var A, B []int
+		// let B alway be right
+		if two[0] >= one[0] {
+			A, B = one, two
+		} else {
+			B, A = one, two
+		}
+		if B[0] > A[1] {
+			return nil
+		}
+
+		if B[1] >= A[1] { // B cover A
+			return []int{A[0], B[1]}
+		} else { // B inner A
+			return []int{A[0], A[1]}
+		}
+	}
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	if len(intervals) < 2 {
+		return intervals
+	}
+	ans := [][]int{}
+	ans = append(ans, intervals[0])
+	for i := 1; i < len(intervals); i++ {
+		t := merge(ans[len(ans)-1:][0], intervals[i])
+		if t == nil {
+			ans = append(ans, intervals[i])
+		} else {
+			ans[len(ans)-1:][0] = t
+		}
+	}
+	return ans
+}
+
 func Q2593SumSmaller(nums []int, target int) int {
 	sort.Ints(nums)
 	l := len(nums)
