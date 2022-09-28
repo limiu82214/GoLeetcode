@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ442FindAllDuplicatesInAnArray Medium
+func TestQ442FindAllDuplicatesInAnArray(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected []int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[4,3,2,7,8,2,3,1]`),
+			Expected: JsonToSlice[int](`[3,2]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1,1,2]`),
+			Expected: JsonToSlice[int](`[1]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1]`),
+			Expected: JsonToSlice[int](`[]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q442FindAllDuplicatesInAnArray(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ287FindTheDuplicateNumber Medium *fail*
 func TestQ287FindTheDuplicateNumber(t *testing.T) {
 	type param struct {
