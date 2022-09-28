@@ -14,6 +14,30 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q268MissingNumber(nums []int) int {
+	n := len(nums)
+	ans := n
+	for i := 0; i < n; {
+		v := nums[i]
+		if v == n {
+			ans = i
+			i++
+		} else {
+			if i != v {
+				nums[i], nums[v] = nums[v], nums[i]
+			} else {
+				i++
+			}
+		}
+	}
+	// for i, v := range nums {
+	// 	if v == n {
+	// 		return i
+	// 	}
+	// }
+	return ans
+}
 func Q495TeemoAttacking(timeSeries []int, duration int) int {
 	if len(timeSeries) == 1 {
 		return duration
