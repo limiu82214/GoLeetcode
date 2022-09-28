@@ -14,6 +14,15 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q287FindTheDuplicateNumber(nums []int) int {
+	// You must solve the problem without modifying the array nums and uses only constant extra space.
+	x := 0
+	for _, v := range nums {
+		x ^= ^v
+	}
+	return x
+}
+
 func Q136SingleNumber(nums []int) int {
 	x := 0
 	for _, v := range nums {
