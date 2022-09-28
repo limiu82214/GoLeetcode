@@ -14,6 +14,13 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q136SingleNumber(nums []int) int {
+	x := 0
+	for _, v := range nums {
+		x ^= v
+	}
+	return x
+}
 
 func Q268MissingNumber(nums []int) int {
 	n := len(nums)

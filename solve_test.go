@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ136SingleNumber Easy
+func TestQ136SingleNumber(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[2,2,1]`),
+			Expected: 1,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[4,1,2,1,2]`),
+			Expected: 4,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1]`),
+			Expected: 1,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q136SingleNumber(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ268MissingNumber Easy
 func TestQ268MissingNumber(t *testing.T) {
 	type param struct {
