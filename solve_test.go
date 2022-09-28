@@ -45,6 +45,30 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ645SetMismatch Easy
+func TestQ645SetMismatch(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected []int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,2,2,4]`),
+			Expected: JsonToSlice[int](`[2,3]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1,1]`),
+			Expected: JsonToSlice[int](`[1,2]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q645SetMismatch(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ442FindAllDuplicatesInAnArray Medium
 func TestQ442FindAllDuplicatesInAnArray(t *testing.T) {
 	type param struct {

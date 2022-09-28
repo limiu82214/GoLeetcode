@@ -14,6 +14,28 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q645SetMismatch(nums []int) []int {
+	for i := 0; i < len(nums); {
+		v := nums[i]
+		if v-1 == i { // 已到對的地方了
+			i++
+		} else {
+			if nums[v-1] == nums[i] {
+				i++
+			} else {
+				nums[i], nums[v-1] = nums[v-1], nums[i]
+			}
+		}
+	}
+	for i, v := range nums {
+		if i != v-1 {
+			return []int{nums[i], i + 1}
+		}
+	}
+	return nil
+}
+
 func Q442FindAllDuplicatesInAnArray(nums []int) []int {
 	// You must write an algorithm that runs in O(n) time and uses only constant extra space.
 	ans := []int{}
@@ -36,6 +58,7 @@ func Q442FindAllDuplicatesInAnArray(nums []int) []int {
 	}
 	return ans
 }
+
 func Q287FindTheDuplicateNumber(nums []int) int {
 	// You must solve the problem without modifying the array nums and uses only constant extra space.
 	x := 0
