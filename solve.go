@@ -14,6 +14,39 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q102BinaryTreeLevelOrderTraversal(root *TreeNode) [][]int {
+	if root == nil {
+		return [][]int{}
+	}
+	ans := [][]int{}
+	t := []int{}
+	q := []*TreeNode{}
+	q = append(q, root)
+	q = append(q, nil)
+	for len(q) != 0 {
+		n := q[0]
+		q = q[1:]
+		if n == nil { // this level's last element
+			ans = append(ans, t)
+			t = []int{}
+			if len(q) == 0 {
+				break
+			}
+			q = append(q, nil)
+			continue
+		}
+		t = append(t, n.Val)
+		if n.Left != nil {
+			q = append(q, n.Left)
+		}
+		if n.Right != nil {
+			q = append(q, n.Right)
+		}
+	}
+	return ans
+}
+
 func Q41FirstMissingPositive(nums []int) int {
 	l := len(nums)
 	for i := 0; i < l; {

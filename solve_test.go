@@ -45,6 +45,34 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ102BinaryTreeLevelOrderTraversal Medium
+func TestQ102BinaryTreeLevelOrderTraversal(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Expected [][]int
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[3,9,20,null,null,15,7]`),
+			Expected: JsonToSliceSlice[int](`[[3],[9,20],[15,7]]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1]`),
+			Expected: JsonToSliceSlice[int](`[[1]]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[]`),
+			Expected: JsonToSliceSlice[int](`[]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q102BinaryTreeLevelOrderTraversal(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ41FirstMissingPositive Hard
 func TestQ41FirstMissingPositive(t *testing.T) {
 	type param struct {
