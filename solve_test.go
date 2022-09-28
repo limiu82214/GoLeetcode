@@ -45,6 +45,41 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ57InsertInterval Medium
+func TestQ57InsertInterval(t *testing.T) {
+	type param struct {
+		Arg1     [][]int
+		Arg2     []int
+		Expected [][]int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSliceSlice[int](`[[1,3],[6,9]]`),
+			Arg2:     JsonToSlice[int](`[2,5]`),
+			Expected: JsonToSliceSlice[int](`[[1,5],[6,9]]`),
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[1,2],[3,5],[6,7],[8,10],[12,16]]`),
+			Arg2:     JsonToSlice[int](`[4,8]`),
+			Expected: JsonToSliceSlice[int](`[[1,2],[3,10],[12,16]]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			for i := range d.Expected {
+				sort.Ints(d.Expected[i])
+			}
+			actual := Q57InsertInterval(d.Arg1, d.Arg2)
+			for i := range actual {
+				sort.Ints(actual[i])
+			}
+			assert.Equal(t, d.Expected, actual, d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ56MergeIntervals Medium
 func TestQ56MergeIntervals(t *testing.T) {
 	type param struct {
