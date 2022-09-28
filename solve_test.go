@@ -45,6 +45,32 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ252MeetingRooms Easy
+func TestQ252MeetingRooms(t *testing.T) {
+	type param struct {
+		Arg1     [][]int
+		Expected bool
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSliceSlice[int](`[[0,30],[5,10],[15,20]]`),
+			Expected: false,
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[7,10],[2,4]]`),
+			Expected: true,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			actual := Q252MeetingRooms(d.Arg1)
+			assert.Equal(t, d.Expected, actual, d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ57InsertInterval Medium
 func TestQ57InsertInterval(t *testing.T) {
 	type param struct {

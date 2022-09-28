@@ -14,6 +14,19 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q252MeetingRooms(intervals [][]int) bool {
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	for i := 0; i < len(intervals)-1; i++ {
+		A := intervals[i]
+		B := intervals[i+1]
+		if B[0] < A[1] { // b cover A
+			return false
+		}
+	}
+	return true
+}
 
 func Q57InsertInterval(intervals [][]int, newInterval []int) [][]int {
 	merge := func(one, two []int) []int {
