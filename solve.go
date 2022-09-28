@@ -15,6 +15,26 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q2593SumSmaller(nums []int, target int) int {
+	sort.Ints(nums)
+	l := len(nums)
+	ans := 0
+	for p := 0; p < l-1; p++ {
+
+		goal := target - nums[p]
+		for i, j := p+1, l-1; i < j; {
+			t := nums[i] + nums[j]
+			if t < goal {
+				ans += j - i
+				i++
+			} else {
+				j--
+			}
+		}
+	}
+	return ans
+}
+
 func Q163SumClosest(nums []int, target int) int {
 	sort.Ints(nums)
 	minDist := -1
