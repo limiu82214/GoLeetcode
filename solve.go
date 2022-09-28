@@ -14,6 +14,22 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q495TeemoAttacking(timeSeries []int, duration int) int {
+	if len(timeSeries) == 1 {
+		return duration
+	}
+	during := 0
+	for i := 1; i < len(timeSeries); i++ {
+		t := timeSeries[i] - timeSeries[i-1]
+		if t >= duration {
+			during += duration
+		} else {
+			during += t
+		}
+	}
+	during += duration // last one
+	return during
+}
 
 func Q253MeetingRoomsII(intervals [][]int) int {
 	sort.Slice(intervals, func(i, j int) bool {

@@ -45,6 +45,33 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ495TeemoAttacking Easy
+func TestQ495TeemoAttacking(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Arg2     int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,4]`),
+			Arg2:     2,
+			Expected: 4,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1,2]`),
+			Arg2:     2,
+			Expected: 3,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q495TeemoAttacking(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ253MeetingRoomsII Medium
 func TestQ253MeetingRoomsII(t *testing.T) {
 	type param struct {
