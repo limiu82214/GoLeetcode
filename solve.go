@@ -14,6 +14,33 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q253MeetingRoomsII(intervals [][]int) int {
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	room := [][]int{}
+	getRoom := func(B []int) {
+		isGet := false
+		for i, A := range room {
+			if A[0] < B[1] && A[1] > B[0] {
+				// cover
+			} else {
+				room[i] = B
+				isGet = true
+				break
+			}
+		}
+		if !isGet {
+			room = append(room, B)
+		}
+	}
+	for _, v := range intervals {
+		getRoom(v)
+	}
+	return len(room)
+}
+
 func Q252MeetingRooms(intervals [][]int) bool {
 	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i][0] < intervals[j][0]

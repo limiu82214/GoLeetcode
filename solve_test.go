@@ -45,6 +45,52 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ253MeetingRoomsII Medium
+func TestQ253MeetingRoomsII(t *testing.T) {
+	type param struct {
+		Arg1     [][]int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSliceSlice[int](`[[0,30],[5,10],[15,20]]`),
+			Expected: 2,
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[7,10],[2,4]]`),
+			Expected: 1,
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[2,7]]`),
+			Expected: 1,
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[5,8],[6,8]]`),
+			Expected: 2,
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[6,15],[13,20],[6,17]]`),
+			Expected: 3,
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[13,15],[1,13]]`),
+			Expected: 1,
+		},
+		{
+			Arg1:     JsonToSliceSlice[int](`[[1293,2986],[848,3846],[4284,5907],[4466,4781],[518,2918],[300,5870]]`),
+			Expected: 4,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			actual := Q253MeetingRoomsII(d.Arg1)
+			assert.Equal(t, d.Expected, actual, d)
+		}
+	}, 1, 0)
+
+}
+
 // TestQ252MeetingRooms Easy
 func TestQ252MeetingRooms(t *testing.T) {
 	type param struct {
