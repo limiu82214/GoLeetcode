@@ -45,6 +45,38 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ41FirstMissingPositive Hard
+func TestQ41FirstMissingPositive(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1]`),
+			Expected: 2,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1,2,0]`),
+			Expected: 3,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[3,4,-1,1]`),
+			Expected: 2,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[7,8,9,11,12]`),
+			Expected: 1,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q41FirstMissingPositive(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ645SetMismatch Easy
 func TestQ645SetMismatch(t *testing.T) {
 	type param struct {

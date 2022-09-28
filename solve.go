@@ -14,6 +14,28 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q41FirstMissingPositive(nums []int) int {
+	l := len(nums)
+	for i := 0; i < l; {
+		v := nums[i]
+		if v > l || v <= 0 || i+1 == v {
+			i++
+		} else {
+			if nums[v-1] == v {
+				i++
+			} else {
+				nums[v-1], nums[i] = v, nums[v-1]
+			}
+		}
+	}
+	i := 0
+	for ; i < l; i++ {
+		if i+1 != nums[i] {
+			return i + 1
+		}
+	}
+	return i + 1
+}
 
 func Q645SetMismatch(nums []int) []int {
 	for i := 0; i < len(nums); {
