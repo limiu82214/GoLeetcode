@@ -14,6 +14,33 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q104MaximumDepthOfBinaryTree(root *TreeNode) int {
+	var goDeep func(*TreeNode) int
+	goDeep = func(t *TreeNode) int {
+		if t == nil {
+			return 0
+		}
+		if t.Left == nil && t.Right == nil {
+			return 1
+		}
+		m1 := 0
+		m2 := 0
+		if t.Left != nil {
+			m1 = goDeep(t.Left)
+		}
+		if root.Right != nil {
+			m2 = goDeep(t.Right)
+		}
+		if m1 > m2 {
+			return 1 + m1
+		} else {
+			return 1 + m2
+		}
+	}
+	return goDeep(root)
+}
+
 func Q103BinaryTreeZigzagLevelOrderTraversal(root *TreeNode) [][]int {
 	if root == nil {
 		return [][]int{}

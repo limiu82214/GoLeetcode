@@ -11,6 +11,30 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ104MaximumDepthOfBinaryTree Easy
+func TestQ104MaximumDepthOfBinaryTree(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[3,9,20,null,null,15,7]`),
+			Expected: 3,
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1,null,2]`),
+			Expected: 2,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q104MaximumDepthOfBinaryTree(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestForCopy Easy ============= 複製一個copy並開始你的表演
 func TestForCopy(t *testing.T) {
 	type param struct {
