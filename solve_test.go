@@ -45,6 +45,40 @@ func TestForCopy(t *testing.T) {
 	}, 1, 0)
 }
 
+// TestQ103BinaryTreeZigzagLevelOrderTraversal Medium
+func TestQ103BinaryTreeZigzagLevelOrderTraversal(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Expected [][]int
+	}
+	data := []param{
+
+		{
+			Arg1:     JSONArrayToTreeNode(`[1,2,3,4,null,null,5]`),
+			Expected: JsonToSliceSlice[int](`[[1],[3,2],[4,5]]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[3,9,20,null,null,15,7]`),
+			Expected: JsonToSliceSlice[int](`[[3],[20,9],[15,7]]`),
+		},
+
+		{
+			Arg1:     JSONArrayToTreeNode(`[1]`),
+			Expected: JsonToSliceSlice[int](`[[1]]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[]`),
+			Expected: JsonToSliceSlice[int](`[]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q103BinaryTreeZigzagLevelOrderTraversal(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ102BinaryTreeLevelOrderTraversal Medium
 func TestQ102BinaryTreeLevelOrderTraversal(t *testing.T) {
 	type param struct {
