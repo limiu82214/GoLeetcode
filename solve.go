@@ -14,6 +14,40 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q107BinaryTreeLevelOrderTraversalII(root *TreeNode) [][]int {
+	if root == nil {
+		return [][]int{}
+	}
+	ans := [][]int{}
+	t := []int{}
+	q := []*TreeNode{}
+	q = append(q, root)
+	q = append(q, nil)
+	for len(q) != 0 {
+		n := q[0]
+		q = q[1:]
+		if n == nil { // this level's last element
+			ans = append(ans, t)
+			t = []int{}
+			if len(q) == 0 {
+				break
+			}
+			q = append(q, nil)
+			continue
+		}
+		t = append(t, n.Val)
+		if n.Left != nil {
+			q = append(q, n.Left)
+		}
+		if n.Right != nil {
+			q = append(q, n.Right)
+		}
+	}
+	for i, j := 0, len(ans)-1; i < j; i, j = i+1, j-1 {
+		ans[i], ans[j] = ans[j], ans[i]
+	}
+	return ans
+}
 
 func Q104MaximumDepthOfBinaryTree(root *TreeNode) int {
 	var goDeep func(*TreeNode) int

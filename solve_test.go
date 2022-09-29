@@ -11,6 +11,34 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ107BinaryTreeLevelOrderTraversalII Medium
+func TestQ107BinaryTreeLevelOrderTraversalII(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Expected [][]int
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[3,9,20,null,null,15,7]`),
+			Expected: JsonToSliceSlice[int](`[[15,7],[9,20],[3]]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1]`),
+			Expected: JsonToSliceSlice[int](`[[1]]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[]`),
+			Expected: JsonToSliceSlice[int](`[]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q107BinaryTreeLevelOrderTraversalII(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ104MaximumDepthOfBinaryTree Easy
 func TestQ104MaximumDepthOfBinaryTree(t *testing.T) {
 	type param struct {
