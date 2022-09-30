@@ -11,6 +11,38 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ111MinimumDepthOfBinaryTree Easy
+func TestQ111MinimumDepthOfBinaryTree(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[3,9,20,null,null,15,7]`),
+			Expected: 2,
+		},
+		// {
+		// 	Arg1:     JSONArrayToTreeNode(`[2,null,3,null,4,null,5,null,6]`),
+		// 	Expected: 5, // 此題目的輸入是有左邊節點就會一直往增加左邊
+		// },
+		{
+			Arg1:     JSONArrayToTreeNode(`[]`),
+			Expected: 0,
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1]`),
+			Expected: 1,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q111MinimumDepthOfBinaryTree(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ107BinaryTreeLevelOrderTraversalII Medium
 func TestQ107BinaryTreeLevelOrderTraversalII(t *testing.T) {
 	type param struct {

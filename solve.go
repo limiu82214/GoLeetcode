@@ -14,6 +14,37 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q111MinimumDepthOfBinaryTree(root *TreeNode) int {
+	var findDeppLeaf func(t *TreeNode, deepCnt int) int
+	findDeppLeaf = func(t *TreeNode, deepCnt int) int {
+		if t.Left == nil && t.Right == nil {
+			return deepCnt
+		}
+		m1 := -1
+		m2 := -1
+		if t.Left != nil {
+			m1 = findDeppLeaf(t.Left, deepCnt+1)
+		}
+		if t.Right != nil {
+			m2 = findDeppLeaf(t.Right, deepCnt+1)
+		}
+		if m1 == -1 {
+			return m2
+		} else if m2 == -1 {
+			return m1
+		} else if m1 < m2 {
+			return m1
+		} else {
+			return m2
+		}
+	}
+	if root == nil {
+		return 0
+	}
+	return findDeppLeaf(root, 1)
+}
+
 func Q107BinaryTreeLevelOrderTraversalII(root *TreeNode) [][]int {
 	if root == nil {
 		return [][]int{}
