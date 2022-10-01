@@ -11,6 +11,38 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ110BalancedBinaryTree Easy
+func TestQ110BalancedBinaryTree(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Expected bool
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[3,9,20,null,null,15,7]`),
+			Expected: true,
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1,2,2,3,3,null,null,4,4]`),
+			Expected: false,
+		},
+		{
+			Arg1:     JSONArrayToTreeNodeV2(`[1,null,2,null,3]`),
+			Expected: false,
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[]`),
+			Expected: true,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q110BalancedBinaryTree(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ111MinimumDepthOfBinaryTree Easy
 func TestQ111MinimumDepthOfBinaryTree(t *testing.T) {
 	type param struct {

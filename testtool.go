@@ -77,7 +77,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-// JSONArrayToTreeNode [5,3,6,2,4,null,7] use it
+// Accept complete tree JSONArrayToTreeNode [5,3,6,2,4,null,7] use it
 func JSONArrayToTreeNode(j string) *TreeNode {
 	arg := JsonStringToSliceAny(j)
 	if len(arg) < 1 {
@@ -109,6 +109,55 @@ func JSONArrayToTreeNode(j string) *TreeNode {
 	}
 
 	return list[0]
+}
+
+// if left is nil skip right node
+func JSONArrayToTreeNodeV2(j string) *TreeNode {
+	arg := JsonStringToSliceAny(j)
+	if len(arg) < 1 {
+		return nil
+	}
+	list := make([]*TreeNode, 0)
+
+	for _, v := range arg {
+		if v == nil {
+			list = append(list, nil)
+			continue
+		}
+		tNode := &TreeNode{
+			Val:   int(v.(float64)),
+			Left:  nil,
+			Right: nil,
+		}
+		list = append(list, tNode)
+	}
+	popList := func() *TreeNode {
+		if len(list) == 0 {
+			return nil
+		}
+		node := list[0]
+		list = list[1:]
+		return node
+	}
+
+	head := list[0]
+	list = list[1:]
+	queue := []*TreeNode{}
+	queue = append(queue, head)
+	for len(queue) > 0 {
+		node := queue[0]
+		queue = queue[1:]
+		node.Left = popList()
+		if node.Left != nil {
+			queue = append(queue, node.Left)
+		}
+		node.Right = popList()
+		if node.Right != nil {
+			queue = append(queue, node.Right)
+		}
+	}
+
+	return head
 
 }
 

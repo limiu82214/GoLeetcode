@@ -15,6 +15,52 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q110BalancedBinaryTree(root *TreeNode) bool {
+	if root == nil {
+		return true
+	}
+	abs := func(x int) int {
+		if x < 0 {
+			return -x
+		}
+		return x
+	}
+
+	var BFS func(t *TreeNode, deepCnt int) (high int, isBalance bool)
+	BFS = func(t *TreeNode, deepCnt int) (high int, isBalance bool) {
+		if t == nil {
+			return deepCnt, true
+		}
+		h1 := deepCnt
+		h2 := deepCnt
+		if t.Left != nil {
+			isB := false
+			h1, isB = BFS(t.Left, deepCnt+1)
+			if !isB {
+				return deepCnt, isB
+			}
+		}
+		if t.Right != nil {
+			isB := false
+			h2, isB = BFS(t.Right, deepCnt+1)
+			if !isB {
+				return deepCnt, isB
+			}
+		}
+
+		if abs(h1-h2) > 1 {
+			return deepCnt, false
+		}
+		if h1 > h2 {
+			return h1, true
+		} else {
+			return h2, true
+		}
+	}
+	_, isB := BFS(root, 1)
+	return isB
+}
+
 func Q111MinimumDepthOfBinaryTree(root *TreeNode) int {
 	var findDeppLeaf func(t *TreeNode, deepCnt int) int
 	findDeppLeaf = func(t *TreeNode, deepCnt int) int {
