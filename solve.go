@@ -14,6 +14,22 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+
+func Q78Subsets(nums []int) [][]int {
+	ans := [][]int{}
+	ans = append(ans, []int{})
+	for _, x := range nums {
+		t := append([][]int{}, ans...)
+		for i := range t {
+			t[i] = append(t[i], x)
+			t[i] = append([]int{}, t[i]...)
+			sort.Ints(t[i])
+		}
+		ans = append(ans, t...)
+	}
+	return ans
+}
+
 func Q113PathSumII(root *TreeNode, targetSum int) [][]int {
 	ans := [][]int{}
 	var DFS func(*TreeNode, []int, int)
