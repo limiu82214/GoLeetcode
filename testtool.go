@@ -79,6 +79,7 @@ type TreeNode struct {
 
 // Accept complete tree JSONArrayToTreeNode [5,3,6,2,4,null,7] use it
 func JSONArrayToTreeNode(j string) *TreeNode {
+	return JSONArrayToTreeNodeV2(j)
 	arg := JsonStringToSliceAny(j)
 	if len(arg) < 1 {
 		return nil

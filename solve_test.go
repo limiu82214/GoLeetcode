@@ -11,6 +11,53 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ113PathSumII Medium
+func TestQ113PathSumII(t *testing.T) {
+	type param struct {
+		Arg1     *TreeNode
+		Arg2     int
+		Expected [][]int
+	}
+	data := []param{
+		{
+			Arg1:     JSONArrayToTreeNode(`[5,4,8,11,null,13,4,7,2,null,null,5,1]`),
+			Arg2:     22,
+			Expected: JsonToSliceSlice[int](`[[5,4,11,2],[5,8,4,5]]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1,2,3]`),
+			Arg2:     5,
+			Expected: JsonToSliceSlice[int](`[]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1,2]`),
+			Arg2:     0,
+			Expected: JsonToSliceSlice[int](`[]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[]`),
+			Arg2:     1,
+			Expected: JsonToSliceSlice[int](`[]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[1,2]`),
+			Arg2:     1,
+			Expected: JsonToSliceSlice[int](`[]`),
+		},
+		{
+			Arg1:     JSONArrayToTreeNode(`[-2,null,-3]`),
+			Arg2:     -5,
+			Expected: JsonToSliceSlice[int](`[[-2,-3]]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q113PathSumII(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ110BalancedBinaryTree Easy
 func TestQ110BalancedBinaryTree(t *testing.T) {
 	type param struct {
@@ -2134,7 +2181,7 @@ func TestQ7ReverseInteger(t *testing.T) {
 
 }
 
-// TestQ1531StringCompressionII Hard
+// TestQ1531StringCompressionII Hard *fail*
 func TestQ1531StringCompressionII(t *testing.T) {
 	type param struct {
 		Arg1     string

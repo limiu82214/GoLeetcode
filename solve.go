@@ -14,6 +14,31 @@ import (
 func main() {
 	fmt.Println("hello world")
 }
+func Q113PathSumII(root *TreeNode, targetSum int) [][]int {
+	ans := [][]int{}
+	var DFS func(*TreeNode, []int, int)
+	DFS = func(t *TreeNode, query []int, remain int) {
+		if t == nil {
+			return
+		}
+		remain = remain - t.Val
+		if remain == 0 && t.Left == nil && t.Right == nil { // 確保是root-leaf
+			query = append(query, t.Val)
+			tmp := append([]int{}, query...) // 新建一個slice防止slice被其他地方串改
+			ans = append(ans, tmp)
+			return
+		}
+		query = append(query, t.Val)
+		if t.Left != nil {
+			DFS(t.Left, query, remain)
+		}
+		if t.Right != nil {
+			DFS(t.Right, query, remain)
+		}
+	}
+	DFS(root, []int{}, targetSum)
+	return ans
+}
 
 func Q110BalancedBinaryTree(root *TreeNode) bool {
 	if root == nil {
