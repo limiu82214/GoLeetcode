@@ -11,6 +11,30 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ90SubsetsII Medium
+func TestQ90SubsetsII(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected [][]int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,2,2]`),
+			Expected: JsonToSliceSlice[int](`[[],[1],[1,2],[1,2,2],[2],[2,2]]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[0]`),
+			Expected: JsonToSliceSlice[int](`[[],[0]]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.ElementsMatch(t, d.Expected, Q90SubsetsII(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ78Subsets Medium
 func TestQ78Subsets(t *testing.T) {
 	type param struct {

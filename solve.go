@@ -15,6 +15,36 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q90SubsetsII(nums []int) [][]int {
+	joinToString := func(t []int) string {
+		s := ""
+		for _, v := range t {
+			s += strconv.Itoa(v) + "_"
+		}
+		return s
+	}
+	hash := make(map[string][]int)
+	tmpAns := [][]int{}
+	tmpAns = append(tmpAns, []int{})
+	for _, x := range nums {
+		t := append([][]int{}, tmpAns...)
+		for i := range t {
+			t[i] = append(t[i], x)
+			t[i] = append([]int{}, t[i]...)
+			sort.Ints(t[i])
+			hash[joinToString(t[i])] = t[i]
+		}
+		tmpAns = append(tmpAns, t...)
+	}
+
+	ans := [][]int{}
+	ans = append(ans, []int{})
+	for _, v := range hash {
+		ans = append(ans, v)
+	}
+	return ans
+}
+
 func Q78Subsets(nums []int) [][]int {
 	ans := [][]int{}
 	ans = append(ans, []int{})
