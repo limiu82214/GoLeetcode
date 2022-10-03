@@ -11,6 +11,33 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ704BinarySearch Easy
+func TestQ704BinarySearch(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Arg2     int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,0,3,5,9,12]`),
+			Arg2:     9,
+			Expected: 4,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[1,0,3,5,9,12]`),
+			Arg2:     2,
+			Expected: -1,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q704BinarySearch(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ90SubsetsII Medium
 func TestQ90SubsetsII(t *testing.T) {
 	type param struct {

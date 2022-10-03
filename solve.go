@@ -15,6 +15,22 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q704BinarySearch(nums []int, target int) int {
+	i := 0
+	j := len(nums) - 1
+	for i <= j {
+		midIdx := (j + i) / 2
+		if target == nums[midIdx] {
+			return midIdx
+		} else if target > nums[midIdx] {
+			i = midIdx + 1
+		} else {
+			j = midIdx - 1
+		}
+	}
+	return -1
+}
+
 func Q90SubsetsII(nums []int) [][]int {
 	joinToString := func(t []int) string {
 		s := ""
