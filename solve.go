@@ -15,6 +15,75 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q215KthLargestElementInAnArray(nums []int, k int) int {
+	type minHeap []int
+
+	Len := func(h minHeap) int { return len(h) }
+	Push := func(h *minHeap, x int) {
+		*h = append(*h, x)
+		l := len(*h)
+		idx := l - 1
+		for { // h[l-1] bobble up
+			parentIdx := (idx - 1) / 2
+			if (*h)[idx] < (*h)[parentIdx] {
+				(*h)[idx], (*h)[parentIdx] = (*h)[parentIdx], (*h)[idx]
+				idx = parentIdx
+				if idx == 0 { // root
+					break
+				}
+			} else {
+				break
+			}
+		}
+		// need bobble up
+	}
+	Popup := func(h *minHeap) int {
+		ans := (*h)[0]
+		(*h)[0] = (*h)[len((*h))-1]
+		(*h) = (*h)[:len(*h)-1]
+		l := len(*h)
+		idx := 0
+		for { // h[0] down
+			leftIdx := idx*2 + 1
+			rightIdx := idx*2 + 2
+			tIdx := 0
+			if leftIdx < l && rightIdx <l {
+				if (*h)[leftIdx] < (*h)[rightIdx] {
+					tIdx = leftIdx
+				} else {
+					tIdx = rightIdx
+				}
+			} else if leftIdx <l && rightIdx >= l {
+				tIdx = leftIdx
+			} else if leftIdx >= l && rightIdx < l {
+				tIdx = rightIdx
+			} else {
+				break
+			}
+
+			if (*h)[idx] > (*h)[tIdx] {
+				(*h)[idx], (*h)[tIdx] = (*h)[tIdx], (*h)[idx]
+				idx = tIdx
+			} else {
+				break
+			}
+		}
+		return ans
+	}
+
+	h := minHeap{}
+	var ans int
+	for _, v := range nums {
+		Push(&h, v)
+		if Len(h) > k {
+			Popup(&h)
+		}
+	}
+	ans = Popup(&h)
+
+	return ans
+}
+
 func Q260SingleNumberIII(nums []int) []int {
 	mergeTwo := 0
 	for _, v := range nums {

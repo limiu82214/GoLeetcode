@@ -11,6 +11,38 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ215KthLargestElementInAnArray Medium
+func TestQ215KthLargestElementInAnArray(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Arg2     int
+		Expected int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[3,2,1,5,6,4]`),
+			Arg2:     2,
+			Expected: 5,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[3,2,3,1,2,4,5,5,6]`),
+			Arg2:     4,
+			Expected: 4,
+		},
+		{
+			Arg1:     JsonToSlice[int](`[0]`),
+			Arg2:     1,
+			Expected: 0,
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q215KthLargestElementInAnArray(d.Arg1, d.Arg2), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ260SingleNumberIII Medium
 func TestQ260SingleNumberIII(t *testing.T) {
 	type param struct {
