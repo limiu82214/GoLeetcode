@@ -15,6 +15,28 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q260SingleNumberIII(nums []int) []int {
+	mergeTwo := 0
+	for _, v := range nums {
+		mergeTwo ^= v
+	}
+	// now mergeTwo is two num xor
+	diffBit := 1
+	for mergeTwo&diffBit == 0 {
+		diffBit = diffBit << 1
+	}
+
+	ans1, ans2 := 0, 0
+	for _, v := range nums {
+		if v&diffBit == 0 {
+			ans1 ^= v
+		} else {
+			ans2 ^= v
+		}
+	}
+	return []int{ans1, ans2}
+}
+
 func Q704BinarySearch(nums []int, target int) int {
 	i := 0
 	j := len(nums) - 1

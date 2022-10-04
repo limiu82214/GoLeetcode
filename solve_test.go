@@ -11,6 +11,34 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ260SingleNumberIII Medium
+func TestQ260SingleNumberIII(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected []int
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[1,2,1,3,2,5]`),
+			Expected: JsonToSlice[int](`[3,5]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[-1,0]`),
+			Expected: JsonToSlice[int](`[-1,0]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[0,1]`),
+			Expected: JsonToSlice[int](`[1,0]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.ElementsMatch(t, d.Expected, Q260SingleNumberIII(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ704BinarySearch Easy
 func TestQ704BinarySearch(t *testing.T) {
 	type param struct {
