@@ -11,6 +11,30 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestQ2121IntervalsBetweenIdenticalElements Medium
+func TestQ2121IntervalsBetweenIdenticalElements(t *testing.T) {
+	type param struct {
+		Arg1     []int
+		Expected []int64
+	}
+	data := []param{
+		{
+			Arg1:     JsonToSlice[int](`[2,1,3,1,2,3,3]`),
+			Expected: JsonToSlice[int64](`[4,2,7,2,4,4,5]`),
+		},
+		{
+			Arg1:     JsonToSlice[int](`[10,5,10,10]`),
+			Expected: JsonToSlice[int64](`[5,0,3,4]`),
+		},
+	}
+
+	Decorate(func() {
+		for _, d := range data {
+			assert.Equal(t, d.Expected, Q2121IntervalsBetweenIdenticalElements(d.Arg1), d)
+		}
+	}, 1, 0)
+}
+
 // TestQ215KthLargestElementInAnArray Medium
 func TestQ215KthLargestElementInAnArray(t *testing.T) {
 	type param struct {

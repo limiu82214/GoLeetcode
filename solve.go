@@ -15,6 +15,57 @@ func main() {
 	fmt.Println("hello world")
 }
 
+func Q2121IntervalsBetweenIdenticalElements(arr []int) []int64 {
+	// abs := func(x int) int64 {
+	// 	if x < 0 {
+	// 		return int64(-x)
+	// 	}
+	// 	return int64(x)
+	// }
+	l := len(arr)
+	VMapIdx := make(map[int][]int64, l)
+	for i := 0; i < l; i++ {
+		if VMapIdx[arr[i]] == nil {
+			VMapIdx[arr[i]] = []int64{}
+		}
+		VMapIdx[arr[i]] = append(VMapIdx[arr[i]], int64(i))
+	}
+
+	ansMap := make(map[int64]int64, l)
+	for _, tmpIdxL := range VMapIdx {
+		ll := int64(len(tmpIdxL))
+		var i int64
+		var j int64
+		var t int64
+		t = 0
+		// 算第一個
+		for j = 1; j < ll; j++ {
+			idx := tmpIdxL[0]
+			idx2 := tmpIdxL[j]
+			if idx > idx2 {
+				t += idx - idx2
+			} else {
+				t += idx2 - idx
+			}
+		}
+		ansMap[tmpIdxL[0]] = t
+
+		// 用第一個推後面的
+		i = 0
+		for i = 1; i < ll; i++ {
+			t += (tmpIdxL[i] - tmpIdxL[i-1]) * (2*i - ll)
+
+			ansMap[tmpIdxL[i]] = int64(t)
+		}
+
+	}
+	ans := make([]int64, l)
+	for i := 0; i < l; i++ {
+		ans[i] = ansMap[int64(i)]
+	}
+	return ans
+}
+
 func Q215KthLargestElementInAnArray(nums []int, k int) int {
 	type minHeap []int
 
@@ -47,13 +98,13 @@ func Q215KthLargestElementInAnArray(nums []int, k int) int {
 			leftIdx := idx*2 + 1
 			rightIdx := idx*2 + 2
 			tIdx := 0
-			if leftIdx < l && rightIdx <l {
+			if leftIdx < l && rightIdx < l {
 				if (*h)[leftIdx] < (*h)[rightIdx] {
 					tIdx = leftIdx
 				} else {
 					tIdx = rightIdx
 				}
-			} else if leftIdx <l && rightIdx >= l {
+			} else if leftIdx < l && rightIdx >= l {
 				tIdx = leftIdx
 			} else if leftIdx >= l && rightIdx < l {
 				tIdx = rightIdx
