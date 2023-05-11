@@ -15,6 +15,101 @@ func main() {
 	fmt.Println("hello world")
 }
 
+// Q59SpiralMatrixII no test Medium
+func Q59SpiralMatrixII(n int) [][]int {
+	m := make([][]int, n)
+	for i := 0; i < n; i++ {
+		m[i] = make([]int, n)
+	}
+
+	i := 0
+	j := 0
+	count := 1
+	ggRotateCount := 0
+
+	type direct struct {
+		i int
+		j int
+	}
+
+	// def direct add
+	// dRight := &direct{1, 0}
+	// dDown := &direct{0, 1}
+	// dLeft:= &direct{-1, 0}
+	// dUp := &direct{0, -1}
+
+	rotateList := []direct{
+		{0, 1},  //dRight,
+		{1, 0},  //dDown,
+		{0, -1}, //dLeft,
+		{-1, 0}, //dUp,
+	}
+	rotateIdx := 0
+
+	// get toI, toJfrom direct
+exit:
+	for {
+		//fmt.Println(m, i,j)
+		if m[i][j] == 0 {
+			m[i][j] = count
+			ggRotateCount = 0
+			count++
+
+			// next
+			for {
+
+				toI := rotateList[rotateIdx].i
+				toJ := rotateList[rotateIdx].j
+
+				if i+toI >= n || i+toI < 0 || j+toJ >= n || j+toJ < 0 ||
+					m[i+toI][j+toJ] != 0 {
+					// direct rotate
+					switch rotateIdx {
+					case 3:
+						rotateIdx = 0
+					default:
+						rotateIdx++
+					}
+					ggRotateCount++
+				} else {
+					i = i + toI
+					j = j + toJ
+					break
+				}
+				if ggRotateCount == 4 {
+					break exit
+				}
+			}
+		} else {
+			break
+		}
+	}
+	return m
+
+	// ans := ""
+	//         ans += "["
+	// for i:0; i<n ; i++ {
+
+	//     for j:=0; j<n; j++ {
+	//         switch j{
+	//             case 0:
+	//                 ans += "["+m[i][j]+","
+	//             case n-1:
+	//                 ans += m[i][j]+"]"
+	//             default:
+	//                 ans += m[i][j]+","
+	//         }
+	//     }
+	//     switch i {
+	//         case <n-1:
+	//             ans +=","
+	//     }
+
+	// }
+	//         ans += "]"
+	//         return ans
+}
+
 func Q2121IntervalsBetweenIdenticalElements(arr []int) []int64 {
 	// abs := func(x int) int64 {
 	// 	if x < 0 {
