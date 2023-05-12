@@ -8,11 +8,17 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
 	q237deletenodeinalinkedlist "github.com/limiu82214/GoLeetcode/exam/q237deletenodeinalinkedlist"
 )
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q2140SolvingQuestionsWithBrainpower no test Medium
+func Q2140SolvingQuestionsWithBrainpower(questions [][]int) int64 {
+	return Q2140SolvingQuestionsWithBrainpowerPkg.Solve(questions)
 }
 
 // Q59SpiralMatrixII no test Medium
