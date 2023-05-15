@@ -8,12 +8,18 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
-	q237deletenodeinalinkedlist "github.com/limiu82214/GoLeetcode/exam/q237deletenodeinalinkedlist"
+	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
 )
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q1721SwappingNodesinaLinkedList no test Medium
+func Q1721SwappingNodesinaLinkedList(head *Q1721SwappingNodesinaLinkedListPkg.ListNode, k int) *Q1721SwappingNodesinaLinkedListPkg.ListNode {
+	return Q1721SwappingNodesinaLinkedListPkg.Solve(head, k)
 }
 
 // Q2140SolvingQuestionsWithBrainpower no test Medium
@@ -3391,7 +3397,7 @@ func Q595BigCountries() {
 	// SELECT name, population, area FROM World WHERE ( World.area > 2999999 OR World.population > 24999999)
 }
 
-func Q237DeleteNodeInALinkedList(node *q237deletenodeinalinkedlist.ListNode) {
+func Q237DeleteNodeInALinkedList(node *Q237DeleteNodeInALinkedListPkg.ListNode) {
 	node.Val = node.Next.Val
 	node.Next = node.Next.Next
 }
