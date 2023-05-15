@@ -1,4 +1,4 @@
-package q237deletenodeinalinkedlist
+package Q237DeleteNodeInALinkedListPkg
 
 type ListNode struct {
 	Val  int
