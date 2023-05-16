@@ -11,10 +11,16 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
 )
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q24SwapNodesinPairs no test Medium
+func Q24SwapNodesinPairs(head *Q24SwapNodesinPairsPkg.ListNode) *Q24SwapNodesinPairsPkg.ListNode {
+	return Q24SwapNodesinPairsPkg.Solve(head)
 }
 
 // Q1721SwappingNodesinaLinkedList no test Medium
