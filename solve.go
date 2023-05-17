@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q2130MaximumTwinSumofaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
@@ -16,6 +17,11 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q2130MaximumTwinSumofaLinkedList no test Medium
+func Q2130MaximumTwinSumofaLinkedList(head *Q2130MaximumTwinSumofaLinkedListPkg.ListNode) int {
+	return Q2130MaximumTwinSumofaLinkedListPkg.Solve(head)
 }
 
 // Q24SwapNodesinPairs no test Medium
