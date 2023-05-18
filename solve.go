@@ -13,11 +13,17 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q217ContainsDuplicatePkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q242ValidAnagramPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
 )
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q242ValidAnagram no test Easy
+func Q242ValidAnagram(s string, t string) bool {
+	return Q242ValidAnagramPkg.Solve(s, t)
 }
 
 // Q217ContainsDuplicate no test Easy
