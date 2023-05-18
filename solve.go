@@ -15,10 +15,16 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q242ValidAnagramPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q49GroupAnagramsPkg"
 )
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q49GroupAnagrams no test Medium
+func Q49GroupAnagrams(strs []string) [][]string {
+	return Q49GroupAnagramsPkg.Solve(strs)
 }
 
 // Q242ValidAnagram no test Easy
