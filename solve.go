@@ -11,12 +11,18 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2130MaximumTwinSumofaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q217ContainsDuplicatePkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
 )
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q217ContainsDuplicate no test Easy
+func Q217ContainsDuplicate(nums []int) bool {
+	return Q217ContainsDuplicatePkg.Solve(nums)
 }
 
 // Q2130MaximumTwinSumofaLinkedList no test Medium
