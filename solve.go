@@ -15,11 +15,17 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q242ValidAnagramPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q347TopKFrequentElementsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q49GroupAnagramsPkg"
 )
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q347TopKFrequentElements no test Medium
+func Q347TopKFrequentElements(nums []int, k int) []int {
+	return Q347TopKFrequentElementsPkg.Solve(nums, k)
 }
 
 // Q49GroupAnagrams no test Medium
