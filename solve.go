@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/limiu82214/GoLeetcode/exam/Q1557MinimumNumberofVerticestoReachAlNodesPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2130MaximumTwinSumofaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
@@ -21,6 +22,11 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q1557MinimumNumberofVerticestoReachAlNodes
+func Q1557MinimumNumberofVerticestoReachAlNodes(n int, edges [][]int) []int {
+	return Q1557MinimumNumberofVerticestoReachAlNodesPkg.Solve(n, edges)
 }
 
 // Q347TopKFrequentElements no test Medium
