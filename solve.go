@@ -18,13 +18,19 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q347TopKFrequentElementsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q49GroupAnagramsPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q785IsGraphBipartitePkg"
 )
 
 func main() {
 	fmt.Println("hello world")
 }
 
-// Q1557MinimumNumberofVerticestoReachAlNodes
+// Q785IsGraphBipartite no test Medium
+func Q785IsGraphBipartite(graph [][]int) bool {
+	return Q785IsGraphBipartitePkg.Solve(graph)
+}
+
+// Q1557MinimumNumberofVerticestoReachAlNodes no test Medium
 func Q1557MinimumNumberofVerticestoReachAlNodes(n int, edges [][]int) []int {
 	return Q1557MinimumNumberofVerticestoReachAlNodesPkg.Solve(n, edges)
 }
