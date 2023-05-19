@@ -14,6 +14,7 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q217ContainsDuplicatePkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q238ProductofArrayExceptSelfPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q242ValidAnagramPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q347TopKFrequentElementsPkg"
@@ -23,6 +24,11 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q238ProductofArrayExceptSelf no test Medium
+func Q238ProductofArrayExceptSelf(nums []int) []int {
+	return Q238ProductofArrayExceptSelfPkg.Solve(nums)
 }
 
 // Q785IsGraphBipartite no test Medium
