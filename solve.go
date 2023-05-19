@@ -10,6 +10,7 @@ import (
 
 	"github.com/limiu82214/GoLeetcode/exam/Q1557MinimumNumberofVerticestoReachAlNodesPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q20ValidParenthesesPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2130MaximumTwinSumofaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q217ContainsDuplicatePkg"
@@ -24,6 +25,11 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q20ValidParentheses no test Easy
+func Q20ValidParentheses(s string) bool {
+	return Q20ValidParenthesesPkg.Solve(s)
 }
 
 // Q238ProductofArrayExceptSelf no test Medium
