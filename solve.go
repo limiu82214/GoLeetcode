@@ -27,6 +27,10 @@ func main() {
 	fmt.Println("hello world")
 }
 
+// Q155MinStack no test Medium
+func Q155MinStack() {
+}
+
 // Q20ValidParentheses no test Easy
 func Q20ValidParentheses(s string) bool {
 	return Q20ValidParenthesesPkg.Solve(s)
