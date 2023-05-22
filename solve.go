@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/limiu82214/GoLeetcode/exam/Q121BestTimetoBuyandSellStockPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q1557MinimumNumberofVerticestoReachAlNodesPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q20ValidParenthesesPkg"
@@ -28,7 +29,12 @@ func main() {
 	fmt.Println("hello world")
 }
 
-// Q74Searcha2DMatrix
+// Q121BestTimetoBuyandSellStock no test Easy
+func Q121BestTimetoBuyandSellStock(prices []int) int {
+	return Q121BestTimetoBuyandSellStockPkg.Solve(prices)
+}
+
+// Q74Searcha2DMatrix no test Medium
 func Q74Searcha2DMatrix(matrix [][]int, target int) bool {
 	return Q74Searcha2DMatrixPkg.Solve(matrix, target)
 }
