@@ -15,6 +15,7 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q2130MaximumTwinSumofaLinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q217ContainsDuplicatePkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q21MergeTwoSortedListsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q238ProductofArrayExceptSelfPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q242ValidAnagramPkg"
@@ -27,6 +28,11 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// 21MergeTwoSortedLists no test Easy
+func Q21MergeTwoSortedLists(list1 *Q21MergeTwoSortedListsPkg.ListNode, list2 *Q21MergeTwoSortedListsPkg.ListNode) *Q21MergeTwoSortedListsPkg.ListNode {
+	return Q21MergeTwoSortedListsPkg.Solve(list1, list2)
 }
 
 // Q121BestTimetoBuyandSellStock no test Easy
