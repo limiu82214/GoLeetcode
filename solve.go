@@ -20,11 +20,17 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q347TopKFrequentElementsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q49GroupAnagramsPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q74Searcha2DMatrixPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q785IsGraphBipartitePkg"
 )
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q74Searcha2DMatrix
+func Q74Searcha2DMatrix(matrix [][]int, target int) bool {
+	return Q74Searcha2DMatrixPkg.Solve(matrix, target)
 }
 
 // Q155MinStack no test Medium
