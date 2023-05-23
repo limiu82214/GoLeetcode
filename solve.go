@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/limiu82214/GoLeetcode/exam/Q1089DuplicateZerosPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q121BestTimetoBuyandSellStockPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q1557MinimumNumberofVerticestoReachAlNodesPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
@@ -29,6 +30,11 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q1089DuplicateZeros no test Easy
+func Q1089DuplicateZeros(arr []int) {
+	Q1089DuplicateZerosPkg.Solve(arr)
 }
 
 // 226InvertBinaryTree no test Easy
