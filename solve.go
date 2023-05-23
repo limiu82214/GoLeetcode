@@ -16,6 +16,7 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q2140SolvingQuestionsWithBrainpowerPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q217ContainsDuplicatePkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q21MergeTwoSortedListsPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q226InvertBinaryTreePkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q237DeleteNodeInALinkedListPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q238ProductofArrayExceptSelfPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q242ValidAnagramPkg"
@@ -28,6 +29,11 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// 226InvertBinaryTree no test Easy
+func Q226InvertBinaryTree(root *Q226InvertBinaryTreePkg.TreeNode) *Q226InvertBinaryTreePkg.TreeNode {
+	return Q226InvertBinaryTreePkg.Solve(root)
 }
 
 // 21MergeTwoSortedLists no test Easy
