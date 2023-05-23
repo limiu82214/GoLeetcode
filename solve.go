@@ -32,6 +32,11 @@ func main() {
 	fmt.Println("hello world")
 }
 
+// Q703KthLargestElementinaStream no test Easy
+func Q703KthLargestElementinaStream() {
+}
+
+
 // Q1089DuplicateZeros no test Easy
 func Q1089DuplicateZeros(arr []int) {
 	Q1089DuplicateZerosPkg.Solve(arr)
