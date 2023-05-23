@@ -23,6 +23,7 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q242ValidAnagramPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q347TopKFrequentElementsPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q39CombinationSumPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q49GroupAnagramsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q74Searcha2DMatrixPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q785IsGraphBipartitePkg"
@@ -32,10 +33,14 @@ func main() {
 	fmt.Println("hello world")
 }
 
+// Q39CombinationSum
+func Q39CombinationSum(candidates []int, target int) [][]int {
+	return Q39CombinationSumPkg.Solve(candidates, target)
+}
+
 // Q703KthLargestElementinaStream no test Easy
 func Q703KthLargestElementinaStream() {
 }
-
 
 // Q1089DuplicateZeros no test Easy
 func Q1089DuplicateZeros(arr []int) {
