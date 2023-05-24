@@ -24,6 +24,7 @@ import (
 	"github.com/limiu82214/GoLeetcode/exam/Q24SwapNodesinPairsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q347TopKFrequentElementsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q39CombinationSumPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q46PermutationsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q49GroupAnagramsPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q74Searcha2DMatrixPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q785IsGraphBipartitePkg"
@@ -33,7 +34,12 @@ func main() {
 	fmt.Println("hello world")
 }
 
-// Q39CombinationSum
+// Q46Permutations no test Medium
+func Q46Permutations(nums []int) [][]int {
+	return Q46PermutationsPkg.Solve(nums)
+}
+
+// Q39CombinationSum no test Medium
 func Q39CombinationSum(candidates []int, target int) [][]int {
 	return Q39CombinationSumPkg.Solve(candidates, target)
 }
