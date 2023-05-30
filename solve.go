@@ -34,6 +34,10 @@ func main() {
 	fmt.Println("hello world")
 }
 
+// Q705DesignHashSet no test Easy
+func Q705DesignHashSet() {
+}
+
 // Q46Permutations no test Medium
 func Q46Permutations(nums []int) [][]int {
 	return Q46PermutationsPkg.Solve(nums)
