@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/limiu82214/GoLeetcode/exam/Q1089DuplicateZerosPkg"
+	"github.com/limiu82214/GoLeetcode/exam/Q1091ShortestPathinBinaryMatrixPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q121BestTimetoBuyandSellStockPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q1557MinimumNumberofVerticestoReachAlNodesPkg"
 	"github.com/limiu82214/GoLeetcode/exam/Q1721SwappingNodesinaLinkedListPkg"
@@ -32,6 +33,11 @@ import (
 
 func main() {
 	fmt.Println("hello world")
+}
+
+// Q1091ShortestPathinBinaryMatrix no test Medium
+func Q1091ShortestPathinBinaryMatrix(grid [][]int) int {
+	return Q1091ShortestPathinBinaryMatrixPkg.Solve(grid)
 }
 
 // Q705DesignHashSet no test Easy
